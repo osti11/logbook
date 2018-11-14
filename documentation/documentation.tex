@@ -1,7 +1,10 @@
 \documentclass{article}
 
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}     %TimesNewRoman
 \usepackage[utf8]{inputenc} %UTF-8 Zeichensatz
 \usepackage[ngerman]{babel} %Deutsch
+\usepackage{lmodern}
 
 %Allgemeine Angaben
 \title{Entwicklung Mobiler Anwendungen}
@@ -9,7 +12,15 @@
 %\date{}
 
 \begin{document}
-\maketitle
+
+\begin{titlepage}
+    \clearpage
+    \maketitle          %allgemeine Angaben
+    \thispagestyle{empty}
+\end{titlepage}
+
+\tableofcontents    %Inhaltsverzeichnis
+\pagebreak          %Seitenumbruch
 
 \section{Idee}
 Meine Idee ist eine Fahrtenbuchapp die einfaches Übertragen der erfassten Daten in ein Fahrtenbuch ermöglicht.
