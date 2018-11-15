@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper]{article}
 
 \usepackage[T1]{fontenc}
 \usepackage{newtxtext}     %TimesNewRoman
@@ -7,22 +7,43 @@
 \usepackage{lmodern}
 \usepackage{pdfpages}
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{scrlayer-scrpage}   %Paket Kopf-/Fußzeile
+\setcounter{tocdepth}{1}
 
-%Allgemeine Angaben
-\title{Entwicklung Mobiler Anwendungen \\Projekt logbook \\ Dokumentation}
 \author{Jannik Ostermayer}
-%\date{}
 
 \begin{document}
 
+\pagestyle{scrheadings}         %Kopf und Fußzeile mit Paket setzen
+\clearpairofpagestyles          %Kopf & Fuß leeren
+%footer
+\ifoot{Jannik Ostermayer}
+\cfoot{Matr.Nr. 672330}
+\ofoot{\pagemark}
+
 \begin{titlepage}
-    \clearpage
-    \maketitle          %allgemeine Angaben
-    \thispagestyle{empty}
+
+	\centering
+	\includegraphics[width=0.4\textwidth]{Logo_HS_Worms.png}\par\vspace{1cm}
+	{\LARGE Entwicklung mobiler Anwendungen \par}
+	\vspace{1.5cm}
+	{\huge Projekt Fahrtenbuch\par}
+	\vspace{0.3cm}
+	{\huge Dokumentation\par}
+	\vspace{2cm}
+	{\Large Jannik Ostermayer\par}
+	\vspace{1cm}
+	{ Matrikelnummer 672330 \par}
+	\vfill
+
+% Bottom of the page
+	{\large \today\par}
+
 \end{titlepage}
 
 \tableofcontents    %Inhaltsverzeichnis
-\pagebreak          %Seitenumbruch
+\pagebreak                              %Seitenumbruch
 
 \section{Idee}
 Meine Idee ist eine Fahrtenbuchapp zum leichten Übertragen 
@@ -42,31 +63,52 @@ Außerdem gibt es Export-Funktionen das du dir deine erfassetn Fahrten
 auch bequem auf deinem PC anschauen kannst.
 
 \section{Zielgruppe}
-Der potentielle Markt für eine Fahrtenbuch App erstreckt sich potentiell über alle
+Der potentielle Markt für eine Fahrtenbuch App erstreckt sich über alle
 gewerblich genutzt Fahrzeuge in Deutschland. Das sind laut einer Statistik des KBA (Kraft Fahrt Bundesamtes)
-aus dem Jahr 2017 64,4% der zugelassenen Fahrzeuge in Deutschland. In absoluten Zahlen sind das 2.215.208
+aus dem Jahr 2017 64,4\% der zugelassenen Fahrzeuge in Deutschland. In absoluten Zahlen sind das 2.215.208
 Gewerblich neu zugelassen Fahrzeuge. Meine App richtet sich aber spezial an Personen die einen
 Firmenwagen fahren, wie Vertreter. Da es bei den Statistiken nur eine unterscheidung zwischen
 geschäftlicher und privater Nutzung gibt, exestieren keine genauen Zahlen über Anzahl der Firmenwagen
-unter den gewerblich genutzten Fahrzeugen. Man geht von ca 10% der gesamten Fahrzeuge aus.
+unter den gewerblich genutzten Fahrzeugen. Man geht von ca 10\% der gesamten Fahrzeuge aus.
 Laut KBA vom Stand 1. Januar 2018 gibt es in Deutschland 46,5 Millionen zugelessene PKWs.
-Das bedeutet wenn man von 10% ausgeht, gibt es in Deutschland 4,65 Millionen Firmenfahrzeuge.
-Das sich meine App an Fahrer eines Firmenwagens richtet die Steuern sparen wollen und eine
+Das bedeutet wenn man von 10\% ausgeht, gibt es in Deutschland 4,65 Millionen Firmenfahrzeuge.
+Da sich meine App an Fahrer eines Firmenwagens richtet die Steuern sparen wollen und eine
 erleichterung beim führen eines Fahrtenbuches suchen, trifft meine App auf einen potentiellen
-Markt von 4,65 Millionen nutzern.
+Markt von 4,65 Millionen nutzern. Bei dem Führen von Fahrtenbüchern gibt es starke unterschiede
+zwischen den Berufsgruppen, so muss zum Beispiel ein Handwerker für jede Fahrt den Grund der Fahrt angeben.
+Dahingegen müssen Handelsvertreter und Kundendienstmonteure keinen Grund der Fahrt angeben, wenn der Grund
+plausibel ist, hier reicht wenn der Kunde angegeben wird. Bei diesen Berufsgruppen die nicht alles angeben
+müssen spricht man von einem \textit{erleichterten} Fahrtenbuch. In erste Linie soll sich meine App an Personen
+die ein solches \textit{erleichtertes} Fahrtenbuch führen richten. Im nächsten Schritt, wenn meine App ausgebaut wird
+würde ich auch gerne die anderen Berufsgruppen, die ein \textit{normales} Fahrtenbuch führen in
+meine Zielgruppe mitaufnehmen.
 
-\begin{figure}[h]
-  \centering
-     \includegraphics[width=0.7\textwidth]{Firmenwagen_Branchen.PNG}
-  \caption{Firmenwagen nach Branchen}
-  \label{fig:Bild1}
-\end{figure}
-
+%Grafik
+%\begin{figure}[H]
+%    \begin{center}
+%        \includegraphics[width=12cm]{neuzulassung.jpg}
+%        \caption{Verteilung der neuzugelassenen Fahrzeuge}
+%        \label{Verteilung der neuzugelassenen Fahrzeuge}
+%    \end{center}
+%\end{figure}
 
 \section{Marktanalyse}
-So gut wie alles Kostenpflichtig.
-1. kfz fahrtenbuch
-2. gps zeiterfassung
+Die meisten Apps im Play Store sollen ein Fahrtenbuch ersetzen. Diese bieten nur eingeschränkte
+Funktionalitäten in der kostenlosen Version. Meist muss ein Abo abgeschlossen werden für 5-10€ pro Monat,
+dafür gibt es meistens noch eine Web-Lösung und die möglichkeiten in Manipulationssichere Formate
+zu expotieren. Exemplarisch werde ich ein paar Apps näher Analysieren.
+
+\subsection{GPS Zeiterfassung + Fahrtenbuch}
+
+
+\subsection{kfz fahrtenbuch}
+
+
+\subsection{SquareTrip}
+
+
+\subsection{Driverslog Pro 2 - Fahrtenbuch}
+
 
 \section{Bedarfsanalyse}
 
