@@ -6,9 +6,10 @@
 \usepackage[ngerman]{babel} %Deutsch
 \usepackage{lmodern}
 \usepackage{pdfpages}
-\usepackage{graphicx}
-\usepackage{float}
+\usepackage{graphicx}   %Grafik einfuegen
+\usepackage{float}      %Grafik fest positionieren
 \usepackage{scrlayer-scrpage}   %Paket Kopf-/Fußzeile
+\usepackage{csquotes}
 \setcounter{tocdepth}{1}
 
 \author{Jannik Ostermayer}
@@ -114,7 +115,7 @@ zu expotieren. Exemplarisch werde ich ein paar Apps näher Analysieren.
 
 \section{Features}
 \subsection{Anforderungen}
-	\begin{enumerate}
+\begin{enumerate}
 	\item Die Fahrtenbuch Daten sollen in einer Datenbank auf dem Handy gespeichert werden.
 	\item Alle Einträge der Datenbank sollen in einer Liste dargestellt werden.
 	\item Die Liste enthält die Information Zeit, Zweck, Start, Ziel
@@ -123,13 +124,13 @@ zu expotieren. Exemplarisch werde ich ein paar Apps näher Analysieren.
 	\item Der Benutzer kann auf ein Element der Liste klicken und bekommt eine Detailansicht.
 	\item Die App speichert die Daten in der Form wir die vom Finanzamt anerkannten Fahrtenbücher.
 	\item Die App muss per GPS erfassen wenn der Benutzer losfährt und automatisch Start-, Endpunkt und Entfernung bestimmen und diese eintragen.
-	\item Die App muss den Benutzer Auffordern fehlende Information, wie "Zweck der Fahrt nachzutragen".
+	\item Die App muss den Benutzer Auffordern fehlende Information, wie \enquote{Zweck der Fahrt nachzutragen}.
 	\item Der Benutzer muss Fahrten in der App händisch eintragen können.
 	\item Der Benutzer muss alle Fahrtenbuch Daten expotieren können als PDF oder HTML(bzw. Jason).
 	\item Die App soll automatisch starten wenn das Handy per Blutooth mit dem Auto gekoppelt wird.
 	\item Der Benutzer soll Einträge bearbeiten können.
 	\item Der Benutzer soll Einträge löschen können.
-	\end{enumerate}
+\end{enumerate}
 
 \section{User Stories, Personas}
 
