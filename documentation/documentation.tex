@@ -51,10 +51,14 @@ Meine Idee ist eine Fahrtenbuchapp zum leichten Übertragen
 der Fahrten in ein physisches Fahrtenbuch.
 Da es noch keine verifizierte Fahrtenbuchapp 
 des Finanzamtes gibt und so auch keine Rechtssicherheit herrscht.
-Zum leichteren übertragen sollte es auch eine Exportfunktion geben.
+Zum leichteren übertragen sollte es auch eine Exportfunktion geben oder
+die Möglichleit sich eine Email zu schicken.
 Da das übertragen in ein Fahrtenbuch zeitnahgeschehen (innerhalb der 
 nächsten drei Tage) erfolgen muss sollte es auch Push Benachrichtungen
-zur Erinnerung geben. 
+zur Erinnerung geben. Die App kann durch einen Button gestartet werden,
+aber auch alternativ durch eine Bluetooth Verbindung oder einen NFC Chip.
+Die erfassten Fahrten sollten auch auf einer Karte angezeigt werden,
+da man bei größeren Umwegen, diese genau beschreiben muss.
 
 \section{Beschreibung}
 Diese App vereinfacht das führen eines Fahrtenbuches enorm. 
@@ -97,6 +101,30 @@ meine Zielgruppe mitaufnehmen.
 
 \section{Bedarfsanalyse}
 
+\subsection{Datenbank}
+
+ \begin{table}[h]
+	\caption{Aufbau der Datenbank}
+	\begin{tabular}{l}
+		Id & Start & Ziel & Zweck der Fahrt \\
+		1 & Home & HS & lernen \\ 
+	\end{tabular}
+	\label{tab:Aufbau der Datenbank}
+ \end{table}
+
+\subsection{GPS}
+
+\subsubsection{Darstellung der Fahrt auf Karte}
+Alle erfassten Daten sollten im GPSX Format erfasst werden. 
+Diese können benutzt werden um die Route in Google Maps darzustellen.
+
+
+\subsection{Bluetooth}
+
+\subsection{NFC}
+
+\subsection{View}
+
 \section{Features}
 \subsection{Anforderungen}
 \begin{enumerate}
@@ -119,6 +147,41 @@ meine Zielgruppe mitaufnehmen.
 \section{User Stories, Personas}
 
 \section{Mockuop, Wireframe}
+--erste Version--
+
+\begin{figure}
+	\begin{minipage}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/mock1}
+        \caption{\label{img:img/mock1}, Startbildschirm}
+    \end{minipage}
+    \hspace{0.025\textwidth}% Abstand zwischen Bilder
+	\begin{minipage}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/mock2}
+        \caption{\label{img:img/mock2}Driverslog Pro 2 - Fahrtenbuch, Detailansicht}
+    \end{minipage}
+    \hspace{0.025\textwidth}% Abstand zwischen Bilder
+	\begin{minipage}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{img/mock3}
+        \caption{\label{img:img/mock3}Driverslog Pro 2 - Fahrtenbuch, Detailansicht}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}
+	\begin{minipage}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/mock4}
+        \caption{\label{img:img/mock4}, Startbildschirm}
+    \end{minipage}
+    \hspace{0.025\textwidth}% Abstand zwischen Bilder
+	\begin{minipage}[b]{0.3\textwidth}
+        \includegraphics[width=\textwidth]{img/mock5}
+        \caption{\label{img:img/mock5}Driverslog Pro 2 - Fahrtenbuch, Detailansicht}
+    \end{minipage}
+    \hspace{0.025\textwidth}% Abstand zwischen Bilder
+	\begin{minipage}[b]{0.3\textwidth}
+		\includegraphics[width=\textwidth]{img/mock6}
+        \caption{\label{img:img/mock6}Driverslog Pro 2 - Fahrtenbuch, Detailansicht}
+	\end{minipage}
+\end{figure}
 
 \section{UML-Diagramme}
 
