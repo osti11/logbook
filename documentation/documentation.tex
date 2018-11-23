@@ -103,13 +103,29 @@ meine Zielgruppe mitaufnehmen.
 
 \subsection{Datenbank}
 
- \begin{table}[h]
-	\caption{Aufbau der Datenbank}
-	\begin{tabular}{l}
-		Id & Start & Ziel & Zweck der Fahrt \\
-		1 & Home & HS & lernen \\ 
+ \begin{table}
+	\caption{Spalten des Fahrtenbuches}
+    \centering
+	\begin{tabular}{c c c c c c c c c c c c c}
+		\hline
+		Datum & Fahrzeit von - bis & Zweck der Fahrt  & Besuchte Person, Firma, Behörde &
+		km-Stand Fahrtbeginn & Gefahrene km & Start & Ziel & km-Satnd Fahrtende & Ktaftstoff &
+		Ltr. je 100km & Sonstiger Betrag & Name des Fahrers\\ [0.5ex]
+		1 & Home & HS & lernen \\ [1ex]
+		\hline
 	\end{tabular}
-	\label{tab:Aufbau der Datenbank}
+	\label{table:nonlin}
+ \end{table}
+
+ \begin{table}
+	\caption{Aufbau Datenbank}
+    \centering
+	\begin{tabular}{c c c c c c c c c c c c c}
+		\hline
+        id & start & destination & purpose & mileage_start & mileage_destination & odometer \\ [1ex]
+		\hline
+	\end{tabular}
+	\label{table:nonlin}
  \end{table}
 
 \subsection{GPS}
