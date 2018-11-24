@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 /**
- * Created by Jannik on 11/24/2018.
+ * Created by Jannik on 11/24/2018. </br>
  * represent the table "drive" in the database.
  * This contains the purpose for the drive and the mileage at start and arrival.
  */
@@ -15,7 +15,6 @@ import java.util.*
 data class Drive (
         /**
          * dr_purpose, purpose of the drive
-         * @value String
          */
         @ColumnInfo(name = "dr_purpose") var purpose: String,
         @ColumnInfo(name = "dr_mileage_start") var mileageStart: Double,

@@ -6,6 +6,3 @@
 
 dr_purpose, purpose of the drive
 
-**Value**
-String
-
