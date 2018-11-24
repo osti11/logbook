@@ -4,8 +4,10 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.ema.jannik.logbook.model.Stage
 
+/**
+ * This interface contains queries and other operations on the table stage.
+ */
 @Dao
 interface StageDao {
     @Query("SELECT * FROM stage")

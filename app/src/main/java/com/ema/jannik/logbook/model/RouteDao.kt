@@ -6,6 +6,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.ema.jannik.logbook.model.Route
 
+/**
+ * This interface contains queries and other operations on the table route.
+ */
 @Dao
 interface RouteDao {
     @Query("SELECT * FROM route")

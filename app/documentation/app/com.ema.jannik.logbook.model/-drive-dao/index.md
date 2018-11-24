@@ -5,6 +5,7 @@
 `interface DriveDao`
 
 Created by Jannik on 11/24/2018.
+This interface contains queries and other operations on the table drive.
 
 ### Functions
 

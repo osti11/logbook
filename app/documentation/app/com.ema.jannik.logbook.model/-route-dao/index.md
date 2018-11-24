@@ -4,6 +4,8 @@
 
 `interface RouteDao`
 
+This interface contains queries and other operations on the table route.
+
 ### Functions
 
 | Name | Summary |

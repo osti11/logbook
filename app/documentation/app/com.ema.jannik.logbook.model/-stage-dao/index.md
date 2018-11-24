@@ -4,6 +4,8 @@
 
 `interface StageDao`
 
+This interface contains queries and other operations on the table stage.
+
 ### Functions
 
 | Name | Summary |
