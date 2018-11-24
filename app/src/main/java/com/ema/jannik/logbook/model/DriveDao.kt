@@ -1,12 +1,14 @@
 package com.ema.jannik.logbook.Model
 
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 
 /**
  * Created by Jannik on 11/24/2018.
  */
+@Dao
 interface DriveDao {
     @Query("SELECT * FROM drive")
     fun getAll(): List<Drive>
