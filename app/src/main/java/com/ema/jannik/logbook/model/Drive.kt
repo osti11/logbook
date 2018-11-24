@@ -1,4 +1,4 @@
-package com.ema.jannik.logbook.Model
+package com.ema.jannik.logbook.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
