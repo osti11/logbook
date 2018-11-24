@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.ema.jannik.logbook.Model.Stage
+import com.ema.jannik.logbook.model.Stage
 
 @Dao
 interface StageDao {
