@@ -15,6 +15,7 @@ import java.util.*
 data class Drive (
         /**
          * dr_purpose, purpose of the drive
+         * @value String
          */
         @ColumnInfo(name = "dr_purpose") var purpose: String,
         @ColumnInfo(name = "dr_mileage_start") var mileageStart: Double,
