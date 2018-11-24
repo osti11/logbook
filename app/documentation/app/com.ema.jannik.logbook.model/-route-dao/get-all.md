@@ -2,4 +2,4 @@
 
 # getAll
 
-`abstract fun getAll(): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Route`](../../com.ema.jannik.logbook.-model/-route/index.md)`>`
+`abstract fun getAll(): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Route`](../-route/index.md)`>`

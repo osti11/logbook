@@ -2,4 +2,4 @@
 
 # delete
 
-`abstract fun delete(stage: `[`Stage`](../../com.ema.jannik.logbook.-model/-stage/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun delete(stage: `[`Stage`](../-stage/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)

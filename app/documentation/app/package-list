@@ -2,5 +2,4 @@ $dokka.format:gfm
 $dokka.linkExtension:md
 
 com.ema.jannik.logbook
-com.ema.jannik.logbook.Model
 com.ema.jannik.logbook.model

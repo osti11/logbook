@@ -2,4 +2,4 @@
 
 # insert
 
-`abstract fun insert(route: `[`Route`](../../com.ema.jannik.logbook.-model/-route/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`abstract fun insert(route: `[`Route`](../-route/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
