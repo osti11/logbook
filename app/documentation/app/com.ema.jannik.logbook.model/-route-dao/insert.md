@@ -1,0 +1,5 @@
+[app](../../index.md) / [com.ema.jannik.logbook.model](../index.md) / [RouteDao](index.md) / [insert](./insert.md)
+
+# insert
+
+`abstract fun insert(route: `[`Route`](../../com.ema.jannik.logbook.-model/-route/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
