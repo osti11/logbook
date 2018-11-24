@@ -3,3 +3,6 @@
 # driveId
 
 `var driveId: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
+
+reference the column ro_drid which is a foreign key to drive.dr_id
+

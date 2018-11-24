@@ -4,5 +4,8 @@
 
 `Route(driveId: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, latitude: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, longitude: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`)`
 
-Created by Jannik on 11/24/2018.
+contains all properties except the id
+
+**Constructor**
+contains all properties except the id
 

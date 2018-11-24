@@ -10,7 +10,7 @@ import java.util.*
  * Created by Jannik on 11/24/2018.
  * represent the table "drive" in the database.
  * This table contains the purpose for the drive, start, destination and the mileage at start and arrival.
- * @constructor test
+ * @constructor contains all properties except the id
  */
 @Entity(tableName = "drive")
 data class Drive (

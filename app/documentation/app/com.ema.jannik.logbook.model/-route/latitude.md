@@ -3,3 +3,6 @@
 # latitude
 
 `var latitude: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)
+
+represent the column ro_latitude which contains a latitude to represent the location
+

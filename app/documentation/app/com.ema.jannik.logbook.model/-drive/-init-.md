@@ -4,8 +4,8 @@
 
 `Drive(purpose: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, mileageStart: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, mileageDestination: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, start: `[`Stage`](../-stage/index.md)`, destination: `[`Stage`](../-stage/index.md)`)`
 
-test
+contains all properties except the id
 
 **Constructor**
-test
+contains all properties except the id
 
