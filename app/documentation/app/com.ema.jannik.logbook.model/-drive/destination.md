@@ -3,3 +3,6 @@
 # destination
 
 `var destination: `[`Stage`](../-stage/index.md)
+
+represent the column dr_destination, contains the Location at the end of the journey
+

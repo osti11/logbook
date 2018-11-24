@@ -3,3 +3,6 @@
 # start
 
 `var start: `[`Stage`](../-stage/index.md)
+
+represent the column dr_start, contains the Location at the start of the journey
+
