@@ -13,6 +13,9 @@ interface StageDao {
     @Query("SELECT * FROM stage")
     fun getAll(): List<Stage>
 
+    /**
+     * Adds an entry to the table stage.
+     */
     @Insert
     fun insert(stage: Stage)
 
