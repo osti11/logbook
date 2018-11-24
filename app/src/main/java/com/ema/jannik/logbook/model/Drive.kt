@@ -13,12 +13,18 @@ import java.util.*
  */
 @Entity(tableName = "drive")
 data class Drive (
+        /**
+         * dr_purpose, purpose of the drive
+         */
         @ColumnInfo(name = "dr_purpose") var purpose: String,
         @ColumnInfo(name = "dr_mileage_start") var mileageStart: Double,
         @ColumnInfo(name = "dr_mileage_destination") var mileageDestination: Double,
         @ColumnInfo(name = "dr_start") @Embedded var start: Stage,
         @ColumnInfo(name = "dr_destination") @Embedded var destination: Stage
 ) {
+        /**
+         * dr_id, Primary Key, auto increment
+         */
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "dr_id") var id: Int = 0
 }

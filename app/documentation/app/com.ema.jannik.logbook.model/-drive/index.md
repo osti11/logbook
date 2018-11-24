@@ -19,8 +19,8 @@ This contains the purpose for the drive and the mileage at start and arrival.
 | Name | Summary |
 |---|---|
 | [destination](destination.md) | `var destination: `[`Stage`](../-stage/index.md) |
-| [id](id.md) | `var id: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
+| [id](id.md) | `var id: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>dr_id, Primary Key, auto increment |
 | [mileageDestination](mileage-destination.md) | `var mileageDestination: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) |
 | [mileageStart](mileage-start.md) | `var mileageStart: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) |
-| [purpose](purpose.md) | `var purpose: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+| [purpose](purpose.md) | `var purpose: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)<br>dr_purpose, purpose of the drive |
 | [start](start.md) | `var start: `[`Stage`](../-stage/index.md) |

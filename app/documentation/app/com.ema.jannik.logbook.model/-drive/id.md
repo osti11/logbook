@@ -3,3 +3,6 @@
 # id
 
 `var id: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
+
+dr_id, Primary Key, auto increment
+
