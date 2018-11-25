@@ -3,3 +3,7 @@
 # getAll
 
 `abstract fun getAll(): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Drive`](../-drive/index.md)`>`
+
+Query: "SELECT * FROM drive"
+get all entries from the table drive
+

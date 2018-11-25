@@ -5,11 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 /**
- * Created by Jannik on 11/24/2018.
+ * This class represent the table stage and contains an geo position and the address.
+ * Which is used to save the start and destination of a journey.
  */
 @Entity
 data class Stage (@ColumnInfo(name = "st_latitude") var latitude: Double,
-                  @ColumnInfo(name = "st_longitude") var  longitude: Double){
+                  @ColumnInfo(name = "st_longitude") var  longitude: Double,
+                  @ColumnInfo(name = "st_address") var address: String){
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "st_id") var id: Int = 0
 }

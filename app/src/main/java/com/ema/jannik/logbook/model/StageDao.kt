@@ -12,7 +12,6 @@ import androidx.room.Query
 interface StageDao {
     @Query("SELECT * FROM stage")
     fun getAll(): List<Stage>
-
     /**
      * Adds an entry to the table stage.
      */

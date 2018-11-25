@@ -3,3 +3,6 @@
 # insert
 
 `abstract fun insert(drive: `[`Drive`](../-drive/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+insert an entry in the table drive
+

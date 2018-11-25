@@ -3,3 +3,6 @@
 # insertAll
 
 `abstract fun insertAll(vararg drive: `[`Drive`](../-drive/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+insert a few elements to the table drive
+
