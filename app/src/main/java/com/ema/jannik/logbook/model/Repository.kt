@@ -42,9 +42,6 @@ class Repository {
     }
 
     companion object {
-        /**
-         * test
-         */
         private class InsertDriveAsyncTask(private val driveDao: DriveDao?) : AsyncTask<Drive, Void, Void>(){
             override fun doInBackground(vararg params: Drive): Void? {
                 driveDao!!.insert(params[0])
