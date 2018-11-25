@@ -3,3 +3,6 @@
 # insert
 
 `fun insert(drive: `[`Drive`](../-drive/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+
+run an async task to insert an  entry into table "drive"
+

@@ -22,6 +22,9 @@ class Repository {
     }
 
 
+    /**
+     * run an async task to insert an  entry into table "drive"
+     */
     fun insert(drive: Drive){
         InsertDriveAsyncTask(driveDao).execute(drive)
     }
@@ -39,6 +42,9 @@ class Repository {
     }
 
     companion object {
+        /**
+         * test
+         */
         private class InsertDriveAsyncTask(private val driveDao: DriveDao?) : AsyncTask<Drive, Void, Void>(){
             override fun doInBackground(vararg params: Drive): Void? {
                 driveDao!!.insert(params[0])
