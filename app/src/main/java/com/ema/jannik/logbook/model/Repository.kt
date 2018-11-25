@@ -4,6 +4,9 @@ import android.app.Application
 import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 
+/**
+ * This Repository class add an extra layer between the ViewModel and Data for abstraction purpose
+ */
 class Repository {
     private var driveDao: DriveDao? = null
     private var routeDao: RouteDao? = null
