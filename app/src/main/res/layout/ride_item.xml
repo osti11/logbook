@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp">
+
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/item_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_work_grey_24dp"
+                    android:layout_marginRight="10dp"
+                    />
+
+
+            <TextView
+                    android:id="@+id/text_view_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="40 km"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+            <TextView
+                    android:id="@+id/a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:layout_toStartOf="@id/text_view_distance"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:text="Zweck der Fahrt"
+                    android:layout_toEndOf="@id/item_icon"/>
+
+            <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/item_icon"
+                    android:layout_below="@id/a"
+                    android:text="11.11.18 12:11:12" />
+
+            <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_view_distance"
+                    android:layout_alignParentEnd="true"
+                    android:text="2:00 h" />
+
+        </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

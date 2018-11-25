@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fahrtenbuch</string>
+    <string name="fab_record">Fahrt aufzeichnen</string>
+    <string name="fab_add">Fahrt hinzufügen</string>
+</resources>
