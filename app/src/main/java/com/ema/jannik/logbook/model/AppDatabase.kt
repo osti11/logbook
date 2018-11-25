@@ -17,14 +17,11 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun routeDao(): RouteDao
     abstract fun  stageDao(): StageDao
 
-    /**
-     * instance of the Database as Singleton.
-     * Because each RoomDatabase instance is fairly expensive.
-     */
     companion object {
         private var instance: AppDatabase? = null
 
         /**
+         * Singleton Pattern, because each RoomDatabase instance is fairly expensive.
          * create an instance of the RoomDatabase if the instance is null
          */
         fun getInstance(context: Context): AppDatabase? {
