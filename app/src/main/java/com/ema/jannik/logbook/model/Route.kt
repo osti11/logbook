@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey
 /**
  * Created by Jannik on 11/24/2018.
  * This class represent the table route and contains geo locations.
- * These are used for Polylinies to show the route on maps
+ * These are used for Polylinies to show the route on maps.
+ * This table has no entry when the journey is added manuel.
  * @constructor contains all properties except the id
  */
 

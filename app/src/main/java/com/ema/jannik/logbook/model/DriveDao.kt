@@ -1,5 +1,6 @@
 package com.ema.jannik.logbook.model
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -15,7 +16,7 @@ interface DriveDao {
      * get all entries from the table drive
      */
     @Query("SELECT * FROM drive")
-    fun getAll(): List<Drive>
+    fun getAll(): LiveData<List<Drive>>
     /**
      * insert an entry in the table drive
      */

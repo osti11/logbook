@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.Duration
 import java.util.*
 
 /**
@@ -18,6 +19,10 @@ data class Drive (
          * represent the column dr_purpose, purpose of the drive
          */
         @ColumnInfo(name = "dr_purpose") var purpose: String,
+        /**
+         * represent the column dr_duration ehich contains the duration of the journey
+         */
+        @ColumnInfo(name = "dr_duration") var duration: Duration,       //TODO type convert
         /**
          * represent the column dr_mileage_start, mileage of the car at the start of the journey
          */
@@ -34,7 +39,6 @@ data class Drive (
          * represent the column dr_destination, contains the Location at the end of the journey
          */
         @ColumnInfo(name = "dr_destination") @Embedded var destination: Stage
-        //TODO duration of the journey
         ) {
         /**
          * represent the column dr_id, Primary Key, auto increment
