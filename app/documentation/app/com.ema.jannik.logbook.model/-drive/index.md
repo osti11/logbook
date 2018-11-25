@@ -12,13 +12,14 @@ This table contains the purpose for the drive, start, destination and the mileag
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `Drive(purpose: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, mileageStart: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, mileageDestination: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, start: `[`Stage`](../-stage/index.md)`, destination: `[`Stage`](../-stage/index.md)`)`<br>contains all properties except the id |
+| [&lt;init&gt;](-init-.md) | `Drive(purpose: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`, duration: `[`Duration`](https://developer.android.com/reference/java/time/Duration.html)`, mileageStart: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, mileageDestination: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)`, start: `[`Stage`](../-stage/index.md)`, destination: `[`Stage`](../-stage/index.md)`)`<br>contains all properties except the id |
 
 ### Properties
 
 | Name | Summary |
 |---|---|
 | [destination](destination.md) | `var destination: `[`Stage`](../-stage/index.md)<br>represent the column dr_destination, contains the Location at the end of the journey |
+| [duration](duration.md) | `var duration: `[`Duration`](https://developer.android.com/reference/java/time/Duration.html)<br>represent the column dr_duration ehich contains the duration of the journey |
 | [id](id.md) | `var id: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>represent the column dr_id, Primary Key, auto increment |
 | [mileageDestination](mileage-destination.md) | `var mileageDestination: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>represent the column dr_mileage_destination, mileage of the car at the end of the journey |
 | [mileageStart](mileage-start.md) | `var mileageStart: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html)<br>represent the column dr_mileage_start, mileage of the car at the start of the journey |

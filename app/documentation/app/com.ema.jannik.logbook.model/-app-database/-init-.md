@@ -4,5 +4,5 @@
 
 `AppDatabase()`
 
-Created by Jannik on 11/24/2018.
+This abstract class represent the Database which contains the tables drive, route and stage.
 
