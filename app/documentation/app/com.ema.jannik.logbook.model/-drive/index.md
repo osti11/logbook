@@ -18,7 +18,7 @@ This table contains the purpose for the drive, start, destination and the mileag
 
 | Name | Summary |
 |---|---|
-| [category](category.md) | `var category: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>represent the category: |
+| [category](category.md) | `var category: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>represent the category: 0 = uncategorized 1 = private 2 = work 3 = way to work/home |
 | [duration](duration.md) | `var duration: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) |
 | [id](id.md) | `var id: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>represent the column dr_id, Primary Key, auto increment |
 | [mileageDestination](mileage-destination.md) | `var mileageDestination: `[`Double`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-double/index.html) |
