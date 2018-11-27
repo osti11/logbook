@@ -1,19 +1,16 @@
-package com.ema.jannik.logbook.model
+package com.ema.jannik.logbook.model.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 
 /**
  * This abstract class represent the Database which contains the tables drive, route and stage.
  */
-
-@Database(entities = [Drive::class, Route::class, Stage::class], version = 1)
+@Database(entities = [Drive::class, Route::class], version = 1)
+@TypeConverters(Converts::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun driveDao(): DriveDao
     abstract fun routeDao(): RouteDao
-    abstract fun  stageDao(): StageDao
 
     companion object {
         private var instance: AppDatabase? = null
@@ -26,7 +23,8 @@ abstract class AppDatabase : RoomDatabase() {
             if (instance == null){
                 synchronized(AppDatabase::class){
                     instance = Room.databaseBuilder(context.applicationContext,
-                        AppDatabase::class.java, "weather")
+                        AppDatabase::class.java, "logbook")
+                        .fallbackToDestructiveMigration()
                         .build()
                 }
             }
