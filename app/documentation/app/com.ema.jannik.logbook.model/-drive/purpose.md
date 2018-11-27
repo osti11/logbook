@@ -4,5 +4,8 @@
 
 `var purpose: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)
 
-r
+represent the column dr_purpose, purpose of the drive
 
+### Property
+
+`purpose` - represent the column dr_purpose, purpose of the drive

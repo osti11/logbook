@@ -6,3 +6,6 @@
 
 represent the column dr_id, Primary Key, auto increment
 
+### Property
+
+`id` - represent the column dr_id, Primary Key, auto increment
