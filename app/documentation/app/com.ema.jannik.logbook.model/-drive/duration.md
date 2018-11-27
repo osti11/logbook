@@ -2,7 +2,4 @@
 
 # duration
 
-`var duration: `[`Duration`](https://developer.android.com/reference/java/time/Duration.html)
-
-represent the column dr_duration ehich contains the duration of the journey
-
+`var duration: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)

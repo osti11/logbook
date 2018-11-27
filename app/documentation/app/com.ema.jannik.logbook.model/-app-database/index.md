@@ -17,8 +17,6 @@ This abstract class represent the Database which contains the tables drive, rout
 | Name | Summary |
 |---|---|
 | [driveDao](drive-dao.md) | `abstract fun driveDao(): `[`DriveDao`](../-drive-dao/index.md) |
-| [routeDao](route-dao.md) | `abstract fun routeDao(): `[`RouteDao`](../-route-dao/index.md) |
-| [stageDao](stage-dao.md) | `abstract fun stageDao(): `[`StageDao`](../-stage-dao/index.md) |
 
 ### Companion Object Functions
 
