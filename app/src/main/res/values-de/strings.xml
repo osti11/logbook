@@ -3,4 +3,12 @@
     <string name="app_name">Fahrtenbuch</string>
     <string name="fab_record">Fahrt aufzeichnen</string>
     <string name="fab_add">Fahrt hinzufügen</string>
+    <string name="editText_startAddress">Start Adresse</string>
+    <string name="editText_destinationAddress">Ziel Adresse</string>
+    <string name="textView_distance">Entfernung</string>
+    <string name="textView_mileageStart">Kilomterstand beim Abfahren</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_introduction">Einführung</string>
+    <string name="menu_impressum">Impressum</string>
+    <string name="menu_overview">Übersicht</string>
 </resources>

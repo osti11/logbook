@@ -9,6 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.model.database.Drive
 
+/**
+ * This Adapter is responsible for the RecyclerView of the MainActivity
+ */
 class DriveAdapter : RecyclerView.Adapter<DriveAdapter.DriveHolder>() {
     private var drives: List<Drive> = ArrayList<Drive>()
 

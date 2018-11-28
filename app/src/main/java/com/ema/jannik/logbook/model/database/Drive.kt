@@ -5,7 +5,6 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.sql.Date
-import java.sql.Timestamp
 
 /**
  * Created by Jannik on 11/24/2018.
@@ -30,7 +29,7 @@ data class Drive(
     @ColumnInfo(name = "dr_mileage_start") var mileageStart: Double,
     @ColumnInfo(name = "dr_mileage_destination") var mileageDestination: Double,
     @ColumnInfo(name = "dr_category") var category: Int,
-    @Embedded(prefix = "dr_start_") var start: Stage,
+    @Embedded(prefix = "dr_start_") var start: Stage,       //TODO entfernung
     @Embedded(prefix = "dr_destination_") var destination: Stage
 ) {
     @PrimaryKey(autoGenerate = true)

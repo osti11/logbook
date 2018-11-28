@@ -21,7 +21,7 @@ class DriveRepository(application: Application) {
     }
 
     /**
-     * run an async task to insert an  entry into table "drive"
+     * run an async task to insert an entry into table "drive"
      */
     fun insert(drive: Drive){
         InsertDriveAsyncTask(driveDao).execute(drive)

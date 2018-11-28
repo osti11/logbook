@@ -4,11 +4,13 @@
 
 `class DriveViewModel : AndroidViewModel`
 
+This VieModel provides the data for the View of the MainActivity
+
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DriveViewModel(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`)` |
+| [&lt;init&gt;](-init-.md) | `DriveViewModel(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`)`<br>This VieModel provides the data for the View of the MainActivity |
 
 ### Properties
 

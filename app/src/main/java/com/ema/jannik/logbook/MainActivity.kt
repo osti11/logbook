@@ -1,51 +1,68 @@
 package com.ema.jannik.logbook
 
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.ema.jannik.logbook.model.database.Drive
-import com.ema.jannik.logbook.view.DriveAdapter
-import com.ema.jannik.logbook.viewmodel.DriveViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.view.GravityCompat
+import com.ema.jannik.logbook.fragment.AddDriveFragment
+import com.ema.jannik.logbook.fragment.OverviewFragment
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)  //make it more efficient
+        setSupportActionBar(toolbar)    //set toolbar as actionbar
 
-        val driveAdapter: DriveAdapter = DriveAdapter()
-        recyclerView.adapter = driveAdapter
+        nav_view.setNavigationItemSelectedListener(this)
 
-        val observer = Observer<List<Drive>> { drives: List<Drive> ->
-            driveAdapter.setDrives(drives)
+        val actionBarDrawerToggle = ActionBarDrawerToggle(
+            this, drawer_layout, toolbar,
+            R.string.manu_drawer_open, R.string.menu_drawer_close
+        )
+        drawer_layout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
+        if (savedInstanceState == null) {    //Don't kload the fragment when the device is rotated
+            supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container,  //open Fragment
+                OverviewFragment()
+            ).commit()
+            nav_view.setCheckedItem(R.id.nav_overview)
         }
-
-        val viewModel: DriveViewModel by lazy {
-            ViewModelProviders.of(this).get(DriveViewModel::class.java)
-        }
-        viewModel.allDrives.observe(this, observer)
     }
 
-    fun onClickFabShow(view: View) {
-        changeVisibility(fab_add, textView_fab_add_description)
-        changeVisibility(fab_record, textView_fab_record_description)
+    override fun onBackPressed() {  //Pack press when navigationDrawer is open don't leav the activity
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
-    fun changeVisibility(floatingActionButton: FloatingActionButton, textView: TextView) {
-        if (floatingActionButton.visibility == View.VISIBLE) {
-            floatingActionButton.hide()
-            textView.visibility = View.GONE
-        } else if (floatingActionButton.visibility == View.GONE) {
-            floatingActionButton.show()
-            textView.visibility = View.VISIBLE
+    /**
+     * Called when an item in the navigation menu is selected.
+     * @param item The selected item
+     * @return true to display the item as the selected item
+     */
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_overview -> supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container,
+                OverviewFragment()
+            ).commit()
+            R.id.nav_introduction -> supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container,
+                AddDriveFragment()
+            ).commit()
+            //R.id.nav_settings -> setSupportActionBar()
+            //R.id.nav_impessum ->
+            //Hier action wenn man klickt un sich kein fragm,ent öffnet
         }
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 }

@@ -4,6 +4,8 @@
 
 `class DriveAdapter : Adapter<`[`DriveHolder`](-drive-holder/index.md)`>`
 
+This Adapter is responsible for the RecyclerView of the MainActivity
+
 ### Types
 
 | Name | Summary |
@@ -14,7 +16,7 @@
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DriveAdapter()` |
+| [&lt;init&gt;](-init-.md) | `DriveAdapter()`<br>This Adapter is responsible for the RecyclerView of the MainActivity |
 
 ### Functions
 

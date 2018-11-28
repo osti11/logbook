@@ -3,3 +3,6 @@
 # &lt;init&gt;
 
 `DriveAdapter()`
+
+This Adapter is responsible for the RecyclerView of the MainActivity
+

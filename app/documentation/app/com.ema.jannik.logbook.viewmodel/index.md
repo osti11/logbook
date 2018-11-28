@@ -6,4 +6,5 @@
 
 | Name | Summary |
 |---|---|
-| [DriveViewModel](-drive-view-model/index.md) | `class DriveViewModel : AndroidViewModel` |
+| [AddDriveViewModel](-add-drive-view-model/index.md) | `class AddDriveViewModel : AndroidViewModel`<br>This VieModel provides the data for the View of the AddDriveActivity |
+| [DriveViewModel](-drive-view-model/index.md) | `class DriveViewModel : AndroidViewModel`<br>This VieModel provides the data for the View of the MainActivity |

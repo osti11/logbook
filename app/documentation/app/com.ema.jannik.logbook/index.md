@@ -6,4 +6,4 @@
 
 | Name | Summary |
 |---|---|
-| [MainActivity](-main-activity/index.md) | `class MainActivity : AppCompatActivity` |
+| [MainActivity](-main-activity/index.md) | `class MainActivity : AppCompatActivity, OnNavigationItemSelectedListener` |
