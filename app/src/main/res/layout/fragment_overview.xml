@@ -34,6 +34,7 @@
             android:padding="3dp"
             android:visibility="gone"/>
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
             android:src="@drawable/ic_create_white_24dp"
@@ -43,8 +44,9 @@
             android:layout_gravity="end|bottom"
             android:layout_marginBottom="86dp"
             android:layout_marginEnd="20dp"
-            android:onClick="onClickFabAdd"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:onClick="onClickFabAdd"/>
+
 
     <TextView
             android:id="@+id/textView_fab_record_description"
@@ -57,9 +59,7 @@
             android:background="@drawable/rounded_view"
             android:textColor="#000000"
             android:visibility="gone"
-            android:padding="5dp"
-
-    />
+            android:padding="5dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_record"
@@ -68,6 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             app:fabSize="mini"
+            android:onClick="onClickFabRec"
             android:layout_marginBottom="136dp"
             android:layout_marginEnd="20dp"
             android:visibility="gone"/>

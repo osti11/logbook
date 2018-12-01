@@ -11,4 +11,13 @@
     <string name="menu_introduction">Einführung</string>
     <string name="menu_impressum">Impressum</string>
     <string name="menu_overview">Übersicht</string>
+    <string name="channel_description">Eintrag vervollständigen</string>
+    <string name="editText_purpose">Zweck der Fahrt</string>
+    <string name="textView_duration">Dauer der Fahrt</string>
+    <string name="menu_save">speichern</string>
+    <string name="menu_addDrive">Fahrt hinzufügen</string>
+    <string name="button_startTime">start Zeitpunkt</string>
+    <string name="button_recStart">Starten</string>
+    <string name="button_recEnd">beenden</string>
+    <string name="menu_rec">Fahrt aufzeichnen</string>
 </resources>

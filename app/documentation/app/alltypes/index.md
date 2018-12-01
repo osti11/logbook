@@ -6,6 +6,7 @@
 |---|---|
 | [com.ema.jannik.logbook.fragment.AddDriveFragment](../com.ema.jannik.logbook.fragment/-add-drive-fragment/index.md) |  |
 | [com.ema.jannik.logbook.viewmodel.AddDriveViewModel](../com.ema.jannik.logbook.viewmodel/-add-drive-view-model/index.md) | This VieModel provides the data for the View of the AddDriveActivity |
+| [com.ema.jannik.logbook.App](../com.ema.jannik.logbook/-app/index.md) | This class is a helper class to create the NotificationChannel |
 | [com.ema.jannik.logbook.model.database.AppDatabase](../com.ema.jannik.logbook.model.database/-app-database/index.md) | This abstract class represent the Database which contains the tables drive, route and stage. |
 | [com.ema.jannik.logbook.model.database.Converts](../com.ema.jannik.logbook.model.database/-converts/index.md) | This class converts unstorable data types into data types that can be stored in the database |
 | [com.ema.jannik.logbook.model.database.Drive](../com.ema.jannik.logbook.model.database/-drive/index.md) | Created by Jannik on 11/24/2018. represent the table "drive" in the database. This table contains the purpose for the drive, start, destination and the mileage at start and arrival. |

@@ -12,4 +12,13 @@
     <string name="menu_overview">Overview</string>
     <string name="manu_drawer_open">Open naviagtion drawer</string>
     <string name="menu_drawer_close">Close naviagtion drawer</string>
+    <string name="channel_description">Complete the entry</string>
+    <string name="editText_purpose">purpose of the journey</string>
+    <string name="textView_duration">duration of the journey</string>
+    <string name="menu_save">save</string>
+    <string name="menu_addDrive">add journey</string>
+    <string name="button_startTime">start time</string>
+    <string name="button_recStart">start</string>
+    <string name="button_recEnd">finish</string>
+    <string name="menu_rec">ride record</string>
 </resources>
