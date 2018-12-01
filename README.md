@@ -1,6 +1,6 @@
 # logbook
 
-this APP is logbook manager, to simplify the write of a physical logbook.
+this APP is example for a logbook manager, to simplify the write of a physical logbook.
 
 ## Documentation
 
