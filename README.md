@@ -1,5 +1,7 @@
 # logbook
 
+this APP is logbook manager, to simplify the write of a physical logbook.
+
 ## Documentation
 
 to generate the documentation run this command in the terminal:
@@ -9,3 +11,7 @@ to generate the documentation run this command in the terminal:
 the documentation is created into the folder */app/code_documentation*
 
 click for the documentation [here](app/documentation/app/index.md)
+
+##License
+
+[MIT](LICENSE)
