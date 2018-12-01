@@ -12,6 +12,6 @@ the documentation is created into the folder */app/code_documentation*
 
 click for the documentation [here](app/documentation/app/index.md)
 
-##License
+## License
 
-[MIT](LICENSE)
+This project is under [MIT](LICENSE) license.
