@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
@@ -52,5 +53,6 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
     //Location
-    implementation 'com.google.android.gms:play-services-location:16.0.0'   //maybe us "compile"
+    implementation ('com.google.android.gms:play-services-location:16.0.0')
+    //exclude to provide "Error: Program type already present: android.support.v4.os.ResultReceiver"
 }
