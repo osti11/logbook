@@ -8,6 +8,9 @@
         android:padding="16dp"
         tools:context=".RecordDriveActivity">
 
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:id="@+id/tvtvtv"/>
+
     <Button
             android:text="@string/button_recStart"
             android:layout_width="match_parent"
