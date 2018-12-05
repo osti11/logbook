@@ -101,7 +101,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_overview -> supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container, OverviewFragment()
             ).commit()
-            //R.id.nav_introduction -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container, AddDriveFragment()).commit()  //TODO Einfürung view
+            R.id.nav_introduction -> {
+                val intent = Intent(this, LocationActivity::class.java)//TODO Einfürung view
+                startActivity(intent)
+            }
             R.id.nav_settings -> sendOnChannel()
             R.id.nav_impessum -> supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container, ImprintFragment()
