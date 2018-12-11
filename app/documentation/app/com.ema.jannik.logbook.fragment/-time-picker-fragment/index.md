@@ -20,4 +20,4 @@
 
 | Name | Summary |
 |---|---|
-| [TImePickerFragmentStart](../-t-ime-picker-fragment-start/index.md) | `class TImePickerFragmentStart : `[`TimePickerFragment`](./index.md) |
+| [TimePickerFragmentStart](../-time-picker-fragment-start/index.md) | `class TimePickerFragmentStart : `[`TimePickerFragment`](./index.md) |

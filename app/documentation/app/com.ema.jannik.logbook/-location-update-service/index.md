@@ -10,14 +10,6 @@
 |---|---|
 | [&lt;init&gt;](-init-.md) | `LocationUpdateService()` |
 
-### Properties
-
-| Name | Summary |
-|---|---|
-| [ACTION_BROADCAST](-a-c-t-i-o-n_-b-r-o-a-d-c-a-s-t.md) | `val ACTION_BROADCAST: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [EXTRA_LOCATION](-e-x-t-r-a_-l-o-c-a-t-i-o-n.md) | `val EXTRA_LOCATION: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
-| [notification](notification.md) | `var notification: `[`Notification`](https://developer.android.com/reference/android/app/Notification.html) |
-
 ### Functions
 
 | Name | Summary |
