@@ -4,5 +4,5 @@
 
 `DriveViewModel(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`)`
 
-This VieModel provides the data for the View of the MainActivity
+This VieModel provides the data for the View of the MainActivity.
 

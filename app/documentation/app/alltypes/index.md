@@ -13,7 +13,7 @@
 | [com.ema.jannik.logbook.view.DriveAdapter](../com.ema.jannik.logbook.view/-drive-adapter/index.md) | This Adapter is responsible for the RecyclerView of the MainActivity |
 | [com.ema.jannik.logbook.model.database.DriveDao](../com.ema.jannik.logbook.model.database/-drive-dao/index.md) | This interface contains queries and other operations on the table drive. |
 | [com.ema.jannik.logbook.model.DriveRepository](../com.ema.jannik.logbook.model/-drive-repository/index.md) | This Repository class add an extra layer between the ViewModel and Data for abstraction purpose |
-| [com.ema.jannik.logbook.viewmodel.DriveViewModel](../com.ema.jannik.logbook.viewmodel/-drive-view-model/index.md) | This VieModel provides the data for the View of the MainActivity |
+| [com.ema.jannik.logbook.viewmodel.DriveViewModel](../com.ema.jannik.logbook.viewmodel/-drive-view-model/index.md) | This VieModel provides the data for the View of the MainActivity. |
 | [com.ema.jannik.logbook.model.location.Geocoding](../com.ema.jannik.logbook.model.location/-geocoding/index.md) |  |
 | [com.ema.jannik.logbook.fragment.ImprintFragment](../com.ema.jannik.logbook.fragment/-imprint-fragment/index.md) |  |
 | [com.ema.jannik.logbook.LocationActivity](../com.ema.jannik.logbook/-location-activity/index.md) |  |
