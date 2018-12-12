@@ -7,7 +7,7 @@ import com.ema.jannik.logbook.model.DriveRepository
 import com.ema.jannik.logbook.model.database.Drive
 
 /**
- * This VieModel provides the data for the View of the MainActivity
+ * This VieModel provides the data for the View of the MainActivity.
  */
 class DriveViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: DriveRepository
