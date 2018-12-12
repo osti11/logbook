@@ -27,6 +27,7 @@
 | [com.ema.jannik.logbook.RecordDriveActivity](../com.ema.jannik.logbook/-record-drive-activity/index.md) |  |
 | [com.ema.jannik.logbook.model.database.Route](../com.ema.jannik.logbook.model.database/-route/index.md) | Created by Jannik on 11/24/2018. This class represent the table route and contains geo locations. These are used for Polylinies to show the route on maps. This table has no entry when the journey is added manuel. |
 | [com.ema.jannik.logbook.model.database.RouteDao](../com.ema.jannik.logbook.model.database/-route-dao/index.md) | This interface contains queries and other operations on the table route. |
+| [com.ema.jannik.logbook.fragment.SettingFragment](../com.ema.jannik.logbook.fragment/-setting-fragment/index.md) |  |
 | [com.ema.jannik.logbook.model.database.Stage](../com.ema.jannik.logbook.model.database/-stage/index.md) | This class represent the table stage and contains an geo position and the address. Which is used to save the start and destination of a journey. |
 | [com.ema.jannik.logbook.fragment.TimePickerFragment](../com.ema.jannik.logbook.fragment/-time-picker-fragment/index.md) |  |
 | [com.ema.jannik.logbook.fragment.TimePickerFragmentStart](../com.ema.jannik.logbook.fragment/-time-picker-fragment-start/index.md) |  |
