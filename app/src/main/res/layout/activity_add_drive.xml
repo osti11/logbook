@@ -7,137 +7,222 @@
         android:layout_height="match_parent"
         tools:context=".AddDriveActivity">
 
-    <EditText
-            android:id="@+id/edit_text_start_address"
-            android:layout_height="wrap_content"
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:hint="@string/editText_startAddress"/>
+            android:layout_height="match_parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintVertical_bias="0.0">
 
-    <EditText
-            android:id="@+id/edit_text_destination_address"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:hint="@string/editText_destinationAddress"
-            app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_start_address"/>
-
-    <EditText
-            android:id="@+id/edit_text_purpose"
-            android:layout_height="44dp"
-            android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:hint="@string/editText_purpose"
-            app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_destination_address"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/textView_distance"
-            android:id="@+id/textView_distance"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/number_picker_mileageStart"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="30dp"/>
-
-    <NumberPicker
-            android:id="@+id/number_picker_mileageStart"
-            android:layout_width="wrap_content"
-            android:layout_height="182dp"
-            android:layout_margin="30dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"/>
-
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_marginStart="30dp"
-            android:text="@string/textView_mileageStart"
-            android:id="@+id/textView_odometer"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/number_picker_odometer"/>
-
-    <NumberPicker
-            android:id="@+id/number_picker_odometer"
-            android:layout_height="181dp"
-            android:layout_margin="30dp"
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout"
+                app:layout_constraintBottom_toBottomOf="@+id/editText_start_time"
+                app:layout_constraintTop_toBottomOf="@+id/editText_start_time">
 
 
-    <TextView
-            android:id="@+id/textView_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:clickable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="30dp"
-            android:textAlignment="center"
-            android:text="@string/textView_duration"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/editText_time"/>
+            <EditText
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:textColor="@color/textDark"
+                    android:id="@+id/textView_startAddress"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:hint="@string/editText_startAddress"
+                    android:onClick="onClickStartAddressAutoComplete"
+                    android:textSize="18sp"
+                    tools:layout_conversion_absoluteHeight="46dp"
+                    tools:layout_conversion_absoluteWidth="352dp" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
+
+            <EditText
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:textColor="@color/textDark"
+                    android:id="@+id/textView_destinationAddress"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:textSize="18sp"
+                    android:hint="@string/editText_destinationAddress"
+                    android:onClick="onClickDestinationAddressAutoComplete"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_conversion_absoluteHeight="46dp"
+                    tools:layout_conversion_absoluteWidth="352dp" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/textView_startAddress"/>
+
+            <EditText
+                    android:id="@+id/edit_text_purpose"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:hint="@string/editText_purpose"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_destinationAddress"
+                    tools:layout_conversion_absoluteHeight="44dp"
+                    tools:layout_conversion_absoluteWidth="352dp" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textView_distance"
+                    android:id="@+id/textView_distance"
+                    tools:layout_conversion_absoluteHeight="19dp"
+                    tools:layout_conversion_absoluteWidth="53dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_time"/>
+
+            <NumberPicker
+                    android:id="@+id/number_picker_mileageStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="184dp"
+                    tools:layout_conversion_absoluteHeight="182dp"
+                    tools:layout_conversion_absoluteWidth="64dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_distance"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/textView_mileageStart"
+                    android:id="@+id/textView_odometer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_conversion_absoluteHeight="16dp"
+                    tools:layout_conversion_absoluteWidth="132dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/editText_time"
+                    android:layout_marginStart="24dp"/>
+
+            <NumberPicker
+                    android:id="@+id/numberPicker_odometerStart"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    tools:layout_conversion_absoluteHeight="181dp"
+                    tools:layout_conversion_absoluteWidth="64dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_odometer"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"/>
 
 
-    <TextView
-            android:id="@+id/textView_start_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:clickable="true"
-            android:textAlignment="center"
-            android:text="@string/button_startTime" android:layout_marginStart="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/editText_start_time"/>
-
-    <EditText
-            android:id="@+id/editText_time"
-            android:editable="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:clickable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="30dp"
-            android:onClick="onClickTimePicker"
-            android:textAlignment="center"
-            android:hint="@string/textView_duration"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView_distance" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/edit_text_purpose"/>
+            <EditText
+                    android:id="@+id/editText_time"
+                    android:inputType="time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textAlignment="textStart"
+                    android:hint="@string/textView_duration"
+                    tools:layout_conversion_absoluteHeight="46dp"
+                    tools:layout_conversion_absoluteWidth="190dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_endTime"/>
 
 
-    <EditText
-            android:id="@+id/editText_start_time"
-            android:editable="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:clickable="true"
-            android:onClick="onClickTimePickerStart"
-            android:textAlignment="center"
-            android:hint="@string/button_startTime"
-            android:layout_marginStart="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/textView_odometer"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/edit_text_purpose"/>
+            <EditText
+                    android:id="@+id/editText_start_time"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:onClick="onClickTimePickerStart"
+                    android:textAlignment="textStart"
+                    android:hint="@string/EditText_startTime"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_conversion_absoluteHeight="46dp"
+                    tools:layout_conversion_absoluteWidth="86dp"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/edit_text_purpose"
+                    android:layout_width="match_parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <EditText
+                    android:clickable="false"
+                    android:onClick="onClickTimePicker"
+                    android:focusable="false"
+                    android:hint="@string/editText_endTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:ems="10"
+                    android:id="@+id/editText_endTime" android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_start_time" android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_odometer_end"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/editText_time"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"/>
+
+            <NumberPicker android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:id="@+id/numberPicker_odometer_end" android:layout_marginTop="8dp"
+                          app:layout_constraintTop_toBottomOf="@+id/textView_odometer_end"
+                          app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"/>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_margin="0dp"
+                          android:orientation="horizontal"
+                          app:layout_constraintStart_toStartOf="parent"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          android:id="@+id/linearLayout2" android:layout_marginTop="8dp"
+                          app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                        android:layout_margin="0dp"
+                        android:layout_width="0px"
+                        android:layout_weight="0.25"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_home_black_24dp"
+                        android:id="@+id/imageButton_private"
+                        android:onClick="onClickCategory"
+                />
+
+                <ImageButton
+                        android:layout_margin="0dp"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.25"
+                        app:srcCompat="@drawable/ic_work_grey_24dp"
+                        android:id="@+id/imageButton_work"
+                        android:onClick="onClickCategory"/>
+
+                <ImageButton
+                        android:layout_margin="0dp"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_home_location"
+                        android:layout_weight="0.25"
+                        android:id="@+id/imageButton_way"
+                        android:onClick="onClickCategory"
+                />
+
+                <ImageButton
+                        android:layout_margin="0dp"
+                        android:layout_width="0px"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_directions_car_black_24dp"
+                        android:layout_weight="0.25"
+                        android:id="@+id/imageButton_noCategory"
+                        android:onClick="onClickCategory"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
