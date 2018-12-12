@@ -9,6 +9,8 @@
 | [com.ema.jannik.logbook.App](../com.ema.jannik.logbook/-app/index.md) | This class is a helper class to create the NotificationChannel |
 | [com.ema.jannik.logbook.model.database.AppDatabase](../com.ema.jannik.logbook.model.database/-app-database/index.md) | This abstract class represent the Database which contains the tables drive, route and stage. |
 | [com.ema.jannik.logbook.model.database.Converts](../com.ema.jannik.logbook.model.database/-converts/index.md) | This class converts unstorable data types into data types that can be stored in the database |
+| [com.ema.jannik.logbook.DetailsDriveActivity](../com.ema.jannik.logbook/-details-drive-activity/index.md) |  |
+| [com.ema.jannik.logbook.model.DetailsDriveRepository](../com.ema.jannik.logbook.model/-details-drive-repository/index.md) |  |
 | [com.ema.jannik.logbook.model.database.Drive](../com.ema.jannik.logbook.model.database/-drive/index.md) | Created by Jannik on 11/24/2018. represent the table "drive" in the database. This table contains the purpose for the drive, start, destination and the mileage at start and arrival. |
 | [com.ema.jannik.logbook.view.DriveAdapter](../com.ema.jannik.logbook.view/-drive-adapter/index.md) | This Adapter is responsible for the RecyclerView of the MainActivity |
 | [com.ema.jannik.logbook.model.database.DriveDao](../com.ema.jannik.logbook.model.database/-drive-dao/index.md) | This interface contains queries and other operations on the table drive. |
@@ -28,3 +30,4 @@
 | [com.ema.jannik.logbook.model.database.Stage](../com.ema.jannik.logbook.model.database/-stage/index.md) | This class represent the table stage and contains an geo position and the address. Which is used to save the start and destination of a journey. |
 | [com.ema.jannik.logbook.fragment.TimePickerFragment](../com.ema.jannik.logbook.fragment/-time-picker-fragment/index.md) |  |
 | [com.ema.jannik.logbook.fragment.TimePickerFragmentStart](../com.ema.jannik.logbook.fragment/-time-picker-fragment-start/index.md) |  |
+| [com.ema.jannik.logbook.Utils](../com.ema.jannik.logbook/-utils/index.md) | This class contains functions which are used over the project |

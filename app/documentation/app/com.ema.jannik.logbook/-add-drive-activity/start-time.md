@@ -2,7 +2,7 @@
 
 # startTime
 
-`var startTime: `[`Time`](https://developer.android.com/reference/java/sql/Time.html)`?`
+`var startTime: `[`Calendar`](https://developer.android.com/reference/java/util/Calendar.html)
 
 represent the start time to calculate the duration.
 

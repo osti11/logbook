@@ -2,7 +2,7 @@
 
 # endTime
 
-`var endTime: `[`Time`](https://developer.android.com/reference/java/sql/Time.html)`?`
+`lateinit var endTime: `[`Calendar`](https://developer.android.com/reference/java/util/Calendar.html)
 
 represent the end time to calculate the duration.
 

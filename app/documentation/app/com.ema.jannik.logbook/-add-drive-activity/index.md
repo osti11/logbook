@@ -18,11 +18,11 @@ in this Activity the user can add a past ride to the db.
 |---|---|
 | [category](category.md) | `var category: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)<br>represent the chosen imageButton |
 | [destinationAddress](destination-address.md) | `var destinationAddress: `[`Address`](https://developer.android.com/reference/android/location/Address.html)`?`<br>represent the destination address, to get later the latitude and longitude of the chosen address. |
-| [endTime](end-time.md) | `var endTime: `[`Time`](https://developer.android.com/reference/java/sql/Time.html)`?`<br>represent the end time to calculate the duration. |
+| [endTime](end-time.md) | `lateinit var endTime: `[`Calendar`](https://developer.android.com/reference/java/util/Calendar.html)<br>represent the end time to calculate the duration. |
 | [startAddress](start-address.md) | `var startAddress: `[`Address`](https://developer.android.com/reference/android/location/Address.html)`?`<br>represent the start address, to get later the latitude and longitude of the chosen address. |
 | [startFragmentTimePicker](start-fragment-time-picker.md) | `var startFragmentTimePicker: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`?`<br>This boolean is true when the onClickTimePicker() start the startTimePickerFragment(). |
 | [startIntentAutoComplete](start-intent-auto-complete.md) | `var startIntentAutoComplete: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`?`<br>This boolean is true when onClickStartAddressAutoComplete() start the autocomplete Activity. To know where to set the result |
-| [startTime](start-time.md) | `var startTime: `[`Time`](https://developer.android.com/reference/java/sql/Time.html)`?`<br>represent the start time to calculate the duration. |
+| [startTime](start-time.md) | `var startTime: `[`Calendar`](https://developer.android.com/reference/java/util/Calendar.html)<br>represent the start time to calculate the duration. |
 
 ### Functions
 
