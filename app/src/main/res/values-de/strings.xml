@@ -16,8 +16,26 @@
     <string name="textView_duration">Dauer der Fahrt</string>
     <string name="menu_save">speichern</string>
     <string name="menu_addDrive">Fahrt hinzufügen</string>
-    <string name="button_startTime">start Zeitpunkt</string>
+    <string name="EditText_startTime">start Zeitpunkt</string>
     <string name="button_recStart">Starten</string>
     <string name="button_recEnd">beenden</string>
     <string name="menu_rec">Fahrt aufzeichnen</string>
+    <string name="textView_noEntry">kein Eintrag!</string>
+    <string name="editText_endTime">ende Zeitpunkt</string>
+    <string name="textView_category">Kategorie</string>
+    <string name="menu_share">teilen</string>
+    <string name="email_subject">", stand "</string>
+    <string name="email_description">Wähle einen Email Client aus</string>
+    <string name="category_0">keine Kategorie</string>
+    <string name="category_1">Private</string>
+    <string name="category_2">Geschäftlich</string>
+    <string name="category_3">Weg zur Arbeit</string>
+    <string name="category">"Kategorie: "</string>
+    <string name="title_activity_details_drive">Details</string>
+    <string name="email_text">All EInträge:</string>
+    <string name="email_purpose">"Zweck der Fahrt: "</string>
+    <string name="email_startAddress">"Start Adresse: "</string>
+    <string name="menu_edit">bearbeiten</string>
+    <string name="menu_details">Details</string>
+    <string name="toast_notFound">Eintrag nicht gefunden</string>
 </resources>

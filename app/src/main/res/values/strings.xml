@@ -17,8 +17,26 @@
     <string name="textView_duration">duration of the journey</string>
     <string name="menu_save">save</string>
     <string name="menu_addDrive">add journey</string>
-    <string name="button_startTime">start time</string>
+    <string name="EditText_startTime">start time</string>
     <string name="button_recStart">start</string>
     <string name="button_recEnd">finish</string>
     <string name="menu_rec">ride record</string>
+    <string name="textView_noEntry">no entry!</string>
+    <string name="editText_endTime">end time</string>
+    <string name="textView_category">category</string>
+    <string name="menu_share">share</string>
+    <string name="email_subject">", status from "</string>
+    <string name="email_description">choose an email client</string>
+    <string name="category_0">" no category"</string>
+    <string name="category_1">" private"</string>
+    <string name="category_2">" work"</string>
+    <string name="category_3">" way to work"</string>
+    <string name="category">category:</string>
+    <string name="title_activity_details_drive">details</string>
+    <string name="email_text">all entrys:</string>
+    <string name="email_purpose">"purpose of the ride "</string>
+    <string name="email_startAddress">start address:</string>
+    <string name="menu_edit">edit</string>
+    <string name="menu_details">details</string>
+    <string name="toast_notFound">entry not found</string>
 </resources>
