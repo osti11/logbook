@@ -5,6 +5,8 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -17,12 +19,18 @@ import androidx.core.view.GravityCompat
 import com.ema.jannik.logbook.App.Companion.CHANNEL_UPDATEDRIVE_ID
 import com.ema.jannik.logbook.fragment.ImprintFragment
 import com.ema.jannik.logbook.fragment.OverviewFragment
+import com.ema.jannik.logbook.model.DriveRepository
+import com.ema.jannik.logbook.model.database.Drive
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_overview.*
+import java.text.DateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private val TAG = "MainActivity"
 
     private var notificationManagerCompat: NotificationManagerCompat? = null
 
@@ -92,6 +100,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
+     * set the menu 'overview_menu' which contains the share button in the top right corner
+     */
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.overview_menu, menu)
+        return true
+    }
+
+    /**
+     * call sendMail() when the share button is clicked
+     */
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item!!.itemId == R.id.share) {
+            sendMail()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
+    }
+
+    /**
      * Called when an item in the navigation menu is selected.
      * @param item The selected item
      * @return true to display the item as the selected item
@@ -114,12 +142,52 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    /**
+     * This function create an intent to start the email client, to send a list of all table entries
+     */
+    private fun sendMail(){
+        Log.i(TAG, "call sendEmail()")
+        val calander = Calendar.getInstance()
+        val subject: String =  getString(R.string.app_name) +  getString(R.string.email_subject) + DateFormat.getDateInstance().format(calander.time)
+
+        val driveRepository = DriveRepository(application)
+
+
+        Log.i(TAG, "cast LiveData<List> to List")
+        val drives= driveRepository.getAll().value  //TODO here problem
+        Log.i(TAG, "cast success")
+
+        var text =  getString(R.string.email_text)  //TODO edit email text //TODO pro jahr?
+
+        Log.i(TAG, "foreach")
+        for (d in drives!!){
+            text += "\n" + getString(R.string.category) + "\t" + Utils.getCategory(d.category)
+            text += "\n" + getString(R.string.email_purpose) + "\t" + d.purpose
+            text += "\n" + getString(R.string.email_startAddress) + "\t" + d.start.address//TODO weiter machen
+        }
+
+        Log.i(TAG, "set Intent for email")
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        intent.putExtra(Intent.EXTRA_TEXT, text)
+
+        intent.setType("message/rfc822")    //set type as email client
+
+        Log.i(TAG, "start Email intent")
+        startActivity(Intent.createChooser(intent, getString(R.string.email_description)))  //user choose between all email clients on the device
+    }
+
     //--OnClick functions--
     fun onClickFabShow(view: View) {
         changeVisibility(fab_add, textView_fab_add_description)
         changeVisibility(fab_record, textView_fab_record_description)
     }
 
+    /**
+     * This function change the visibility of the passed parameters.
+     * @param floatingActionButton passed a floating action button.
+     * @param textView  passed the textView which contains the description of the floating action button.
+     */
     private fun changeVisibility(floatingActionButton: FloatingActionButton, textView: TextView) {
         if (floatingActionButton.visibility == View.VISIBLE) {
             floatingActionButton.hide()
@@ -130,11 +198,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    /**
+     * this function is called when the floating action button 'fab_add' is clicked and start an AddDriveActivity.
+     */
     fun onClickFabAdd(view: View) {
         val intent = Intent(this, AddDriveActivity::class.java)
         startActivity(intent)         //TODO start activity for result
     }
 
+    /**
+     * this function is called when the floating action button 'fab_record' is clicked and start an RecordDriveActivity.
+     */
     fun onClickFabRec(view: View) {
         val intent = Intent(this, RecordDriveActivity::class.java)
         startActivity(intent)         //TODO start activity for result
