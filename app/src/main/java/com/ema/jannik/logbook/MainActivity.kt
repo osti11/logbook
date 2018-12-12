@@ -19,6 +19,7 @@ import androidx.core.view.GravityCompat
 import com.ema.jannik.logbook.App.Companion.CHANNEL_UPDATEDRIVE_ID
 import com.ema.jannik.logbook.fragment.ImprintFragment
 import com.ema.jannik.logbook.fragment.OverviewFragment
+import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.model.DriveRepository
 import com.ema.jannik.logbook.model.database.Drive
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -121,6 +122,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /**
      * Called when an item in the navigation menu is selected.
+     * This function load the appropriate fragment.
      * @param item The selected item
      * @return true to display the item as the selected item
      */
@@ -133,7 +135,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this, LocationActivity::class.java)//TODO Einfürung view
                 startActivity(intent)
             }
-            R.id.nav_settings -> sendOnChannel()
+            R.id.nav_settings -> supportFragmentManager.beginTransaction().replace(
+                R.id.fragment_container, SettingFragment()
+            ).commit()  //sendOnChannel() TODO send push notification
             R.id.nav_impessum -> supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container, ImprintFragment()
             ).commit()
