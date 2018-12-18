@@ -2,4 +2,4 @@
 
 # getAddressFromLocation
 
-`fun getAddressFromLocation(location: `[`Location`](https://developer.android.com/reference/android/location/Location.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)
+`fun getAddressFromLocation(location: `[`Location`](https://developer.android.com/reference/android/location/Location.html)`): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)

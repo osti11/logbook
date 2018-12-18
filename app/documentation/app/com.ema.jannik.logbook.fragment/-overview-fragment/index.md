@@ -10,6 +10,12 @@
 |---|---|
 | [&lt;init&gt;](-init-.md) | `OverviewFragment()` |
 
+### Properties
+
+| Name | Summary |
+|---|---|
+| [TAG](-t-a-g.md) | `val TAG: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
+
 ### Functions
 
 | Name | Summary |

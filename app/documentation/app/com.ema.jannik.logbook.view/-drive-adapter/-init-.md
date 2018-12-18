@@ -2,7 +2,7 @@
 
 # &lt;init&gt;
 
-`DriveAdapter()`
+`DriveAdapter(activity: `[`Activity`](https://developer.android.com/reference/android/app/Activity.html)`)`
 
 This Adapter is responsible for the RecyclerView of the MainActivity
 

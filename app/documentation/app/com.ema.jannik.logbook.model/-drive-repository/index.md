@@ -4,13 +4,15 @@
 
 `class DriveRepository`
 
-This Repository class add an extra layer between the ViewModel and Data for abstraction purpose
+This Repository class add an extra layer between the ViewModel and Data for abstraction purpose.
+This class is used from the overview fragment to feed the DriveViewModel
+Do NOT create an instace of this class on the main thread.
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `DriveRepository(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`)`<br>This Repository class add an extra layer between the ViewModel and Data for abstraction purpose |
+| [&lt;init&gt;](-init-.md) | `DriveRepository(application: `[`Application`](https://developer.android.com/reference/android/app/Application.html)`)`<br>This Repository class add an extra layer between the ViewModel and Data for abstraction purpose. This class is used from the overview fragment to feed the DriveViewModel Do NOT create an instace of this class on the main thread. |
 
 ### Functions
 

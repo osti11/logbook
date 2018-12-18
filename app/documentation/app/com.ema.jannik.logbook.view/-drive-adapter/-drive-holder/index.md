@@ -14,8 +14,8 @@
 
 | Name | Summary |
 |---|---|
-| [date](date.md) | `val date: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
-| [distance](distance.md) | `val distance: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
-| [duration](duration.md) | `val duration: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
 | [icon](icon.md) | `val icon: AppCompatImageView` |
-| [purpose](purpose.md) | `val purpose: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
+| [lowerLeftCorner](lower-left-corner.md) | `val lowerLeftCorner: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
+| [lowerRightCorner](lower-right-corner.md) | `val lowerRightCorner: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
+| [upperLeftCorner](upper-left-corner.md) | `val upperLeftCorner: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
+| [upperRightCorner](upper-right-corner.md) | `val upperRightCorner: `[`TextView`](https://developer.android.com/reference/android/widget/TextView.html) |
