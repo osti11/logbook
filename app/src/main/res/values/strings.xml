@@ -34,9 +34,50 @@
     <string name="category">category:</string>
     <string name="title_activity_details_drive">details</string>
     <string name="email_text">all entrys:</string>
-    <string name="email_purpose">"purpose of the ride "</string>
+    <string name="email_purpose">"purpose of the ride: "</string>
     <string name="email_startAddress">start address:</string>
     <string name="menu_edit">edit</string>
     <string name="menu_details">details</string>
     <string name="toast_notFound">entry not found</string>
+    <string name="textView_notificationIntervalDescription">Benachrichtigungsinterval</string>
+    <string name="alertDialog_title">explanation</string>
+    <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine
+        Benachrichtigung bekommen möchtest um die Fahrten in dein <i>richtiges</i> Fahrtenbuch einzutragen.
+    </string>
+    <string name="switch_purpose">purpose ofthe journey required</string>
+    <string name="alertDialog_messagePurpose">Hier kannst du festlegen ob du benachrichtigt werden willst wenn kein
+        Grund für die Fahrt angegeben wurde.
+    </string>
+    <string name="textView_titleNotification">Notification</string>
+    <string name="textView_titleLayout">Layout</string>
+    <string name="button_setDefault">reset to default</string>
+    <string name="alertDialog_messageLayout">Hier kasst du das Layout der einzelnen Listenelemente anpassen, indem du
+        auswählst was in welcher ERcke angezeigtr wird
+    </string>
+
+    <string-array name="spinner_notificationInterval">
+        <item>every day</item>
+        <item>once a week</item>
+        <item>once a month</item>
+        <item>never</item>
+    </string-array>
+    <string-array name="spinner_layout">
+        <item>purpose of ride</item>
+        <item>duration</item>
+        <item>start time</item>
+        <item>end time</item>
+        <item>mileage at start</item>
+        <item>milage at destination</item>
+        <item>start address</item>
+        <item>destination address</item>
+    </string-array>
+    <string name="title_settings">Settings</string>
+    <string name="toast_saveSettings">save settings</string>
+    <string name="email_destinationAddress">destination address:</string>
+    <string name="email_mileageStart">"milage at drive off: "</string>
+    <string name="email_mileageDestination">"mileage at destination: "</string>
+    <string name="email_startTimestamp">start timestamp:</string>
+    <string name="email_destinationTimestamp">"timestamp at destination: "</string>
+    <string name="email_duration">duration of journey:</string>
+    <string name="toast_settingsReset">settings reset</string>
 </resources>

@@ -38,4 +38,36 @@
     <string name="menu_edit">bearbeiten</string>
     <string name="menu_details">Details</string>
     <string name="toast_notFound">Eintrag nicht gefunden</string>
+
+    <string-array name="spinner_notificationInterval">
+        <item>jeden Tag</item>
+        <item>einmal pro Woche</item>
+        <item>einmal pro Monat</item>
+        <item>niemals</item>
+    </string-array>
+    <string name="alertDialog_title">Erklärung</string>
+    <string name="switch_purpose">Zweck der Fahrt erforderlich</string>
+    <string name="textView_titleNotification">Benachrichtigungen</string>
+    <string name="textView_titleLayout">Layout</string>
+    <string name="button_setDefault">zurücksetzen</string>
+
+    <string-array name="spinner_layout">
+        <item>Zweck der Fahrt</item>
+        <item>Dauer</item>
+        <item>Start Zeit</item>
+        <item>Endzeit</item>
+        <item>Kilometerstand beim abfahren</item>
+        <item>Kilometerstand am Ziel</item>
+        <item>StartAdresse</item>
+        <item>Zieladresse</item>
+    </string-array>
+    <string name="title_settings">Einstellungen</string>
+    <string name="toast_saveSettings">Einstellungen gespeichert</string>
+    <string name="email_destinationAddress">"Zieladresse: "</string>
+    <string name="email_mileageDestination">"Kilometerstand am Ziel: "</string>
+    <string name="email_mileageStart">"Kilometerstand beim losfahren "</string>
+    <string name="email_startTimestamp">"Startzeitpunkt: "</string>
+    <string name="email_destinationTimestamp">"Endzeitpunkt: "</string>
+    <string name="email_duration">"Dauer der Fahrt: "</string>
+    <string name="toast_settingsReset">EInstellungen zurückgestezt</string>
 </resources>
