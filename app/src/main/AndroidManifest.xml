@@ -8,49 +8,46 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-            android:name=".App"
+            android:name=".helper.App"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-    >
+            android:theme="@style/AppTheme">
         <meta-data
                 android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version"
-        ></meta-data>
-
+                android:value="@integer/google_play_services_version"/>
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyD8Hi1uatlRMuoQ263U5G9cHIlhEF6HWzo"/>
-
+                android:value=""/>
         <activity
-                android:name=".MainActivity"
+                android:name=".activity.SplashScreenActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-                android:name=".AddDriveActivity"
-                android:parentActivityName=".MainActivity">
+                android:name=".activity.AddDriveActivity"
+                android:parentActivityName=".activity.MainActivity">
         </activity>
         <activity
-                android:name=".RecordDriveActivity"
-                android:parentActivityName=".MainActivity">
+                android:name=".activity.RecordDriveActivity"
+                android:parentActivityName=".activity.MainActivity">
         </activity>
 
         <service android:name=".LocationUpdateService"/>
 
-        <activity android:name=".LocationActivity">
+        <activity android:name=".activity.LocationActivity">
         </activity>
         <activity
-                android:name=".DetailsDriveActivity"
-                android:parentActivityName=".MainActivity"
-        />
+                android:name=".activity.DetailsDriveActivity"
+                android:parentActivityName=".activity.MainActivity"/>
+        <activity android:name=".activity.MainActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
