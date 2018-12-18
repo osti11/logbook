@@ -1,11 +1,9 @@
 package com.ema.jannik.logbook.fragment
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -14,23 +12,15 @@ import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.view.DriveAdapter
 import com.ema.jannik.logbook.viewmodel.DriveViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_overview.*
-import android.view.Menu
-import android.view.MenuItem
-import com.ema.jannik.logbook.DetailsDriveActivity
-import com.ema.jannik.logbook.MainActivity
+import com.ema.jannik.logbook.activity.DetailsDriveActivity
 import com.ema.jannik.logbook.model.DriveRepository
 import com.ema.jannik.logbook.model.database.Stage
 import java.sql.Date
-import java.sql.Time
-import java.sql.Timestamp
-import java.text.DateFormat
-import java.time.LocalDateTime
-import java.util.*
-import java.util.zip.DataFormatException
 
 class OverviewFragment : Fragment() {
+
+    val TAG = this::class.java.toString()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_overview, container, false)
@@ -41,11 +31,15 @@ class OverviewFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         //--set recyclerView--
+        Log.i(TAG, "layoutManager")
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)  //make it more efficient
-        val driveAdapter = DriveAdapter()
+        Log.i(TAG, "init Drive Adapter")
+        val driveAdapter = DriveAdapter(activity!!)
+        Log.i(TAG, "set DriveAdapter")
         recyclerView.adapter = driveAdapter
 
+        Log.i(TAG, "Observe")
         //--set observer for LiveData--
         val observer = Observer<List<Drive>> { drives: List<Drive> ->
             run {
