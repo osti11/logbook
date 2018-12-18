@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".AddDriveActivity">
+        tools:context=".activity.AddDriveActivity">
 
     <ScrollView
             android:layout_width="match_parent"
@@ -27,7 +27,7 @@
             <EditText
                     android:focusable="false"
                     android:inputType="none"
-                    android:textColor="@color/textDark"
+                    android:textColor="@color/dark"
                     android:id="@+id/textView_startAddress"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"
@@ -43,7 +43,7 @@
             <EditText
                     android:focusable="false"
                     android:inputType="none"
-                    android:textColor="@color/textDark"
+                    android:textColor="@color/dark"
                     android:id="@+id/textView_destinationAddress"
                     android:layout_height="wrap_content"
                     android:layout_width="0dp"

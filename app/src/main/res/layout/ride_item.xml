@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content" xmlns:tool="http://schemas.android.com/tools"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp">
@@ -17,45 +17,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    />
-
+                    tool:layout_marginRight="10dp"
+            />
 
             <TextView
-                    android:id="@+id/text_view_distance"
+                    android:id="@+id/textView_upperRightCorner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="40 km"
+                    tool:text="40 km"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 
             <TextView
-                    android:id="@+id/a"
+                    android:id="@+id/textView_upperLeftCorner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:layout_toStartOf="@id/text_view_distance"
+                    android:layout_toStartOf="@id/textView_upperRightCorner"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:text="Hans besucht"
+                    tool:text="Hans besucht"
                     android:layout_toEndOf="@id/item_icon"/>
 
             <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/textView_lowerLeftCorner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:layout_toEndOf="@id/item_icon"
-                    android:layout_below="@id/a"
-                    android:text="11.11.18 12:11:12" />
+                    android:layout_toStartOf="@id/textView_lowerRightCorner"
+                    android:layout_below="@id/textView_upperLeftCorner"
+                    tool:text="11.11.18 12:11:12" />
 
             <TextView
-                    android:id="@+id/duration"
+                    android:id="@+id/textView_lowerRightCorner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_view_distance"
+                    android:layout_below="@id/textView_upperRightCorner"
                     android:layout_alignParentEnd="true"
-                    android:text="2:00 h" />
+                    tool:text="2:00 h" />
 
         </RelativeLayout>
 
