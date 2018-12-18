@@ -1,7 +1,6 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.activity
 
 import android.app.Notification
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
@@ -10,18 +9,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
-import com.ema.jannik.logbook.App.Companion.CHANNEL_UPDATEDRIVE_ID
+import com.ema.jannik.logbook.view.ExplanationDialog
+import com.ema.jannik.logbook.helper.App.Companion.CHANNEL_UPDATEDRIVE_ID
+import com.ema.jannik.logbook.R
+import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.fragment.ImprintFragment
 import com.ema.jannik.logbook.fragment.OverviewFragment
 import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.model.DriveRepository
-import com.ema.jannik.logbook.model.database.Drive
+import com.ema.jannik.logbook.model.EmailRepository
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,14 +32,16 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private val TAG = "MainActivity"
+    private val TAG = this::class.java.name
 
     private var notificationManagerCompat: NotificationManagerCompat? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.i(TAG, "setNavigation")
         //--Navigation--
         setSupportActionBar(toolbar)    //set toolbar as actionbar
         nav_view.setNavigationItemSelectedListener(this)
@@ -49,9 +52,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
+        Log.i(TAG, "setNotification")
         //--Notification--
         notificationManagerCompat = NotificationManagerCompat.from(this)    //can not create channels
 
+        Log.i(TAG, "loadFragment")
         //--load Fragments--
         if (savedInstanceState == null) {    //Don't load the fragment when the device is rotated
             supportFragmentManager.beginTransaction().replace(
@@ -60,6 +65,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             ).commit()
             nav_view.setCheckedItem(R.id.nav_overview)
         }
+        Log.i(TAG, "onCreate finish")
     }
 
     /**
@@ -93,11 +99,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onBackPressed() {  //Pack press when navigationDrawer is open don't leav the activity
+        Log.i(TAG, "onBackPressed()")
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
+        Log.i(TAG, "onBackPressed() finish")
     }
 
     /**
@@ -128,19 +136,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.nav_overview -> supportFragmentManager.beginTransaction().replace(
-                R.id.fragment_container, OverviewFragment()
-            ).commit()
+            R.id.nav_overview -> {
+                title = getString(R.string.app_name)
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container, OverviewFragment()
+                ).commit()
+            }
+
             R.id.nav_introduction -> {
+                //TODO set title
                 val intent = Intent(this, LocationActivity::class.java)//TODO Einfürung view
                 startActivity(intent)
             }
-            R.id.nav_settings -> supportFragmentManager.beginTransaction().replace(
-                R.id.fragment_container, SettingFragment()
-            ).commit()  //sendOnChannel() TODO send push notification
-            R.id.nav_impessum -> supportFragmentManager.beginTransaction().replace(
-                R.id.fragment_container, ImprintFragment()
-            ).commit()
+            R.id.nav_settings -> {
+                title = getString(R.string.title_settings)
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container, SettingFragment()
+                ).commit()
+            }  //sendOnChannel() TODO send push notification
+            R.id.nav_impessum -> {
+                //TODO set title
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container, ImprintFragment()
+                ).commit()
+            }
         }
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
@@ -149,25 +168,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /**
      * This function create an intent to start the email client, to send a list of all table entries
      */
-    private fun sendMail(){
+    private fun sendMail() {
         Log.i(TAG, "call sendEmail()")
         val calander = Calendar.getInstance()
-        val subject: String =  getString(R.string.app_name) +  getString(R.string.email_subject) + DateFormat.getDateInstance().format(calander.time)
+        val subject: String =
+            getString(R.string.app_name) + getString(R.string.email_subject) + DateFormat.getDateInstance().format(
+                calander.time
+            )
 
-        val driveRepository = DriveRepository(application)
+        Log.i(TAG, "init repository")
+        val repository: EmailRepository = EmailRepository(application)
 
+        Log.i(TAG, "getAll()")
+        val drives = repository.getAll()
 
-        Log.i(TAG, "cast LiveData<List> to List")
-        val drives= driveRepository.getAll().value  //TODO here problem
-        Log.i(TAG, "cast success")
-
-        var text =  getString(R.string.email_text)  //TODO edit email text //TODO pro jahr?
+        var text = getString(R.string.email_text)  //TODO edit email text //TODO pro jahr?
 
         Log.i(TAG, "foreach")
-        for (d in drives!!){
-            text += "\n" + getString(R.string.category) + "\t" + Utils.getCategory(d.category)
+        for (d in drives) {
+            text += "\n" + getString(R.string.category) + "\t" + getString(Utils.getCategory(d.category))
             text += "\n" + getString(R.string.email_purpose) + "\t" + d.purpose
-            text += "\n" + getString(R.string.email_startAddress) + "\t" + d.start.address//TODO weiter machen
+            text += "\n" + getString(R.string.email_startAddress) + "\t" + d.start.address
+            text += "\n" + getString(R.string.email_destinationAddress) + "\t" + d.destination.address
+            text += "\n" + getString(R.string.email_mileageStart) + "\t" + d.mileageStart.toString()
+            text += "\n" + getString(R.string.email_mileageDestination) + "\t" + d.mileageDestination.toString()
+            text += "\n" + getString(R.string.email_startTimestamp) + "\t" + d.start_timestamp.toString()
+            text += "\n" + getString(R.string.email_destinationTimestamp) + "\t" + d.destination_timestamp.toString()
+            text += "\n" + getString(R.string.email_duration) + "\t" + d.duration.toString()
+            text += "\n"
         }
 
         Log.i(TAG, "set Intent for email")
@@ -178,7 +206,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         intent.setType("message/rfc822")    //set type as email client
 
         Log.i(TAG, "start Email intent")
-        startActivity(Intent.createChooser(intent, getString(R.string.email_description)))  //user choose between all email clients on the device
+        startActivity(
+            Intent.createChooser(
+                intent,
+                getString(R.string.email_description)
+            )
+        )  //user choose between all email clients on the device
     }
 
     //--OnClick functions--
@@ -217,4 +250,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val intent = Intent(this, RecordDriveActivity::class.java)
         startActivity(intent)         //TODO start activity for result
     }
+
+    /**
+     * onClickListener for the setting fragment.
+     * Open dialog with explanation to the notificationInterval settings.
+     */
+    fun onClickNotificationInfo(view: View) {
+        Log.i(TAG, "NotificationIntervalDialogConstuctor")
+        val dialog = ExplanationDialog(R.string.alertDialog_messageNotification)
+        Log.i(TAG, "NotificationIntervalDialogShow")
+        dialog.show(supportFragmentManager, "info dialog")
+    }
+
+    /**
+     * onClickListener for the setting fragment.
+     * Open dialog with explanation to the purpose settings.
+     */
+    fun onClickPurposeInfo(view: View) {
+        val dialog = ExplanationDialog(R.string.alertDialog_messagePurpose)
+        dialog.show(supportFragmentManager, "info dialog")
+    }
+
+    /**
+     * onClickListener for the setting fragment.
+     * Open dialog with explanation to the layout settings.
+     */
+    fun onClickLayoutInfo(view: View) {
+        val dialog = ExplanationDialog(R.string.alertDialog_messageLayout)
+        dialog.show(supportFragmentManager, "info dialog")
+    }
+
+
+
 }
