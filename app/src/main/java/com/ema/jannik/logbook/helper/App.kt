@@ -1,9 +1,10 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.helper
 
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import com.ema.jannik.logbook.R
 
 /**
  * This class is a helper class to create the NotificationChannel
