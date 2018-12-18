@@ -22,7 +22,7 @@ import java.sql.Date
  */
 @Entity(tableName = "drive")
 data class Drive(
-    @ColumnInfo(name = "dr_purpose") var purpose: String,
+    @ColumnInfo(name = "dr_purpose") var purpose: String,   //TODO wenn leer
     @ColumnInfo(name = "dr_duration") var duration: Date,       //TODO oder als Timestamp
     @ColumnInfo(name= "dr_start_timestamp") var start_timestamp: Date,
     @ColumnInfo(name= "dr_destination_timestamp") var destination_timestamp: Date,

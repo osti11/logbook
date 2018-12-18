@@ -8,7 +8,9 @@ import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.model.database.DriveDao
 
 /**
- * This Repository class add an extra layer between the ViewModel and Data for abstraction purpose
+ * This Repository class add an extra layer between the ViewModel and Data for abstraction purpose.
+ * This class is used from the overview fragment to feed the DriveViewModel
+ * Do NOT create an instace of this class on the main thread.
  */
 class DriveRepository(application: Application) {
     private var driveDao: DriveDao
@@ -17,7 +19,7 @@ class DriveRepository(application: Application) {
     init {
         val database: AppDatabase = AppDatabase.getInstance(application.applicationContext)!!
         driveDao = database.driveDao()
-        allDrives = driveDao.getAll()  //TODO need other db?
+        allDrives = driveDao.getAll()
     }
 
     /**

@@ -19,6 +19,13 @@ interface DriveDao {
     fun getAll(): LiveData<List<Drive>>
 
     /**
+     * Query: "SELECT * FROM drive"
+     * Get all entries from the table drive as normal list to create the email.
+     */
+    @Query("SELECT * FROM drive")
+    fun getAllForEmail(): List<Drive>
+
+    /**
      * Query: SELECT * FROM drive where dr_id = id
      * Get entry by id.
      */

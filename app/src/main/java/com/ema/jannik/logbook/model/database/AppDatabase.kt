@@ -13,6 +13,9 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun routeDao(): RouteDao
 
     companion object {
+
+        private val TAG = this::class.java.name
+
         private var instance: AppDatabase? = null
 
         /**
