@@ -1,26 +1,16 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.activity
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_record_drive.*
-import com.google.android.gms.location.LocationResult
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import androidx.annotation.NonNull
-import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.fragment.app.FragmentActivity
-import com.google.android.gms.tasks.Task
+import com.ema.jannik.logbook.LocationUpdateService
+import com.ema.jannik.logbook.R
 
 
 class RecordDriveActivity : AppCompatActivity() {
@@ -46,7 +36,9 @@ class RecordDriveActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!checkPermission(permissions)) {
-                requestPermissions(permissions, PERMISSION_LOCATION_REQUEST)
+                requestPermissions(permissions,
+                    PERMISSION_LOCATION_REQUEST
+                )
             }
         }
     }
@@ -58,8 +50,8 @@ class RecordDriveActivity : AppCompatActivity() {
         if (button_startEnd.text == getString(R.string.button_recStart)) {
             button_startEnd.text = getString(R.string.button_recEnd)
             val serviceIntent = Intent(this, LocationUpdateService::class.java)
-            //TODO put to Service
-            startService(serviceIntent)
+            ContextCompat.startForegroundService(this, serviceIntent)
+
         } else if (button_startEnd.text == getString(R.string.button_recEnd)) {
             val serviceIntent = Intent(this, LocationUpdateService::class.java)
             stopService(serviceIntent)

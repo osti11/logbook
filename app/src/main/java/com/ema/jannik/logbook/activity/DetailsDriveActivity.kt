@@ -1,4 +1,4 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.activity
 
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.ema.jannik.logbook.R
+import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.model.DetailsDriveRepository
 import com.ema.jannik.logbook.model.database.Drive
 import com.google.android.gms.common.ConnectionResult
@@ -89,9 +91,11 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback{
         Log.i(TAG, "setTextViews()")
 
         val category = Utils.getCategory(drive!!.category)
+        val imageRessource = Utils.getCategoryDrawableId(drive!!.category)
 
-        if(category != 0){  //category == 0 -> not found
+        if(category != 0 && imageRessource != 0){  //category == 0 -> not found
             textView_category.text = getString(category)
+            imageView_category.setImageResource(imageRessource)
         }
 
         textView_purpose.text = drive!!.purpose
@@ -149,7 +153,9 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback{
         if (available == ConnectionResult.SUCCESS){
             return true     //service is available
         } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)){   //fixable error
-            val dialog: Dialog = GoogleApiAvailability.getInstance().getErrorDialog(this, available, ERROR_DIALOG_REQUEST)
+            val dialog: Dialog = GoogleApiAvailability.getInstance().getErrorDialog(this, available,
+                ERROR_DIALOG_REQUEST
+            )
             dialog.show()
         } else {
             Toast.makeText(this, "you can make no requests", Toast.LENGTH_SHORT).show() //TODO Toast die map funktioniert nicht richtig, in string.xml

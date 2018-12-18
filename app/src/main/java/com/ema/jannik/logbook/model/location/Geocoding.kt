@@ -27,7 +27,7 @@ class Geocoding(application: Application) {
     private val geocoder = Geocoder(application.applicationContext, Locale.getDefault())
 
 
-    fun getAddressFromLocation(location: Location) {
+    fun getAddressFromLocation(location: Location) : String{
         try {
             addresses = geocoder.getFromLocation(
                 location.latitude,
@@ -35,6 +35,7 @@ class Geocoding(application: Application) {
                 1
             )
             Log.i("address", addresses.toString())
+            return addresses.toString()
         } catch (ioException: IOException) {
             /*
             // Catch network or other I/O problems.
@@ -69,5 +70,6 @@ class Geocoding(application: Application) {
             )
             */
         }
+        return ""
     }
 }

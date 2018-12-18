@@ -1,20 +1,17 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.activity
 
 
 import android.content.pm.PackageManager
 import android.location.Location
-import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.ema.jannik.logbook.R.id.text
+import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.model.LocationRepository
-import com.ema.jannik.logbook.model.location.Geocoding
 import com.google.android.gms.location.*
 import kotlinx.android.synthetic.main.activity_location.*
-import java.util.jar.Manifest
 
 
 class LocationActivity : AppCompatActivity() {
@@ -79,7 +76,9 @@ class LocationActivity : AppCompatActivity() {
 
         //check Permission runtime
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)){
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_CODE
+            )
         }
         else {
             //if granted
@@ -97,7 +96,9 @@ class LocationActivity : AppCompatActivity() {
             button_start.setOnClickListener(View.OnClickListener {
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
-                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        REQUEST_CODE
+                    )
                     return@OnClickListener
                 }
                 fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
@@ -106,7 +107,9 @@ class LocationActivity : AppCompatActivity() {
             button_end.setOnClickListener(View.OnClickListener {
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)  {
-                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_CODE)
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                        REQUEST_CODE
+                    )
                     return@OnClickListener
                 }
                 fusedLocationProviderClient.removeLocationUpdates(locationCallback)

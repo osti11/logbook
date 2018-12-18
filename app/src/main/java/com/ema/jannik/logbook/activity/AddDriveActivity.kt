@@ -1,4 +1,4 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.activity
 
 import android.app.Activity
 import android.app.TimePickerDialog
@@ -20,6 +20,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.ema.jannik.logbook.R
 import java.text.DateFormat
 import java.util.*
 
@@ -93,7 +94,9 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
 
         //--set Button--
         resetImageButtonBackgroundColor()
-        imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.colorPrimaryDark) )
+        imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+            R.color.colorPrimaryDark
+        ) )
 
 
     }
@@ -193,23 +196,31 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
 
         when (view.id){
             R.id.imageButton_noCategory -> {
-                imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.colorPrimaryDark) )
+                imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+                    R.color.colorPrimaryDark
+                ) )
                 category = 0    //TODO welche werte?
                 message += getString(R.string.category_0)
             }
             R.id.imageButton_private -> {
-                imageButton_private.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.colorPrimaryDark) )
+                imageButton_private.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+                    R.color.colorPrimaryDark
+                ) )
                 category = 1
                 message += getString(R.string.category_1)
             }
             R.id.imageButton_work -> {
-                imageButton_work.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.colorPrimaryDark) )
+                imageButton_work.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+                    R.color.colorPrimaryDark
+                ) )
                 category = 2
                 message += getString(R.string.category_2)
 
             }
             R.id.imageButton_way -> {
-                imageButton_way.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.colorPrimaryDark) )
+                imageButton_way.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+                    R.color.colorPrimaryDark
+                ) )
                 category = 3
                 message += getString(R.string.category_3)
             }
@@ -221,10 +232,18 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
      * This function set the background of all imageButton elments to the default value
      */
     private fun resetImageButtonBackgroundColor(){
-        imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.button_material_light))
-        imageButton_private.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.button_material_light))
-        imageButton_work.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.button_material_light))
-        imageButton_way.setBackgroundColor( ContextCompat.getColor(applicationContext , R.color.button_material_light))
+        imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+            R.color.button_material_light
+        ))
+        imageButton_private.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+            R.color.button_material_light
+        ))
+        imageButton_work.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+            R.color.button_material_light
+        ))
+        imageButton_way.setBackgroundColor( ContextCompat.getColor(applicationContext ,
+            R.color.button_material_light
+        ))
     }
 
     /**
@@ -274,7 +293,9 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
         try {
             val intent = PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
                 .build(this)
-            startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE)
+            startActivityForResult(intent,
+                PLACE_AUTOCOMPLETE_REQUEST_CODE
+            )
         } catch (e: GooglePlayServicesRepairableException) {
             // TODO: Handle the error.
         } catch (e: GooglePlayServicesNotAvailableException) {
