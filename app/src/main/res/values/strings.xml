@@ -40,7 +40,7 @@
     <string name="menu_details">details</string>
     <string name="toast_notFound">entry not found</string>
     <string name="textView_notificationIntervalDescription">Benachrichtigungsinterval</string>
-    <string name="alertDialog_title">explanation</string>
+    <string name="alertDialog_titleSettings">explanation</string>
     <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine
         Benachrichtigung bekommen möchtest um die Fahrten in dein <i>richtiges</i> Fahrtenbuch einzutragen.
     </string>
@@ -80,4 +80,69 @@
     <string name="email_destinationTimestamp">"timestamp at destination: "</string>
     <string name="email_duration">duration of journey:</string>
     <string name="toast_settingsReset">settings reset</string>
+    <string name="textView_mileageEnd">mileage at destination</string>
+    <string name="alertDialog_emailTitle">Export entries to email</string>
+    <string-array name="dialog_email_choice">
+        <item>as list</item>
+        <item>as table (easy to paste in excel)</item>
+    </string-array>
+    <string name="editText_timeHour">hour</string>
+    <string name="editText_timeMinute">minute</string>
+    <string name="toast_minute">minute is not valid</string>
+    <string name="toast_hour">hour is not valid</string>
+    <string name="toast_startAddress">start address is missing</string>
+    <string name="toast_destinationAddress">destination address is missing</string>
+    <string name="toast_mileage">mileage is incorrect</string>
+    <string name="toast_time">time is incorrect</string>
+    <string name="toast_addSuccessfully">Add was successful</string>
+    <string name="alertDialog_titleAddDrive">hint</string>
+    <string name="snackbar_button">undo</string>
+    <string name="snackbar_text">Entry deleted.</string>
+    <string name="menu_delete">delete all before ...</string>
+    <string name="distance_unit" translatable="false">" km"</string>
+    <string name="textView_titleDelete">Delete</string>
+    <string name="switch_delete">delete changes newer entries</string>
+    <string name="alertDialog_messageDelete">Hier kannst du bestimmen ob wenn ein einzelner Eiontrag gelöscht wird die
+        KIlometerstände der neueren Einträge um die Entfernung des gelöschten EIntrags angepasst werden soll. (Das macht
+        SInn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
+    </string>
+    <string name="title_introduction">Introduction</string>
+    <string name="textView_title">Wilkommen</string>
+    <string name="textView_titleDescription">Diese App hilft dir beim führen deines Fahrtenbuches. Um dir den Einstieg
+        zu erleichtern wird dir im folgenden Text die grundfunktionalität der App erklärt.
+    </string>
+    <string name="textView_titleNavigation">Navigation</string>
+    <string name="textView_navigationDescription">Wenn du von links nach rechts streichst oder auf ☰ drückst öffnet sich
+        die Navigation
+    </string>
+    <string name="textView_titleDrive">Fahrt erfassen</string>
+    <string name="textView_driveDescription">Um eine Fahrt aufzuzeichnen drückst du in der rechten unteren Ecke auf das
+        + Symbol. Danach kannst du eine Fahrt aufzeichnen oder hinzufügen.
+    </string>
+    <string name="textView_TitleRecordDrive">Fahrt aufzeichnen</string>
+    <string name="textView_recordDriveDescription">Beim aufzeichnen drückst du einen start Knopf. Nun wird deine
+        GPS-Position erfasst bis du auf den Stop Knopf drückst.
+    </string>
+    <string name="textView_titleAddDrive">Fahrt hinzufügen</string>
+    <string name="textView_addDriveDescription">Beim Hinzufügen kannst du eine Fahrt nachträglich per Hand hinzufügen.
+    </string>
+    <string name="textView_deleteDescription">Du kannst einzelnene Einträge löschen oder alle Einträge vor einem
+        bestimmten Zeitpunkt.
+    </string>
+    <string name="textView_titleDeleteSingle">einzelne Einträge löschen</string>
+    <string name="textView_deleteSingleDescription">Bei der Übersicht kannst du in der Liste einzelne Einträge nach
+        links oder rechts streichen um diese zu löschen. Danach hast du noch kurze Zeit die möglichkeit das Löschen
+        rückgängig zu machen.
+    </string>
+    <string name="textView_titleDeleteFew">mehere Einträge löschen</string>
+    <string name="textView_deleteFewDescription">
+        Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
+    </string>
+    <string name="title_impressum">Impressum</string>
+    <string name="textView_titleExport">expotieren</string>
+    <string name="textView_exportDescription">Du kannst dein digitales Fahrtenbuch als Email expotieren, um es dir, zum leichteren Übertragen, auf deinem PC anzuschauen. Dazu musst du rechts oben auf den SHARE-Button drücken. Danach kannst du auswählen wie die Nachricht
+        formatiert werden soll, als Liste oder Tabelle. Die Tabellenformatierung ist nur zum einfachen Einfügen in einem
+        Tabellenkalkulationsprogramm wie Excel gedacht.
+    </string>
+    <string name="textView_rec">Position is recorded</string>
 </resources>

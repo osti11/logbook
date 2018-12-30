@@ -6,22 +6,54 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:context=".activity.RecordDriveActivity">
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-    android:id="@+id/tvtvtv"/>
+        tools:context=".activity.RecordDriveActivity"
+>
 
     <Button
             android:text="@string/button_recStart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button_startEnd"
+            android:id="@+id/button_startFS"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="8dp"
             android:height="20dp"
-            android:onClick="onClickForegroundService"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:onClick="onClickStartForegroundService"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_stopFS"
+    />
+
+    <Button
+            android:text="@string/button_recEnd"
+            android:onClick="onClickStopForegroundService"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_stopFS"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/textView_rec"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:visibility="gone"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,12 +45,15 @@
         <item>einmal pro Monat</item>
         <item>niemals</item>
     </string-array>
-    <string name="alertDialog_title">Erklärung</string>
+    <string name="alertDialog_titleSettings">Erklärung</string>
     <string name="switch_purpose">Zweck der Fahrt erforderlich</string>
     <string name="textView_titleNotification">Benachrichtigungen</string>
     <string name="textView_titleLayout">Layout</string>
     <string name="button_setDefault">zurücksetzen</string>
-
+    <string-array name="dialog_email_choice">
+        <item>als Liste</item>
+        <item>als Tabelle (zum einfachen einfügen in Excel)</item>
+    </string-array>
     <string-array name="spinner_layout">
         <item>Zweck der Fahrt</item>
         <item>Dauer</item>
@@ -70,4 +73,38 @@
     <string name="email_destinationTimestamp">"Endzeitpunkt: "</string>
     <string name="email_duration">"Dauer der Fahrt: "</string>
     <string name="toast_settingsReset">EInstellungen zurückgestezt</string>
+    <string name="textView_mileageEnd">Kilometerstand am Ziel</string>
+    <string name="alertDialog_emailTitle">Einträge in Email expotieren</string>
+    <string name="editText_timeHour">Stunde</string>
+    <string name="editText_timeMinute">Minute</string>
+    <string name="toast_minute">Minut ist ungültig</string>
+    <string name="toast_addSuccessfully">Hinzufügen war erfolgreich</string>
+    <string name="alertDialog_titleAddDrive">Hinweis</string>
+    <string name="snackbar_button">rückgängig machen</string>
+    <string name="snackbar_text">Eintrag gelöscht.</string>
+    <string name="menu_delete">Alles löschen vor dem ...</string>
+    <string name="textView_titleDelete">Löschen</string>
+    <string name="switch_delete">Löschen ändert neuere Einträge</string>
+    <string name="title_introduction">Einführung</string>
+    <string name="textView_title">Wilkommen</string>
+    <string name="textView_titleDescription">Diese App hilft dir beim führen deines Fahrtenbuches. Um dir den Einstieg
+        zu erleichtern wird dir im folgenden Text die grundfunktionalität der App erklärt.
+    </string>
+    <string name="textView_titleNavigation">Navigation</string>
+    <string name="textView_recordDriveDescription">Beim aufzeichnen drückst du einen start Knopf. Nun wird deine
+        GPS-Position erfasst bis du auf den Stop Knopf drückst.
+    </string>
+    <string name="textView_deleteDescription">Du kannst einzelnene Einträge löschen oder alle Einträge vor einem
+        bestimmten Zeitpunkt.
+    </string>
+    <string name="textView_titleDeleteSingle">einzelne Einträge löschen</string>
+    <string name="textView_deleteSingleDescription">Bei der Übersicht kannst du in der Liste einzelne Einträge nach
+        links oder rechts streichen um diese zu löschen. Danach hast du noch kurze Zeit die möglichkeit das Löschen
+        rückgängig zu machen.
+    </string>
+    <string name="textView_titleDeleteFew">mehere Einträge löschen</string>
+    <string name="textView_deleteFewDescription">Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
+    </string>
+    <string name="textView_titleExport">Expotieren</string>
+    <string name="textView_rec">Position wird erfasst</string>
 </resources>

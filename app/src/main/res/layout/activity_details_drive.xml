@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -188,7 +190,7 @@
             <TextView
                     android:text="@string/textView_distance"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView"
+                    android:layout_height="wrap_content" android:id="@+id/textView_navigationDescription"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/textView_mileageStart"/>
@@ -196,8 +198,8 @@
                     android:text="90"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    android:id="@+id/textView_distance"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_navigationDescription"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="8dp" android:textSize="18sp" android:textColor="@color/dark"/>
             <TextView
@@ -206,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_mileageDestinationDescription"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" android:layout_marginTop="8dp"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textView_distance" android:layout_marginTop="8dp"/>
             <TextView
                     android:text="50090"
                     android:layout_width="wrap_content"
