@@ -20,5 +20,5 @@ interface RouteDao {
      * Get rout by FOREIGN KEY ro_drid
      */
     @Query("SELECT * FROM route WHERE ro_drId = (:id)")
-    fun getByDrId(id: Int): Route
+    fun getByDrId(id: Int): List<Route>
 }

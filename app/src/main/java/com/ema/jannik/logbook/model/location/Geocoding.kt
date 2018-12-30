@@ -1,15 +1,10 @@
 package com.ema.jannik.logbook.model.location
 
 import android.app.Application
-import android.content.Context
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.util.Log
-import android.view.View
-import android.widget.TextView
-import com.ema.jannik.logbook.R.id.textView
-import com.ema.jannik.logbook.model.location.Geocoding.Constants.PACKAGE_NAME
 import java.io.IOException
 import java.util.*
 
@@ -35,7 +30,7 @@ class Geocoding(application: Application) {
                 1
             )
             Log.i("address", addresses.toString())
-            return addresses.toString()
+            return addresses[0].getAddressLine(0).toString()
         } catch (ioException: IOException) {
             /*
             // Catch network or other I/O problems.
