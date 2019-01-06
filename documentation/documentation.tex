@@ -128,7 +128,24 @@ meine Zielgruppe mitaufnehmen.
 	\label{table:nonlin}
  \end{table}
 
-\subsection{GPS}
+\subsection{Aufzeichnen Der Fahrt}
+Um die Fahrt aufzuzeichnen
+
+\subsubsection{Position bestimmen}
+Um die Position unter Android zu ermitteln gibt es drei Wege:
+\begin{enumerate}
+	\item  LocationManager & LocationListener
+	\item fusion location client
+	\item fusion location provider
+\end{enumerate}
+
+
+\subsubsection{Entfernung bestimmen}
+Die bestimmten Positionen werden gesammelt bis das Aufzeichnen der Fahrt beendet wird.
+
+\subsubsection{Start- und Zieladresse ermitteln}
+
+\subsubsection{Foreground Service}
 
 \subsubsection{Darstellung der Fahrt auf Karte}
 Alle erfassten Daten sollten im GPSX Format erfasst werden. 
@@ -164,7 +181,6 @@ Diese können benutzt werden um die Route in Google Maps darzustellen.
 \section{User Stories, Personas}
 
 \section{Mockuop, Wireframe}
---erste Version--
 
 \begin{figure}
 	\begin{minipage}[b]{0.3\textwidth}
