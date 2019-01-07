@@ -1,0 +1,12 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+com.ema.jannik.logbook
+com.ema.jannik.logbook.activity
+com.ema.jannik.logbook.fragment
+com.ema.jannik.logbook.helper
+com.ema.jannik.logbook.model
+com.ema.jannik.logbook.model.database
+com.ema.jannik.logbook.model.location
+com.ema.jannik.logbook.view
+com.ema.jannik.logbook.viewmodel

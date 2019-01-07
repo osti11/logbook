@@ -135,12 +135,43 @@ Dafür werde ich die Google Maps SDK verwenden.
 	\label{table:nonlin}
  \end{table}
 
-\subsection{GPS}
+\subsection{Aufzeichnen Der Fahrt}
+Um die Fahrt aufzuzeichnen
+
+\subsubsection{Position bestimmen}
+Um die Position unter Android zu ermitteln gibt es drei Wege:
+\begin{enumerate}
+	\item  LocationManager & LocationListener
+	\item fusion location client
+	\item fusion location provider
+\end{enumerate}
+
+LocationManager & LocationListener
+Bei dieser Möglichkeit werden die Boardmittel von ANdroid verwendet um die Position bestimmen.
+Diese Methode hat den größten Akkuverbrauch und wird von Google nicht empfohlen.
+
+Fusion Location client
+Bei dieser Methode wird der Google Location Service verwendet der sowieso im Hintergrund läuft. Bei dieser Methode 
+startet man ein update Request bei dem man die Rahmenbedingungen wie Priorität min und max Zeit zwischen den Updates einstellen kann.
+Diese Methode ist Akkuschonender.
+
+Fusion Location Provider
+Diese Methode ist im prinziep eine verbesserte und vereinfachte Form des Fusion Location Client und wird von Google empfohlen.
+
+\subsubsection{Entfernung bestimmen}
+Die bestimmten Positionen werden gesammelt bis das Aufzeichnen der Fahrt beendet wird.
+
+\subsubsection{Start- und Zieladresse ermitteln}
+Bevor man die Fahrt in die Datenbank schreiben kann benötigt man außer den GPS-Koordinaten, Ankunftszeit, Abfahrtszeit und 
+Entfernung auch die Adresse der ersten und letzten Position. Um diese zu ermitteln benötigt man eine API die eine GPS-Position 
+entgegennimmt und eine Adresse zurückgibt. Da ich eh schon die Google Maps API verwende, habe ich mich für Geocoding entschieden.
+Das ist eine Google API die genau das macht, GPS-Kordinaten einer Adresse zuordnen und umgekehrt. 
+
+\subsubsection{Foreground Service}
 
 \subsubsection{Darstellung der Fahrt auf Karte}
 Alle erfassten Daten sollten im GPSX Format erfasst werden. 
 Diese können benutzt werden um die Route in Google Maps darzustellen.
-
 
 \subsection{Bluetooth}
 
@@ -161,7 +192,9 @@ Android Jetpack
 
 
 \section{Features}
+
 \subsection{Anforderungen}
+
 \begin{enumerate}
 	\item Die Fahrtenbuch Daten sollen in einer Datenbank auf dem Handy gespeichert werden.
 	\item Alle Einträge der Datenbank sollen in einer Liste dargestellt werden.
@@ -182,7 +215,6 @@ Android Jetpack
 \section{User Stories, Personas}
 
 \section{Mockuop, Wireframe}
---erste Version--
 
 \begin{figure}
 	\begin{minipage}[b]{0.3\textwidth}

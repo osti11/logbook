@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fahrtenbuch</string>
+    <string name="fab_record">Fahrt aufzeichnen</string>
+    <string name="fab_add">Fahrt hinzufügen</string>
+    <string name="editText_startAddress">Start Adresse</string>
+    <string name="editText_destinationAddress">Ziel Adresse</string>
+    <string name="textView_distance">Entfernung</string>
+    <string name="textView_mileageStart">Kilomterstand beim Abfahren</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_introduction">Einführung</string>
+    <string name="menu_impressum">Impressum</string>
+    <string name="menu_overview">Übersicht</string>
+    <string name="channel_description">Eintrag vervollständigen</string>
+    <string name="editText_purpose">Zweck der Fahrt</string>
+    <string name="textView_duration">Dauer der Fahrt</string>
+    <string name="menu_save">speichern</string>
+    <string name="menu_addDrive">Fahrt hinzufügen</string>
+    <string name="EditText_startTime">start Zeitpunkt</string>
+    <string name="button_recStart">Starten</string>
+    <string name="button_recEnd">beenden</string>
+    <string name="menu_rec">Fahrt aufzeichnen</string>
+    <string name="textView_noEntry">kein Eintrag!</string>
+    <string name="editText_endTime">ende Zeitpunkt</string>
+    <string name="textView_category">Kategorie</string>
+    <string name="menu_share">teilen</string>
+    <string name="email_subject">", stand "</string>
+    <string name="email_description">Wähle einen Email Client aus</string>
+    <string name="category_0">keine Kategorie</string>
+    <string name="category_1">Private</string>
+    <string name="category_2">Geschäftlich</string>
+    <string name="category_3">Weg zur Arbeit</string>
+    <string name="category">"Kategorie: "</string>
+    <string name="title_activity_details_drive">Details</string>
+    <string name="email_text">All EInträge:</string>
+    <string name="email_purpose">"Zweck der Fahrt: "</string>
+    <string name="email_startAddress">"Start Adresse: "</string>
+    <string name="menu_edit">bearbeiten</string>
+    <string name="menu_details">Details</string>
+    <string name="toast_notFound">Eintrag nicht gefunden</string>
+
+    <string-array name="spinner_notificationInterval">
+        <item>jeden Tag</item>
+        <item>einmal pro Woche</item>
+        <item>einmal pro Monat</item>
+        <item>niemals</item>
+    </string-array>
+    <string name="alertDialog_titleSettings">Erklärung</string>
+    <string name="switch_purpose">Zweck der Fahrt erforderlich</string>
+    <string name="textView_titleNotification">Benachrichtigungen</string>
+    <string name="textView_titleLayout">Layout</string>
+    <string name="button_setDefault">zurücksetzen</string>
+    <string-array name="dialog_email_choice">
+        <item>als Liste</item>
+        <item>als Tabelle (zum einfachen einfügen in Excel)</item>
+    </string-array>
+    <string-array name="spinner_layout">
+        <item>Zweck der Fahrt</item>
+        <item>Dauer</item>
+        <item>Start Zeit</item>
+        <item>Endzeit</item>
+        <item>Kilometerstand beim abfahren</item>
+        <item>Kilometerstand am Ziel</item>
+        <item>StartAdresse</item>
+        <item>Zieladresse</item>
+    </string-array>
+    <string name="title_settings">Einstellungen</string>
+    <string name="toast_saveSettings">Einstellungen gespeichert</string>
+    <string name="email_destinationAddress">"Zieladresse: "</string>
+    <string name="email_mileageDestination">"Kilometerstand am Ziel: "</string>
+    <string name="email_mileageStart">"Kilometerstand beim losfahren "</string>
+    <string name="email_startTimestamp">"Startzeitpunkt: "</string>
+    <string name="email_destinationTimestamp">"Endzeitpunkt: "</string>
+    <string name="email_duration">"Dauer der Fahrt: "</string>
+    <string name="toast_settingsReset">EInstellungen zurückgestezt</string>
+    <string name="textView_mileageEnd">Kilometerstand am Ziel</string>
+    <string name="alertDialog_emailTitle">Einträge in Email expotieren</string>
+    <string name="editText_timeHour">Stunde</string>
+    <string name="editText_timeMinute">Minute</string>
+    <string name="toast_minute">Minut ist ungültig</string>
+    <string name="toast_addSuccessfully">Hinzufügen war erfolgreich</string>
+    <string name="alertDialog_titleAddDrive">Hinweis</string>
+    <string name="snackbar_button">rückgängig machen</string>
+    <string name="snackbar_text">Eintrag gelöscht.</string>
+    <string name="menu_delete">Alles löschen vor dem ...</string>
+    <string name="textView_titleDelete">Löschen</string>
+    <string name="switch_delete">Löschen ändert neuere Einträge</string>
+    <string name="title_introduction">Einführung</string>
+    <string name="textView_title">Wilkommen</string>
+    <string name="textView_titleDescription">Diese App hilft dir beim führen deines Fahrtenbuches. Um dir den Einstieg
+        zu erleichtern wird dir im folgenden Text die grundfunktionalität der App erklärt.
+    </string>
+    <string name="textView_titleNavigation">Navigation</string>
+    <string name="textView_recordDriveDescription">Beim aufzeichnen drückst du einen start Knopf. Nun wird deine
+        GPS-Position erfasst bis du auf den Stop Knopf drückst.
+    </string>
+    <string name="textView_deleteDescription">Du kannst einzelnene Einträge löschen oder alle Einträge vor einem
+        bestimmten Zeitpunkt.
+    </string>
+    <string name="textView_titleDeleteSingle">einzelne Einträge löschen</string>
+    <string name="textView_deleteSingleDescription">Bei der Übersicht kannst du in der Liste einzelne Einträge nach
+        links oder rechts streichen um diese zu löschen. Danach hast du noch kurze Zeit die möglichkeit das Löschen
+        rückgängig zu machen.
+    </string>
+    <string name="textView_titleDeleteFew">mehere Einträge löschen</string>
+    <string name="textView_deleteFewDescription">Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
+    </string>
+    <string name="textView_titleExport">Expotieren</string>
+    <string name="textView_rec">Position wird erfasst</string>
+</resources>
