@@ -1,12 +1,12 @@
 package com.ema.jannik.logbook.activity
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import com.ema.jannik.logbook.fragment.TimePickerFragmentStart
@@ -16,11 +16,17 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import android.content.Intent
 import android.location.Address
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.util.Log
+import android.widget.*
 import androidx.core.content.ContextCompat
 import com.ema.jannik.logbook.R
+import com.ema.jannik.logbook.fragment.DatePickerFragment
+import com.ema.jannik.logbook.model.AddDriveRepository
+import com.ema.jannik.logbook.model.database.Drive
+import com.ema.jannik.logbook.model.database.Stage
+import com.ema.jannik.logbook.view.ExplanationDialogAddDrive
+import com.google.android.gms.location.places.Place
+import java.lang.NumberFormatException
 import java.text.DateFormat
 import java.util.*
 
@@ -28,7 +34,9 @@ import java.util.*
 /**
  * in this Activity the user can add a past ride to the db.
  */
-class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
+open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+
+    val TAG = this::class.java.name
 
     companion object {
         /**
@@ -44,19 +52,19 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
     var startIntentAutoComplete: Boolean? = null
 
     /**
-     * This boolean is true when the onClickTimePicker() start the startTimePickerFragment().
+     * This boolean is true when the onClickEndTime() start the startTimePickerFragment().
      */
     var startFragmentTimePicker: Boolean? = null
 
     /**
      * represent the start address, to get later the latitude and longitude of the chosen address.
      */
-    var startAddress: Address? = null
+    var startAddress: Place? = null
 
     /**
      * represent the destination address, to get later the latitude and longitude of the chosen address.
      */
-    var destinationAddress: Address? = null
+    var destinationAddress: Place? = null
 
     /**
      * represent the chosen imageButton
@@ -71,7 +79,7 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
     /**
      * represent the end time to calculate the duration.
      */
-    lateinit var endTime: Calendar
+    var endTime: Calendar = Calendar.getInstance()
 
     /**
      * This function is called when the activity is created to set the ActionBar, TimePicker and the imageButtons.
@@ -86,17 +94,23 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
 
         //--set Numberpicker--
         //TODO set this whit db help
-        number_picker_mileageStart.maxValue = 200000
-        number_picker_mileageStart.minValue = 300000
+        numberPicker_odometerStart.maxValue = 400000
+        numberPicker_odometerStart.minValue = 0
 
-        numberPicker_odometerStart.minValue = 200
-        numberPicker_odometerStart.maxValue = 300
+        numberPicker_distance.minValue = 0
+        numberPicker_distance.maxValue = 1000
+
+        numberPicker_odometer_end.minValue = 0
+        numberPicker_odometer_end.maxValue = 400000
 
         //--set Button--
         resetImageButtonBackgroundColor()
-        imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-            R.color.colorPrimaryDark
-        ) )
+        imageButton_noCategory.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.colorPrimaryDark
+            )
+        )
 
 
     }
@@ -124,22 +138,106 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
     /**
      * save the input in the database
      */
-    private fun saveDrive(){    //TODO hier weiter
+    private fun saveDrive() {    //TODO hier weiter
+
+        Log.i(TAG, "Minute.tostring " + editText_timeMinute.text.toString())
+
+        var minute: Int?
+
+        try {
+            minute = Integer.parseInt(editText_timeMinute.text.toString())  //TODO nur phasen wenn was eingetragen
+        } catch (e: NumberFormatException) { //string can not be past into an integer
+            minute = null
+        }
+
+        Log.i(TAG, "Minute.Int " + minute)
+
+        Log.i(TAG, "Hour.tostring " + editText_timeHour.text.toString())
+
+        var hour: Int?
+        try {
+            hour = Integer.parseInt(editText_timeHour.text.toString())
+        } catch (e: NumberFormatException) {    //string can not be past into an integer
+            hour = null
+        }
+
+        Log.i(TAG, "Hour.Int " + hour)
+
         val purpose = edit_text_purpose.text.toString()
+        Log.i(TAG, "purpose: " + purpose)
+
         val startAddress = startAddress
+        Log.i(TAG, "startAddress " + startAddress)
+
         val destinationAddress = destinationAddress
-        val startMilage = number_picker_mileageStart.value
+        Log.i(TAG, "destinationAddress " + destinationAddress)
+
+        val startMilage = numberPicker_distance.value   //TODO start milage?
+        Log.i(TAG, "distance " + startMilage)
+
         val distance = numberPicker_odometerStart.value
-        val endMilage = startMilage + distance
-        //val startTime = startTime
-        //val endTime = endTime
+        Log.i(TAG, distance.toString())
 
-        if (purpose.trim().isEmpty()) {
-            Toast.makeText(this, "Zweck der fahrt eintragen", Toast.LENGTH_SHORT).show()    //TODO string xml
+        val endMilage = numberPicker_odometer_end.value
+        Log.i(TAG, endMilage.toString())
+
+        val startTime = startTime
+        Log.i(TAG, startTime.time.toString())
+
+        val endTime = endTime
+        Log.i(TAG, endTime.time.toString())
+
+        var message: String = ""
+
+        if (minute == null || minute > 59 || minute < 0)  //valid duration minute //TODO unsafe use
+            message += getString(R.string.toast_minute) + "\n"
+        if (hour == null || hour < 0 || hour > 100)  //valid duration hour
+            message += getString(R.string.toast_hour) + "\n"
+        if (startAddress == null)
+            message += getString(R.string.toast_startAddress) + "\n"
+        if (destinationAddress == null)
+            message += getString(R.string.toast_destinationAddress) + "\n"  //TODO namens gebung Toast
+        if (endMilage - startMilage != distance)
+            message += getString(R.string.toast_mileage) + "\n"
+        if (editText_start_time.text == null || editText_start_time.text == null)
+            message += getString(R.string.toast_time)
+        if (message != "") {   //when message has benn modified then show the message
+            val dialog = ExplanationDialogAddDrive(message)
+            dialog.show(supportFragmentManager, "false input")
             return
-        } //else if ()  //TODO handle when entry is incomplete
+        }
 
-        //TODO save in db
+        val duration: Calendar = Calendar.getInstance()
+        duration.set(Calendar.HOUR_OF_DAY, hour!!)
+        duration.set(Calendar.MINUTE, minute!!)
+
+        //save in db
+        val repository = AddDriveRepository(application)
+        repository.insert(
+            Drive
+                (
+                purpose = purpose,
+                start = Stage(
+                    longitude = startAddress!!.latLng.longitude,
+                    latitude = startAddress.latLng.latitude,
+                    address = startAddress.address.toString()
+                ),
+                destination = Stage(
+                    longitude = destinationAddress!!.latLng.longitude,
+                    latitude = destinationAddress.latLng.latitude,
+                    address = destinationAddress.address.toString()
+                ),
+                mileageDestination = endMilage.toDouble(),
+                mileageStart = startMilage.toDouble(),
+                distance = distance.toDouble(),
+                start_timestamp = startTime,
+                destination_timestamp = endTime,
+                category = category,
+                duration = duration
+            )
+        )
+
+        Toast.makeText(this, R.string.toast_addSuccessfully, Toast.LENGTH_LONG).show()
 
         finish()
     }
@@ -148,19 +246,20 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
      * this function set the result from the TimePickerFragment.
      */
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        //if (startFragmentTimePicker == false){
-            endTime = Calendar.getInstance()
+        Log.i(TAG, "onTimeSet()")
+
+        if (startFragmentTimePicker == false) {
             endTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
             endTime.set(Calendar.MINUTE, minute)
             endTime.set(Calendar.SECOND, 0)
+            Log.i(TAG, "setTime(start)")
             setTime(endTime, editText_endTime)
-        //}
-        /*
-        else if (startFragmentTimePicker == true){Calendar.getInstance()
+        } else if (startFragmentTimePicker == true) {
             startTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
             startTime.set(Calendar.MINUTE, minute)
             startTime.set(Calendar.SECOND, 0)
-            editText_start_time.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(startTime))
+            Log.i(TAG, "setTime(start)")
+            setTime(startTime, editText_start_time)
         }
         startFragmentTimePicker = null
 
@@ -172,55 +271,84 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
             time.add(Calendar.MINUTE, - startTime.get(Calendar.MINUTE))
             editText_time.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(time))
         }
-        */*/
+        */
+    }
+
+    /**
+     * @param view the picker associated with the dialog
+     * @param year the selected year
+     * @param month the selected month (0-11 for compatibility with
+     * [Calendar.MONTH])
+     * @param dayOfMonth th selected day of the month (1-31, depending on
+     * month)
+     */
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+        Log.i(TAG, "onDataSet()")
+        startTime.set(year, month, dayOfMonth)
+        startTimePickerFragment()
     }
 
     /**
      * set the time in editText
      */
-    private fun setTime(calendar: Calendar?, editText: EditText?) {
-        val text: String = DateFormat.getTimeInstance(DateFormat.SHORT).format(calendar)    //TODO errror
-        Toast.makeText(this, text, Toast.LENGTH_LONG).show()
-        editText!!.setText(text)
+    private fun setTime(calendar: Calendar, editText: EditText) {
+        Log.i(TAG, "setTime()")
+        val text: String = DateFormat.getDateTimeInstance().format(calendar.time)
+
+        Log.i(TAG, "setText")
+        editText.setText(text)
+        Log.i(TAG, "setTime() finish")
     }
 
     /**
      * This function is called when the user click on an imageButton.
      * The imageButton who call this function become a different background colour, show a toast message and set an value to the integer category
      */
-    fun onClickCategory(view: View){
+    fun onClickCategory(view: View) {
 
         resetImageButtonBackgroundColor()
 
         var message: String = getString(R.string.category)
 
-        when (view.id){
+        when (view.id) {
             R.id.imageButton_noCategory -> {
-                imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-                    R.color.colorPrimaryDark
-                ) )
+                imageButton_noCategory.setBackgroundColor(
+                    ContextCompat.getColor(
+                        applicationContext,
+                        R.color.colorPrimaryDark
+                    )
+                )
                 category = 0    //TODO welche werte?
                 message += getString(R.string.category_0)
             }
             R.id.imageButton_private -> {
-                imageButton_private.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-                    R.color.colorPrimaryDark
-                ) )
+                imageButton_private.setBackgroundColor(
+                    ContextCompat.getColor(
+                        applicationContext,
+                        R.color.colorPrimaryDark
+                    )
+                )
                 category = 1
                 message += getString(R.string.category_1)
             }
             R.id.imageButton_work -> {
-                imageButton_work.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-                    R.color.colorPrimaryDark
-                ) )
+                imageButton_work.setBackgroundColor(
+                    ContextCompat.getColor(
+                        applicationContext,
+                        R.color.colorPrimaryDark
+                    )
+                )
                 category = 2
                 message += getString(R.string.category_2)
 
             }
             R.id.imageButton_way -> {
-                imageButton_way.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-                    R.color.colorPrimaryDark
-                ) )
+                imageButton_way.setBackgroundColor(
+                    ContextCompat.getColor(
+                        applicationContext,
+                        R.color.colorPrimaryDark
+                    )
+                )
                 category = 3
                 message += getString(R.string.category_3)
             }
@@ -231,43 +359,64 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
     /**
      * This function set the background of all imageButton elments to the default value
      */
-    private fun resetImageButtonBackgroundColor(){
-        imageButton_noCategory.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-            R.color.button_material_light
-        ))
-        imageButton_private.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-            R.color.button_material_light
-        ))
-        imageButton_work.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-            R.color.button_material_light
-        ))
-        imageButton_way.setBackgroundColor( ContextCompat.getColor(applicationContext ,
-            R.color.button_material_light
-        ))
+    private fun resetImageButtonBackgroundColor() {
+        imageButton_noCategory.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.button_material_light
+            )
+        )
+        imageButton_private.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.button_material_light
+            )
+        )
+        imageButton_work.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.button_material_light
+            )
+        )
+        imageButton_way.setBackgroundColor(
+            ContextCompat.getColor(
+                applicationContext,
+                R.color.button_material_light
+            )
+        )
     }
 
     /**
      * set the boolean startFragmentTimePicker to true and call the function startTimePickerFragment()
      */
-    fun onClickTimePicker(view: View) {  //TODO mehre Listener
+    fun onClickEndTime(view: View) {  //TODO mehre Listener
+        Log.i(TAG, "onClickEndTime")
         startFragmentTimePicker = false
-        startTimePickerFragment()
+        startDatePickerFragment()
     }
 
     /**
      * set the boolean startFragmentTimePicker to false and call the function startTimePickerFragment()
      */
-    fun onClickTimePickerStart(view: View) {  //TODO mehre Listener
+    fun onClickStartTime(view: View) {  //TODO mehre Listener
+        Log.i(TAG, "onClick start Time()")
         startFragmentTimePicker = true
-        startTimePickerFragment()
+        startDatePickerFragment()
     }
 
     /**
      * This function start the TimePickerFragment to choose a time
      */
-    private fun startTimePickerFragment(){
+    private fun startTimePickerFragment() {
+        Log.i(TAG, "startTimePicker()")
         val timePicker: DialogFragment = TimePickerFragmentStart()
         timePicker.show(supportFragmentManager, "time picker")
+    }
+
+    private fun startDatePickerFragment() {
+        Log.i(TAG, "startDatePicker()")
+        val datePicker: DialogFragment = DatePickerFragment()
+        datePicker.show(supportFragmentManager, "datePicker")
     }
 
     /**
@@ -293,7 +442,8 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
         try {
             val intent = PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
                 .build(this)
-            startActivityForResult(intent,
+            startActivityForResult(
+                intent,
                 PLACE_AUTOCOMPLETE_REQUEST_CODE
             )
         } catch (e: GooglePlayServicesRepairableException) {
@@ -311,9 +461,11 @@ class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 val placeResult = PlaceAutocomplete.getPlace(this, data!!)
-                if (startIntentAutoComplete == true) {
+                if (startIntentAutoComplete == true) {      //Event wurd durch klick auf StartAdresse ausgelöst
+                    startAddress = placeResult
                     textView_startAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
-                } else if (startIntentAutoComplete == false) {
+                } else if (startIntentAutoComplete == false) {  //Event wurd durch klick auf ZielAdresse ausgelöst
+                    destinationAddress = placeResult
                     textView_destinationAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
                 }
                 startIntentAutoComplete = null
