@@ -2,12 +2,15 @@ package com.ema.jannik.logbook.activity
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.nfc.NfcAdapter
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 import kotlinx.android.synthetic.main.activity_record_drive.*
 import com.ema.jannik.logbook.LocationUpdateService
 import com.ema.jannik.logbook.R
@@ -17,6 +20,8 @@ class RecordDriveActivity : AppCompatActivity() {
 
     companion object {
         private const val PERMISSION_LOCATION_REQUEST = 1000
+
+        const val EXTRA_BLUETOOTH_START = "bluetoothStart"
     }
 
     private val permissions =
@@ -36,28 +41,42 @@ class RecordDriveActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!checkPermission(permissions)) {
-                requestPermissions(permissions,
+                requestPermissions(
+                    permissions,
                     PERMISSION_LOCATION_REQUEST
                 )
             }
         }
+
+        //start service when reciever start this activity
+        if(intent.getBooleanExtra(EXTRA_BLUETOOTH_START, false)){
+            startForegroundService()
+        }
+    }
+
+    private fun startForegroundService() {
+        textView.visibility = View.VISIBLE
+
+        val serviceIntent = Intent(this, LocationUpdateService::class.java)
+        ContextCompat.startForegroundService(this, serviceIntent)
     }
 
     /**
-     * This onClickListener starts or ends the LocationsService and change the text of the button
+     * This onClickListener starts the LocationUpdates as foregroundService
      */
-    fun onClickForegroundService(view: View) {
-        if (button_startEnd.text == getString(R.string.button_recStart)) {
-            button_startEnd.text = getString(R.string.button_recEnd)
-            val serviceIntent = Intent(this, LocationUpdateService::class.java)
-            ContextCompat.startForegroundService(this, serviceIntent)
+    fun onClickStartForegroundService(view: View) {
+        startForegroundService()
+    }
 
-        } else if (button_startEnd.text == getString(R.string.button_recEnd)) {
-            val serviceIntent = Intent(this, LocationUpdateService::class.java)
-            stopService(serviceIntent)
-            //TODO back to main activity    //StopSelf
-            //TODO heavy work in thread
-        }
+    /**
+     * This onClickListener stops the foregroundService and remove locationUpdates.
+     */
+    fun onClickStopForegroundService(view: View) {
+        Toast.makeText(applicationContext, R.string.toast_recDriveStop, Toast.LENGTH_SHORT).show()
+
+        val serviceIntent = Intent(this, LocationUpdateService::class.java)
+        stopService(serviceIntent)
+        finish()
     }
 
     private fun checkPermission(permissionArray: Array<String>): Boolean {
@@ -92,4 +111,3 @@ class RecordDriveActivity : AppCompatActivity() {
         }
     }
 }
-
