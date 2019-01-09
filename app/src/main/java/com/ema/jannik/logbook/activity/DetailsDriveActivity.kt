@@ -21,11 +21,15 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.android.synthetic.main.activity_details_drive.*
+import java.sql.Time
 import java.text.DateFormat
+import java.time.Duration
+import java.util.*
 
 class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -115,11 +119,14 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
         textView_startAddress.text = drive!!.start.address
         textView_destinationAddress.text = drive!!.destination.address
         textView_startTime.text = DateFormat.getDateTimeInstance().format(drive!!.start_timestamp.time)
-        textView_duration.text = DateFormat.getTimeInstance().format(drive!!.duration.time)
         textView_endTime.text = DateFormat.getDateTimeInstance().format(drive!!.destination_timestamp.time)
         textView_mileageStart.text = String.format("%.2f km", drive!!.mileageStart)//TODO einheit
         textView_mileageDestination.text = String.format("%.2f km", drive!!.mileageDestination)//TODO einheit
         textView_distance.text = String.format("%.2f km", drive!!.distance)//TODO einheit
+
+        val duration = drive!!.duration
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
+        textView_duration.text = Time(duration.timeInMillis).toString()//TODO format time
     }
 
     /**
@@ -158,10 +165,19 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
             val destinationLatLng = LatLng(destination.latitude, destination.longitude)
 
             //add marker for start address
-            map.addMarker(MarkerOptions().position(startLatLng).title(getString(R.string.editText_startAddress) + ": " + start.address))
-            map.moveCamera(CameraUpdateFactory.newLatLng(startLatLng))
+            map.addMarker(
+                MarkerOptions()
+                    .position(startLatLng).title(getString(R.string.editText_startAddress) + ": " + start.address)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            )
+
             //add marker for destination address
-            map.addMarker(MarkerOptions().position(destinationLatLng).title(getString(R.string.editText_destinationAddress) + ": " + destination.address))
+            map.addMarker(
+                MarkerOptions()
+                    .position(destinationLatLng).title(getString(R.string.editText_destinationAddress) + ": " + destination.address)
+            )
+
+            map.moveCamera(CameraUpdateFactory.newLatLng(startLatLng))
 
             //add polyline when route exists
             if (routes != null) {
