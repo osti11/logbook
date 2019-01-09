@@ -101,6 +101,13 @@ meine Zielgruppe mitaufnehmen.
 
 \section{Bedarfsanalyse}
 
+\subsection{Fahrt hinzufügen}
+In der App soll man in einer Suchleiste die Startaddresse eingeben und in einer anderen die Zieladdresse.
+Zur Autovervollständigung der Adresse werde ich die Google Places API verwenden.
+
+\subsection{gefahrene Strecke auf Karte anzeigen}
+Dafür werde ich die Google Maps SDK verwenden.
+
 \subsection{Datenbank}
 
  \begin{table}
@@ -139,11 +146,26 @@ Um die Position unter Android zu ermitteln gibt es drei Wege:
 	\item fusion location provider
 \end{enumerate}
 
+LocationManager & LocationListener
+Bei dieser Möglichkeit werden die Boardmittel von ANdroid verwendet um die Position bestimmen.
+Diese Methode hat den größten Akkuverbrauch und wird von Google nicht empfohlen.
+
+Fusion Location client
+Bei dieser Methode wird der Google Location Service verwendet der sowieso im Hintergrund läuft. Bei dieser Methode 
+startet man ein update Request bei dem man die Rahmenbedingungen wie Priorität min und max Zeit zwischen den Updates einstellen kann.
+Diese Methode ist Akkuschonender.
+
+Fusion Location Provider
+Diese Methode ist im prinziep eine verbesserte und vereinfachte Form des Fusion Location Client und wird von Google empfohlen.
 
 \subsubsection{Entfernung bestimmen}
 Die bestimmten Positionen werden gesammelt bis das Aufzeichnen der Fahrt beendet wird.
 
 \subsubsection{Start- und Zieladresse ermitteln}
+Bevor man die Fahrt in die Datenbank schreiben kann benötigt man außer den GPS-Koordinaten, Ankunftszeit, Abfahrtszeit und 
+Entfernung auch die Adresse der ersten und letzten Position. Um diese zu ermitteln benötigt man eine API die eine GPS-Position 
+entgegennimmt und eine Adresse zurückgibt. Da ich eh schon die Google Maps API verwende, habe ich mich für Geocoding entschieden.
+Das ist eine Google API die genau das macht, GPS-Kordinaten einer Adresse zuordnen und umgekehrt. 
 
 \subsubsection{Foreground Service}
 
@@ -153,9 +175,21 @@ Diese können benutzt werden um die Route in Google Maps darzustellen.
 
 \subsection{Bluetooth}
 
+\subsection{NFC}
+Meine App ist nach dem MVVM Pattern und dem Single-Activity-Pattern aufgebaut
+
+\subsubsection{MVVM}
+Das steht für Model, ViewModel, View. 
+
+
 \subsection{View}
 
-\subsection{Architektur}
+\section{Architectur}
+Da ich die App auch gern in Zukunft weiter entwicklen möchte wollte ich die App so moder wie möglich gestalten.
+....
+Android Jetpack
+....
+
 
 \section{Features}
 
