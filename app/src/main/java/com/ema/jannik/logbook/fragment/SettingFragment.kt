@@ -1,7 +1,10 @@
 package com.ema.jannik.logbook.fragment
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.content.res.Resources
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,8 +13,13 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import com.ema.jannik.logbook.AlertReciever
 import com.ema.jannik.logbook.R
 import kotlinx.android.synthetic.main.fragment_setting.*
+import java.util.*
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothAdapter
+import kotlin.collections.ArrayList
 
 
 class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnClickListener {
@@ -26,7 +34,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         /**
          * shared preference storage the value of spinner_notificationInterval.
          */
-        const val NOTIFICATIN: String = "notificationInterval"
+        const val NOTIFICATION_INTERVAL: String = "notificationInterval"
 
         /**
          * shared preferences speichert den Zustand von switch_purpose.
@@ -41,13 +49,30 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         const val LAYOUT_THREE: String = "layout3"
 
         const val LAYOUT_FOUR: String = "layout4"
+
+        const val DELETE_MODIFY: String = "deleteModify"
+
+        const val NOTIFICATION_DAY: String = "notificationDay"
+
+        const val BLUETOOTH_CONNECTION: String = "useBluetoothConnection"
+
+        const val BLUETOOTH_CONNECTION_NAME: String = "bluetoothConnectionName"
+
+        /**
+         * request code for the pendingIntent to copy the entries in 'a real logbook'.
+         */
+        const val PENDING_INTENT_REQUEST_CODE_COPY = 10
     }
 
     /**
      * Diese Variabel wird von den shared preferneces gestzt //TODO kommentare
      */
+    private lateinit var spinnerDayValue: String    //TODO hier witer werte setzen speichern werte benutzen.
     private lateinit var spinnerNotificationValue: String
     private var switchPurposeValue: Boolean = false
+    private var switchDeleteValue: Boolean = false
+    private var switchBluetoothValue: Boolean = false
+    private lateinit var spinnerBluetoothValue: String
     private lateinit var spinnerLayout1Value: String
     private lateinit var spinnerLayout2Value: String
     private lateinit var spinnerLayout3Value: String
@@ -84,12 +109,13 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
 
         Log.i(TAG, "setSpinner")
         //--set spinner--
+        setSpinnerDay()
         setSpinnerNotification()
-        Log.i(TAG, "onActivityCreated finish")
         setSpinnerLayoutOne()
         setSpinnerLayoutTwo()
         setSpinnerLayout3()
         setSpinnerLayout4()
+        setSpinnerBluetooth()
 
         //--load and set data--
         loadData()
@@ -126,7 +152,10 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      * Initialize the contents of the Fragment host's standard options menu.
      */
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater!!.inflate(R.menu.setting_menu, menu)    //tell system to use add note menu     //TODO share button entfernen
+        inflater!!.inflate(
+            R.menu.setting_menu,
+            menu
+        )    //tell system to use add note menu     //TODO share button entfernen
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -136,6 +165,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.save_setting) {
             saveSettings()
+            setAlarm(getDay()!!)    //TODO
             return true
         } else {
             return super.onOptionsItemSelected(item)
@@ -164,10 +194,14 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         Log.i(TAG, "getArray")
         val layout = resources.getStringArray(R.array.spinner_layout)
         val notification = resources.getStringArray(R.array.spinner_notificationInterval)
+        val day = resources.getStringArray(R.array.spinner_day)
 
         //--save settings--
-        editor.putString(NOTIFICATIN, notification[1])
+        editor.putBoolean(BLUETOOTH_CONNECTION, false)  //TODO connection name
+        editor.putString(NOTIFICATION_INTERVAL, notification[1])
+        editor.putString(NOTIFICATION_DAY, day[6])
         editor.putBoolean(PURPOSE, false)
+        editor.putBoolean(DELETE_MODIFY, false)
         editor.putString(LAYOUT_ONE, layout[0])
         editor.putString(LAYOUT_TWO, layout[2])
         editor.putString(LAYOUT_THREE, layout[6])
@@ -179,6 +213,46 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         loadData()
         updateViews()
         Log.i(TAG, "resetSetting fertig")
+    }
+
+    /**
+     * Set spinner 'spinner_bluetooth'.
+     */
+    private fun setSpinnerBluetooth() {
+        val adapter = ArrayAdapter<String>(
+            context!!,
+            android.R.layout.simple_spinner_item,
+            getListOfAllBluetoothDevices()
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_bluetooth.adapter = adapter
+        spinner_bluetooth.onItemSelectedListener = this
+    }
+
+    private fun getListOfAllBluetoothDevices(): ArrayList<String>{
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        val pairedDevices = mBluetoothAdapter.bondedDevices
+
+        val s = ArrayList<String>()
+        for (bt in pairedDevices)
+            s.add(bt.name)
+
+        return s
+    }
+
+    /**
+     * set the spinner 'spinner_notificationDay'.
+     * Here you choose how often you get a notification to update your physical drive log.
+     */
+    private fun setSpinnerDay() {
+        val adapter = ArrayAdapter.createFromResource(
+            context!!,
+            R.array.spinner_day,
+            android.R.layout.simple_spinner_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner_day.adapter = adapter
+        spinner_day.onItemSelectedListener = this
     }
 
     /**
@@ -245,8 +319,12 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         val editor = sharedPreferences.edit()
 
         //--save settings--
-        editor.putString(NOTIFICATIN, spinner_notificationInterval.selectedItem.toString())
+        editor.putString(BLUETOOTH_CONNECTION_NAME, spinner_bluetooth.selectedItem.toString())  //FIXME null point exception wenn bluetoth is off
+        editor.putBoolean(BLUETOOTH_CONNECTION, switch_bluetooth.isChecked)
+        editor.putString(NOTIFICATION_INTERVAL, spinner_notificationInterval.selectedItem.toString())
+        editor.putString(NOTIFICATION_DAY, spinner_day.selectedItem.toString())
         editor.putBoolean(PURPOSE, switch_purpose.isChecked)
+        editor.putBoolean(DELETE_MODIFY, switch_delete.isChecked)
         editor.putString(LAYOUT_ONE, spinner_layoutOne.selectedItem.toString())
         editor.putString(LAYOUT_TWO, spinner_layoutTwo.selectedItem.toString())
         editor.putString(LAYOUT_THREE, spinner_layout3.selectedItem.toString())
@@ -262,8 +340,20 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             SHARED_PREFERENCES, //name of shared preferences
             MODE_PRIVATE        //just this application can change the preferences
         )
+        spinnerBluetoothValue = sharedPreferences.getString(
+            BLUETOOTH_CONNECTION_NAME,
+            ""
+        )!!
+        switchBluetoothValue = sharedPreferences.getBoolean(
+            BLUETOOTH_CONNECTION,
+            false
+        )
         spinnerNotificationValue = sharedPreferences.getString(
-            NOTIFICATIN,    //Key
+            NOTIFICATION_INTERVAL,    //Key
+            ""     //default Value
+        )!!
+        spinnerDayValue = sharedPreferences.getString(
+            NOTIFICATION_DAY,    //Key
             ""     //default Value
         )!!
         spinnerLayout1Value = sharedPreferences.getString(
@@ -286,6 +376,10 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             PURPOSE,
             false
         )
+        switchDeleteValue = sharedPreferences.getBoolean(
+            DELETE_MODIFY,
+            false
+        )
     }
 
     /**
@@ -293,6 +387,12 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      * Use this function after you call loadData().
      */
     private fun updateViews() {
+        spinner_day.setSelection(
+            getIndex(
+                spinner_day,
+                spinnerDayValue
+            )
+        )
         spinner_notificationInterval.setSelection(
             getIndex(
                 spinner_notificationInterval,
@@ -323,7 +423,15 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
                 spinnerLayout4Value
             )
         )
+        spinner_bluetooth.setSelection(
+            getIndex(
+                spinner_bluetooth,
+                spinnerBluetoothValue
+            )
+        )
+        switch_bluetooth.isChecked = switchBluetoothValue
         switch_purpose.isChecked = switchPurposeValue
+        switch_delete.isChecked = switchDeleteValue
     }
 
     /**
@@ -337,5 +445,103 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             }
         }
         return 0
+    }
+
+    /**
+     * set the alarm to remember the user to copy the entries into 'a real logbook'.
+     * @param c
+     */
+    private fun setAlarm(c: Calendar) {    //TODO modify for Day
+        val alarmManager: AlarmManager = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, AlertReciever::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, PENDING_INTENT_REQUEST_CODE_COPY, intent, 0)
+
+        val interval: Long = getInterval() ?: return    //when interval is null then do not set Alarm
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.timeInMillis, interval, pendingIntent)
+    }
+
+    /**
+     *  @return gibt Intervall in milliseconds zurück.
+     */
+    private fun getInterval(): Long? {
+        val sharedPreferences = activity!!.getSharedPreferences(
+            SHARED_PREFERENCES, //name of shared preferences
+            MODE_PRIVATE        //just this application can change the preferences
+        )
+        val setting = sharedPreferences.getString(NOTIFICATION_INTERVAL, "")
+        val array = resources.getStringArray(R.array.spinner_notificationInterval)  //get array from string.xml
+
+        var index: Int = -1
+
+        for (i in array.indices) {
+            if (setting == array[i])
+                index = i
+        }
+
+        when (index) {
+            0 -> return AlarmManager.INTERVAL_DAY
+            1 -> return 7 * 24 * 60 * 60 * 1000 //einmal pro Woche
+            2 -> return AlarmManager.INTERVAL_DAY * 30  //TODO overflow
+        }
+        return null
+    }
+
+    /**
+     *
+     */
+    fun getDay(): Calendar? {
+        val sharedPreferences = activity!!.getSharedPreferences(
+            SHARED_PREFERENCES, //name of shared preferences
+            MODE_PRIVATE        //just this application can change the preferences
+        )
+        val setting = sharedPreferences.getString(NOTIFICATION_DAY, "")
+        val array = resources.getStringArray(R.array.spinner_day)  //get array from string.xml
+
+        var index: Int = -1
+
+        for (i in array.indices) {
+            if (setting == array[i])
+                index = i
+        }
+
+        val calendar = Calendar.getInstance()
+
+        calendar.set(Calendar.HOUR, 12)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+
+        when (index) {
+            0 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
+                return calendar
+            }
+            1 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY)
+                return calendar
+            }
+            2 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY)
+                return calendar
+            }
+            3 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY)
+                return calendar
+            }
+            4 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY)
+                return calendar
+            }
+            5 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY)
+                return calendar
+            }
+            6 -> {
+                calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY)
+                return calendar
+            }
+        }
+        return null
     }
 }
