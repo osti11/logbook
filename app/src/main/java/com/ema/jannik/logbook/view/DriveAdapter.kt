@@ -16,6 +16,7 @@ import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.model.database.Drive
+import java.text.DateFormat
 
 
 /**
@@ -75,6 +76,15 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
         notifyDataSetChanged()
 
         //TODO where set no entry
+    }
+
+    /**
+     * get Drive at position
+     * @param position Position at the adapter.
+     * @return drive at position
+     */
+    fun getDriveAt(position: Int): Drive{
+        return drives.get(position)
     }
 
     inner class DriveHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -166,11 +176,11 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
 
         when (x) {
             1 -> return drive.purpose
-            2 -> return drive.duration.toString()
-            3 -> return drive.start_timestamp.toString()
-            4 -> return drive.destination_timestamp.toString()
-            5 -> return drive.mileageStart.toString()
-            6 -> return drive.mileageDestination.toString()
+            2 -> return DateFormat.getTimeInstance().format(drive.duration.time)
+            3 -> return DateFormat.getDateTimeInstance().format(drive.start_timestamp.time)
+            4 -> return DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time)   //TODO need .time ?
+            5 -> return String.format("%.2f km", drive.mileageStart)//TODO einheit
+            6 -> return String.format("%.2f km", drive.mileageDestination)//TODO einheit
             7 -> return drive.start.address
             8 -> return drive.destination.address
         }
