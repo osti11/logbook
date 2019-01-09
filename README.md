@@ -1,17 +1,19 @@
-# logbook
+# logbook - Fahrtenbuch 
 
-this APP is example for a logbook manager, to simplify the write of a physical logbook.
+Diese App ist ein Beispiel für ein Fahrtenbuchmanager, der das schreiben eines Fahrtenbuches vereinfachen soll.
 
 ## Documentation
 
-to generate the documentation run this command in the terminal:
+Um die Documentation zu erstellen füre folgenden Befehl im Terminal aus:
 
 > gradlew dokka
 
-the documentation is created into the folder */app/code_documentation*.
+Die Documentation wird im Ordner */app/code_documentation* erstellt.
 
-Click for the documentation [here](app/documentation/app/index.md).
+Klicke für die Dokumentation [hier](app/documentation/app/index.md).
 
 ## License
 
-This project is under [MIT](LICENSE) license.
+Dieses Projekt steht unter der [MIT Lizenz](LICENSE).
+
+This project is under [MIT license](LICENSE).
