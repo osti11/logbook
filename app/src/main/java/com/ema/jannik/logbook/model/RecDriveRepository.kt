@@ -27,8 +27,8 @@ class RecDriveRepository(application: Application) {
     /**
      * run an async task to insert an entry into table "drive"
      */
-    fun insert(drive: Drive){
-        InsertDriveAsyncTask(driveDao).execute(drive)
+    fun insert(drive: Drive): Int{
+        return InsertDriveAsyncTask(driveDao).execute(drive).get().toInt()
     }
 
     fun insert(route: Route){
@@ -42,11 +42,14 @@ class RecDriveRepository(application: Application) {
         return  GetAddressAsyncTask(geocoding).execute(location).get()
     }
 
+    fun getLastDrive(): Drive{  //TODO was wenn kein EIntrag exestiert
+        return GetLastDriveAsyncTask(driveDao).execute().get()
+    }
+
     companion object {
-        private class InsertDriveAsyncTask(private val driveDao: DriveDao) : AsyncTask<Drive, Void, Void>(){
-            override fun doInBackground(vararg params: Drive): Void? {
-                driveDao.insert(params[0])
-                return null
+        private class InsertDriveAsyncTask(private val driveDao: DriveDao) : AsyncTask<Drive, Void, Long>(){
+            override fun doInBackground(vararg params: Drive): Long{
+                return driveDao.insertResult(params[0])
             }
         }
 
@@ -63,6 +66,15 @@ class RecDriveRepository(application: Application) {
         private class GetAddressAsyncTask(private val geocoding: Geocoding) :AsyncTask<Location, Void, String>(){
             override fun doInBackground(vararg params: Location?): String{
                 return geocoding.getAddressFromLocation(params[0]!!)   //ToDo error als return
+            }
+        }
+
+        private class  GetLastDriveAsyncTask(private val driveDao: DriveDao) : AsyncTask<Void, Void, Drive>(){
+            /**
+             * Override this method to perform a computation on a background thread. The
+             */
+            override fun doInBackground(vararg params: Void?): Drive {
+                return driveDao.getLastDrive()
             }
         }
     }
