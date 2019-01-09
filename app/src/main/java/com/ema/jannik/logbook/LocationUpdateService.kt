@@ -1,11 +1,16 @@
 package com.ema.jannik.logbook
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.*
 import android.util.Log
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.app.NotificationCompat
 import com.ema.jannik.logbook.activity.RecordDriveActivity
 import com.ema.jannik.logbook.helper.App
@@ -14,7 +19,9 @@ import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.model.database.Route
 import com.ema.jannik.logbook.model.database.Stage
 import com.google.android.gms.location.*
+import java.lang.Exception
 import java.sql.Date
+import java.util.*
 
 class LocationUpdateService : Service() {
 
@@ -30,10 +37,10 @@ class LocationUpdateService : Service() {
     lateinit var locationRequest: LocationRequest
     lateinit var locationCallback: LocationCallback
 
-    private lateinit var locations: List<Location>
+    private var locations: MutableList<Location> = mutableListOf()
 
-    private lateinit var timeStart: java.util.Date
-    private lateinit var timeEnd: Date
+    private lateinit var timeStart: Calendar
+    private lateinit var timeEnd: Calendar
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -51,7 +58,6 @@ class LocationUpdateService : Service() {
      * Called after onCreate.
      * This function set an notification, start the service in foreground and request locations updates.
      */
-    @SuppressLint("MissingPermission")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.i(TAG, "onStartCommand")
 
@@ -85,40 +91,65 @@ class LocationUpdateService : Service() {
         Log.i(TAG, "getFusedLocationProviderClient")
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        /*
-        timeStart = Calendar.getInstance().time
-        Toast.makeText(this, DateFormat.getDateTimeInstance()
-            .format(Calendar.getInstance().time), Toast.LENGTH_LONG).show()
-        */
 
-        Log.i(TAG, "requestLocationUpdates")
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+        //TODO get time
+        timeStart = Calendar.getInstance()
+
+        if (ActivityCompat.checkSelfPermission( //TODO check SDK Level by appcombat?
+                applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            Log.i(TAG, "requestLocationUpdates")
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+        }
 
         Log.i(TAG, "onStartCommand finish")
-        return START_REDELIVER_INTENT   //kann man auslager in OnCreate
+        return START_NOT_STICKY//kann man auslager in OnCreate
     }
 
     /**
      * This function is called when the service is finished or stopped and create database entries for drive and route.
+     * Remove the location updates and save the data in the db.
      */
     override fun onDestroy() {
-        Log.i(TAG, "onDestroy()")
-        super.onDestroy()   //TODO wieklich hier
+        super.onDestroy()
+
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        saveInDb()
+    }
 
-        //save in db
-        val start = locations.first()
-        val destination = locations.last()
-
+    /**
+     * save location in db.
+     */
+    private fun saveInDb() {
         val repository = RecDriveRepository(application)
 
-        val drive = Drive(  //TODO entfernung
+        val start = locations.first()
+        val destination = locations.last()
+        val distance = getDistance(locations)
+        val timeEnd = Calendar.getInstance()
+        val duration = Calendar.getInstance()
+        duration.timeInMillis = timeEnd.timeInMillis - timeStart.timeInMillis   //TODO calc time
+        var mileagestart: Double
+        try {
+            mileagestart = repository.getLastDrive().mileageDestination
+        } catch (e: Exception) {    //lastDrive don't exist
+            mileagestart = 0.0
+        }
+
+        val drive = Drive(
             purpose = "",
-            duration = Date(99),
-            start_timestamp = Date(999),
-            destination_timestamp = Date(1800),
-            mileageStart = 99.9,
-            mileageDestination = 99.9,
+            duration = duration,
+            distance = distance,
+            start_timestamp = timeStart,
+            destination_timestamp = timeEnd,
+            mileageStart = mileagestart,
+            mileageDestination = mileagestart + distance,
             category = 0,
             start = Stage(
                 latitude = start.latitude,
@@ -133,24 +164,30 @@ class LocationUpdateService : Service() {
         )
 
         Log.i(TAG, "insertDriveToDB")
-        repository.insert(drive)
+        val result = repository.insert(drive)
 
         Log.i(TAG, "insertRouteToDB")
-        var x:Int = 1
-
         locations.forEach { l: Location ->
             repository.insert(
                 Route(
-                    driveId = drive.id,
+                    driveId = result,
                     latitude = l.latitude,
                     longitude = l.longitude
-                    //, counter = x
                 )
             )
-            x++
         }
+    }
 
-        Log.i(TAG, "onDestroy finish")
+    /**
+     * calculate the distance betwwen the locations
+     */
+    private fun getDistance(locations: MutableList<Location>): Double {
+        var distance = 0F
+        for (l in locations.indices){
+            if(l + 1 < locations.size)
+                distance += locations[l].distanceTo(locations[l+1])
+        }
+        return distance.toDouble()/1000 //meter to kilometer
     }
 
     /**
@@ -160,9 +197,15 @@ class LocationUpdateService : Service() {
     private fun buildLocationCallback() {
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult?) {
+                //super.onLocationResult(p0)  //todo das hier nötig
                 for (location: Location in p0!!.locations) {
                     Log.i(TAG, location.latitude.toString() + " / " + location.longitude.toString())
-                    locations += location
+                    Toast.makeText(
+                        applicationContext,
+                        location.latitude.toString() + " / " + location.longitude.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    locations.add(location)
                 }
             }
         }
@@ -176,8 +219,5 @@ class LocationUpdateService : Service() {
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 5000
         locationRequest.fastestInterval = 3000
-        locationRequest.smallestDisplacement = 10.0F
     }
 }
-
-//TODO stop request
