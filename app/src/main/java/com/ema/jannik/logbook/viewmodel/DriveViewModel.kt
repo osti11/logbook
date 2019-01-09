@@ -18,7 +18,6 @@ class DriveViewModel(application: Application) : AndroidViewModel(application) {
         allDrives = repository.getAll()
     }
 
-
     fun insert(drive: Drive) {      //TODO needs?
         repository.insert(drive)
     }
