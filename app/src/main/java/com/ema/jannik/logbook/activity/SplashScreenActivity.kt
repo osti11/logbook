@@ -22,18 +22,13 @@ class SplashScreenActivity : AppCompatActivity() {
         val config = EasySplashScreen(this@SplashScreenActivity)
                 .withFullScreen()
                 .withTargetActivity(MainActivity::class.java)
-                .withSplashTimeOut(3000)
+                .withSplashTimeOut(2000)
                 .withBackgroundColor(Color.WHITE)
-                .withAfterLogoText(getString(R.string.app_name))
-                .withLogo(R.drawable.ic_splash_screen)
-            .withFooterText("developed by Jannik Ostermayer") //TODO string.xml
+                //.withBeforeLogoText(getString(R.string.app_name))
+                .withLogo(R.drawable.ic_launcher_round)
+            .withFooterText ("developed by Jannik Ostermayer") //TODO string.xml
 
-        TextViewCompat.setTextAppearance(config.afterLogoTextView, R.style.TextAppearance_MaterialComponents_Headline3)
-        config.afterLogoTextView.setTextColor(ContextCompat.getColor(applicationContext ,R.color.colorPrimaryDark))
-        config.logo.scaleType = ImageView.ScaleType.CENTER_INSIDE
-
-
-        val splashScreen: View = config.create()
+        val splashScreen: View = config.create()    //create View
 
         setContentView(splashScreen)    //set layout for activity
     }
