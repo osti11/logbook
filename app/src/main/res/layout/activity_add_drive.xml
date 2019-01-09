@@ -78,7 +78,7 @@
                     tools:layout_conversion_absoluteWidth="53dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="32dp"
                     app:layout_constraintTop_toBottomOf="@+id/editText_timeHour"/>
 
             <NumberPicker
@@ -99,7 +99,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_conversion_absoluteHeight="16dp"
                     tools:layout_conversion_absoluteWidth="132dp"
-                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/editText_timeHour"
+                    android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/editText_timeHour"
                     android:layout_marginStart="24dp"/>
 
             <NumberPicker
@@ -162,7 +162,7 @@
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/textView_odometer_end"
-                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/editText_timeHour"
+                    android:layout_marginTop="32dp" app:layout_constraintTop_toBottomOf="@+id/editText_timeHour"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="24dp"
                     android:textAlignment="textEnd"/>
 
