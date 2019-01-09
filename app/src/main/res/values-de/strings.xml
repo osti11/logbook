@@ -16,12 +16,12 @@
     <string name="textView_duration">Dauer der Fahrt</string>
     <string name="menu_save">speichern</string>
     <string name="menu_addDrive">Fahrt hinzufügen</string>
-    <string name="EditText_startTime">start Zeitpunkt</string>
+    <string name="EditText_startTime">Abfahrt</string>
     <string name="button_recStart">Starten</string>
     <string name="button_recEnd">beenden</string>
     <string name="menu_rec">Fahrt aufzeichnen</string>
     <string name="textView_noEntry">kein Eintrag!</string>
-    <string name="editText_endTime">ende Zeitpunkt</string>
+    <string name="editText_endTime">Ankunft</string>
     <string name="textView_category">Kategorie</string>
     <string name="menu_share">teilen</string>
     <string name="email_subject">", stand "</string>
@@ -30,11 +30,11 @@
     <string name="category_1">Private</string>
     <string name="category_2">Geschäftlich</string>
     <string name="category_3">Weg zur Arbeit</string>
-    <string name="category">"Kategorie: "</string>
+    <string name="category">Kategorie</string>
     <string name="title_activity_details_drive">Details</string>
-    <string name="email_text">All EInträge:</string>
-    <string name="email_purpose">"Zweck der Fahrt: "</string>
-    <string name="email_startAddress">"Start Adresse: "</string>
+    <string name="email_text">Alle Einträge:</string>
+    <string name="email_purpose">Zweck der Fahrt:</string>
+    <string name="email_startAddress">Start Adresse:</string>
     <string name="menu_edit">bearbeiten</string>
     <string name="menu_details">Details</string>
     <string name="toast_notFound">Eintrag nicht gefunden</string>
@@ -64,14 +64,23 @@
         <item>StartAdresse</item>
         <item>Zieladresse</item>
     </string-array>
+    <string-array name="spinner_day">
+        <item>Montag</item>
+        <item>Dienstag</item>
+        <item>Mittwoch</item>
+        <item>Donnerstag</item>
+        <item>Freitag</item>
+        <item>Samstag</item>
+        <item>Sonntag</item>
+    </string-array>
     <string name="title_settings">Einstellungen</string>
     <string name="toast_saveSettings">Einstellungen gespeichert</string>
-    <string name="email_destinationAddress">"Zieladresse: "</string>
-    <string name="email_mileageDestination">"Kilometerstand am Ziel: "</string>
-    <string name="email_mileageStart">"Kilometerstand beim losfahren "</string>
-    <string name="email_startTimestamp">"Startzeitpunkt: "</string>
-    <string name="email_destinationTimestamp">"Endzeitpunkt: "</string>
-    <string name="email_duration">"Dauer der Fahrt: "</string>
+    <string name="email_destinationAddress">Zieladresse:</string>
+    <string name="email_mileageDestination">Kilometerstand am Ziel:</string>
+    <string name="email_mileageStart">Kilometerstand beim losfahren:</string>
+    <string name="email_startTimestamp">Startzeitpunkt:</string>
+    <string name="email_destinationTimestamp">Endzeitpunkt:</string>
+    <string name="email_duration">Dauer der Fahrt:</string>
     <string name="toast_settingsReset">EInstellungen zurückgestezt</string>
     <string name="textView_mileageEnd">Kilometerstand am Ziel</string>
     <string name="alertDialog_emailTitle">Einträge in Email expotieren</string>
@@ -79,7 +88,7 @@
     <string name="editText_timeMinute">Minute</string>
     <string name="toast_minute">Minut ist ungültig</string>
     <string name="toast_addSuccessfully">Hinzufügen war erfolgreich</string>
-    <string name="alertDialog_titleAddDrive">Hinweis</string>
+    <string name="alertDialog_titleAddDrive">" "</string>
     <string name="snackbar_button">rückgängig machen</string>
     <string name="snackbar_text">Eintrag gelöscht.</string>
     <string name="menu_delete">Alles löschen vor dem ...</string>
@@ -107,4 +116,32 @@
     </string>
     <string name="textView_titleExport">Expotieren</string>
     <string name="textView_rec">Position wird erfasst</string>
+    <string name="toast_recDriveStop">Daten werden verarbeitet.</string>
+    <string name="toast_destinationAddress">Ziel Adresse fehlt</string>
+    <string name="toast_hour">Stunde ist ungültig</string>
+    <string name="toast_mileage">Kilometerstand ist unkorrekt</string>
+    <string name="title_impressum">Impressum</string>
+    <string name="textView_TitleRecordDrive">Fahrt aufzeichnen</string>
+    <string name="textView_titleDrive">Fahrt erfassen</string>
+    <string name="alertDialog_messageDelete">Hier kannst du bestimmen ob wenn ein einzelner Eiontrag gelöscht wird die
+        KIlometerstände der neueren Einträge um die Entfernung des gelöschten EIntrags angepasst werden soll. (Das macht
+        SInn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
+    </string>
+    <string name="alertDialog_messageLayout">Hier kasst du das Layout der einzelnen Listenelemente anpassen, indem du
+        auswählst was in welcher ERcke angezeigtr wird
+    </string>
+    <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine</string>
+    <string name="alertDialog_messagePurpose">Hier kannst du festlegen ob du benachrichtigt werden willst wenn kein
+        Grund für die Fahrt angegeben wurde.
+    </string>
+    <string name="textView_navigationDescription">Wenn du von links nach rechts streichst oder auf ☰ drückst öffnet sich
+        die Navigation
+    </string>
+    <string name="textView_notificationIntervalDescription">Wiederholung</string>
+    <string name="textView_titleAddDrive">Fahrt hinzufügen</string>
+    <string name="toast_startAddress">Start Adresse fehlt</string>
+    <string name="toast_time">Zeitangabe ist ungültig</string>
+    <string name="textView_dayDescription">Tag</string>
+    <string name="textView_bluetoothDescription">Name des verbundenen Gerätes</string>
+    <string name="switch_bluetooth">Autostart bei einer Bluetoothverbindung</string>
 </resources>

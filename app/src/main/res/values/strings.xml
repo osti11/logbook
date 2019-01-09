@@ -5,7 +5,7 @@
     <string name="editText_startAddress">start address</string>
     <string name="editText_destinationAddress">destination address</string>
     <string name="textView_distance">distance</string>
-    <string name="textView_mileageStart">Mileage at driving off</string>
+    <string name="textView_mileageStart">mileage at driving off</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_introduction">Introduction</string>
     <string name="menu_impressum">Impressum</string>
@@ -17,12 +17,12 @@
     <string name="textView_duration">duration of the journey</string>
     <string name="menu_save">save</string>
     <string name="menu_addDrive">add journey</string>
-    <string name="EditText_startTime">start time</string>
+    <string name="EditText_startTime">departure</string>
     <string name="button_recStart">start</string>
     <string name="button_recEnd">finish</string>
     <string name="menu_rec">ride record</string>
     <string name="textView_noEntry">no entry!</string>
-    <string name="editText_endTime">end time</string>
+    <string name="editText_endTime">arrival</string>
     <string name="textView_category">category</string>
     <string name="menu_share">share</string>
     <string name="email_subject">", status from "</string>
@@ -31,15 +31,15 @@
     <string name="category_1">" private"</string>
     <string name="category_2">" work"</string>
     <string name="category_3">" way to work"</string>
-    <string name="category">category:</string>
+    <string name="category">category</string>
     <string name="title_activity_details_drive">details</string>
     <string name="email_text">all entrys:</string>
-    <string name="email_purpose">"purpose of the ride: "</string>
+    <string name="email_purpose">purpose of the ride:</string>
     <string name="email_startAddress">start address:</string>
     <string name="menu_edit">edit</string>
     <string name="menu_details">details</string>
     <string name="toast_notFound">entry not found</string>
-    <string name="textView_notificationIntervalDescription">Benachrichtigungsinterval</string>
+    <string name="textView_notificationIntervalDescription">repeat</string>
     <string name="alertDialog_titleSettings">explanation</string>
     <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine
         Benachrichtigung bekommen möchtest um die Fahrten in dein <i>richtiges</i> Fahrtenbuch einzutragen.
@@ -74,10 +74,10 @@
     <string name="title_settings">Settings</string>
     <string name="toast_saveSettings">save settings</string>
     <string name="email_destinationAddress">destination address:</string>
-    <string name="email_mileageStart">"milage at drive off: "</string>
-    <string name="email_mileageDestination">"mileage at destination: "</string>
+    <string name="email_mileageStart">milage at drive off:</string>
+    <string name="email_mileageDestination">mileage at destination:</string>
     <string name="email_startTimestamp">start timestamp:</string>
-    <string name="email_destinationTimestamp">"timestamp at destination: "</string>
+    <string name="email_destinationTimestamp">timestamp at destination:</string>
     <string name="email_duration">duration of journey:</string>
     <string name="toast_settingsReset">settings reset</string>
     <string name="textView_mileageEnd">mileage at destination</string>
@@ -106,6 +106,15 @@
         KIlometerstände der neueren Einträge um die Entfernung des gelöschten EIntrags angepasst werden soll. (Das macht
         SInn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
     </string>
+    <string-array name="spinner_day">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
     <string name="title_introduction">Introduction</string>
     <string name="textView_title">Wilkommen</string>
     <string name="textView_titleDescription">Diese App hilft dir beim führen deines Fahrtenbuches. Um dir den Einstieg
@@ -119,7 +128,7 @@
     <string name="textView_driveDescription">Um eine Fahrt aufzuzeichnen drückst du in der rechten unteren Ecke auf das
         + Symbol. Danach kannst du eine Fahrt aufzeichnen oder hinzufügen.
     </string>
-    <string name="textView_TitleRecordDrive">Fahrt aufzeichnen</string>
+    <string name="textView_TitleRecordDrive">record ride</string>
     <string name="textView_recordDriveDescription">Beim aufzeichnen drückst du einen start Knopf. Nun wird deine
         GPS-Position erfasst bis du auf den Stop Knopf drückst.
     </string>
@@ -138,11 +147,25 @@
     <string name="textView_deleteFewDescription">
         Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
     </string>
-    <string name="title_impressum">Impressum</string>
+    <string name="title_impressum">Imprint</string>
     <string name="textView_titleExport">expotieren</string>
     <string name="textView_exportDescription">Du kannst dein digitales Fahrtenbuch als Email expotieren, um es dir, zum leichteren Übertragen, auf deinem PC anzuschauen. Dazu musst du rechts oben auf den SHARE-Button drücken. Danach kannst du auswählen wie die Nachricht
         formatiert werden soll, als Liste oder Tabelle. Die Tabellenformatierung ist nur zum einfachen Einfügen in einem
         Tabellenkalkulationsprogramm wie Excel gedacht.
     </string>
     <string name="textView_rec">Position is recorded</string>
+    <string name="toast_recDriveStop">Data is processed.</string>
+    <string name="textView_dayDescription">day</string>
+    <string name="textView_bluetoothDescription">name of the connected device</string>
+    <string name="switch_bluetooth">autostart by bluetooth connection</string>
+    <string name="alertDialog_messageBluetooth">Hier kannst du bestimmen ob die App bei eine Bluetoothverbindung
+        automatisch die Aufzeichnung einer Fahrt beginnen soll und diese auch beenden soll wenn die Verbindung beendet
+        wird. Solltest du dich für ja entscheiden kannst du im nächsten Schritt den Namen dieser Verbindung auswählen.
+    </string>
+    <string name="textView_bluetooth">In den EInstellungen kannst du festlegen ob die App automatisch beginnen soll eine
+        Fahrt aufzuzeichnen wenn eine BluetoothVerbindung zu einem bestimmten Gerät aufgabeut wird und diese auch wieder
+        beenden soll wie die Bluetoothverbindung abbricht. Um den Namen des Bluetoothgerätes in den EInstellungen
+        auswählen zu können muss Bluetooth aktiviert sein und dein Handy schonmal mit dem Gerät verbunden sein.
+    </string>
+    <string name="textView_titleBluetooth" translatable="false">Bluetooth</string>
 </resources>
