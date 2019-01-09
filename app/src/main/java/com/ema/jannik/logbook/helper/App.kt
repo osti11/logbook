@@ -11,8 +11,9 @@ import com.ema.jannik.logbook.R
  */
 class App : Application() {
     companion object {
-        val CHANNEL_UPDATEDRIVE_ID: String = "updateDrive"
-        val CHANNEL_FORGROUNDSERVICE_ID: String = "updatePosition"
+        val CHANNEL_MISSING_PURPOSE_ID: String = "missingPurposeChannel"
+        val CHANNEL_UPDATE_ID: String = "updateLogbookChannel"
+        val CHANNEL_FORGROUNDSERVICE_ID: String = "updatePositionChannel"
     }
 
     /**
@@ -30,7 +31,7 @@ class App : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { //class can just created when Android version Oreo oder higher
             //UpdateNotification
             val channelUpdate =  NotificationChannel(
-                CHANNEL_UPDATEDRIVE_ID,
+                CHANNEL_UPDATE_ID,
                 getString(R.string.channel_description),    //just to identifie
                 NotificationManager.IMPORTANCE_HIGH     //How important, wie laut, wies aussieht    //TODO nachen welche wichtigkeit verwenden
             )
