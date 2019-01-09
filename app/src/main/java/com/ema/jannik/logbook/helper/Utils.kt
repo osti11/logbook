@@ -59,6 +59,29 @@ class Utils {
         }
 
         /**
+         * This function get an int value und pass the imageButton which represent this value.
+         * @param category the category from an drive object.
+         * @return return id of the ImageButton.
+         */
+        fun getImageButtonByCategory(category: Int): Int {
+            when (category) {
+                0 -> {
+                    return R.id.imageButton_noCategory
+                }
+                1 -> {
+                    return R.id.imageButton_private
+                }
+                2 -> {
+                    return R.id.imageButton_work
+                }
+                3 -> {
+                    return R.id.imageButton_way
+                }
+            }
+            return 0
+        }
+
+        /**
          * This function read the layout settings from the shared preferences and
          * tell you in which corner which information is displayed.
          * @param application to access the shared references
