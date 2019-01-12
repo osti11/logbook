@@ -31,7 +31,7 @@ class LocationActivity : AppCompatActivity() {
         locationCallback = object: LocationCallback(){
             override fun onLocationResult(p0: LocationResult?) {
                 for (location :Location in p0!!.locations){
-                    textView.append(location.latitude.toString() + " / " + location.longitude.toString() +"\n")
+                    textView_navigationDescription.append(location.latitude.toString() + " / " + location.longitude.toString() +"\n")
 
 
                     locationRepository.getAddress(location)

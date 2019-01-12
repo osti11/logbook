@@ -40,7 +40,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
 
     companion object {
         /**
-         * to identify th placeAutocomplete request.
+         * Um die placeAutocomplete Anfrage zu identifizieren.
          */
         const val PLACE_AUTOCOMPLETE_REQUEST_CODE = 1
     }
@@ -57,32 +57,32 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     var startFragmentTimePicker: Boolean? = null
 
     /**
-     * represent the start address, to get later the latitude and longitude of the chosen address.
+     * Representiert die Startadresse. Enthält lng, lat und die Adresse als String zum späteren speichern in der DB.
      */
     var startAddress: Place? = null
 
     /**
-     * represent the destination address, to get later the latitude and longitude of the chosen address.
+     * Representiert die Zieladresse. Enthält lng, lat und die Adresse als String zum späteren speichern in der DB.
      */
     var destinationAddress: Place? = null
 
     /**
-     * represent the chosen imageButton
+     * Representiert die ausgewählt Katigorie in form eines Imagebuttons.
      */
     var category: Int = 0
 
     /**
-     * represent the start time to calculate the duration.
+     * Representiert den Abfahrtszeitpunkt.
      */
     var startTime: Calendar = Calendar.getInstance()
 
     /**
-     * represent the end time to calculate the duration.
+     * Ankunftszeit
      */
     var endTime: Calendar = Calendar.getInstance()
 
     /**
-     * This function is called when the activity is created to set the ActionBar, TimePicker and the imageButtons.
+     * Diese Funktion wird beim erstellen der 'activity' aufgerufen und setzt die 'actionBar', 'imageButton' und 'numberPicker'.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,15 +116,15 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * set the menu on top.
+     * Setzt add_drive_menu.xml als Menülayout.
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.add_drive_menu, menu)    //tell system to use add note menu
+        menuInflater.inflate(R.menu.add_drive_menu, menu)
         return true //when true Menu will shown
     }
 
     /**
-     * call the function saveDrive() when save in the right top corner is clicked.
+     * Ruft die Funktion saveDrive() auf wenn 'SPEICHERN' in der rechten oberen Ecke geklickt wird.
      */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.save_drive) {
@@ -136,7 +136,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * save the input in the database
+     * Speichert die Eingabe in der DB.
      */
     private fun saveDrive() {    //TODO hier weiter
 
@@ -243,7 +243,9 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * this function set the result from the TimePickerFragment.
+     * Setzt das Ergebnis des TimePickerFragment.
+     * startFragmentTimePicker == false -> Ergebnis wird in 'endTime' gespeichert.
+     * startFragmentTimePicker == true -> Ergebnis wird in 'startTime' gespeichert.
      */
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         Log.i(TAG, "onTimeSet()")
@@ -262,16 +264,6 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
             setTime(startTime, editText_start_time)
         }
         startFragmentTimePicker = null
-
-        /*
-        //set duration
-        if (endTime.compareTo(startTime) == 1){     //when EndTime bigger then startTime
-            val time = endTime
-            time.add(Calendar.HOUR_OF_DAY, - startTime.get(Calendar.HOUR_OF_DAY))
-            time.add(Calendar.MINUTE, - startTime.get(Calendar.MINUTE))
-            editText_time.setText(DateFormat.getTimeInstance(DateFormat.SHORT).format(time))
-        }
-        */
     }
 
     /**
@@ -281,6 +273,10 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
      * [Calendar.MONTH])
      * @param dayOfMonth th selected day of the month (1-31, depending on
      * month)
+     */
+
+    /**
+     *
      */
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         Log.i(TAG, "onDataSet()")

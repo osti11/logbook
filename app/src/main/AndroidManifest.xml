@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
 
     <application
             android:name=".helper.App"
@@ -21,6 +23,7 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value=""/>
+
         <activity
                 android:name=".activity.SplashScreenActivity"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -36,6 +39,11 @@
         <activity
                 android:name=".activity.RecordDriveActivity"
                 android:parentActivityName=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
         </activity>
 
         <service android:name=".LocationUpdateService"/>
@@ -45,9 +53,22 @@
         <activity
                 android:name=".activity.DetailsDriveActivity"
                 android:parentActivityName=".activity.MainActivity"/>
-        <activity android:name=".activity.MainActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+                android:name=".activity.MainActivity"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+                android:name=".activity.EditDriveActivity"
+                android:parentActivityName=".activity.MainActivity">
+        </activity>
+        <receiver android:name=".AlertReciever"/>
+        <receiver android:name=".StartActivityOnBluetooth">
+            <intent-filter>
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="android.bluetooth.adapter.action.CONNECTION_STATE_CHANGED" />
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+                <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
     </application>
-
 </manifest>
