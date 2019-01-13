@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.model.database.Drive
+import java.lang.NullPointerException
 import java.text.DateFormat
 
 
@@ -41,18 +43,31 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
 
     override fun onBindViewHolder(holder: DriveHolder, position: Int) {
         val currentDrive: Drive = drives.get(position)
-        holder.upperRightCorner.text = getDriveProperty(
-            getSettingsLayout(
-                1
-            ),
-            currentDrive
-        )
-        holder.upperLeftCorner.text = getDriveProperty(
-            getSettingsLayout(
-                2
-            ),
-            currentDrive
-        )
+        if(currentDrive.category == 4) {    //kilometerstand korrigiert
+            holder.upperLeftCorner.text = currentDrive.purpose
+            holder.upperLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.light))
+            holder.lowerLeftCorner.text = String.format("%d km", currentDrive.mileageDestination)
+            holder.lowerLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.light))
+            holder.upperRightCorner.text = ""
+            holder.lowerRightCorner.text = ""
+            holder.icon.setImageResource(R.drawable.ic_correct)
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(activity.applicationContext ,R.color.colorPrimaryDark))
+        } else {    //normaler EIntrag
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(activity.applicationContext ,R.color.light))
+            holder.lowerLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.dark))
+            holder.upperLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.dark))
+            holder.upperRightCorner.text = getDriveProperty(
+                getSettingsLayout(
+                    1
+                ),
+                currentDrive
+            )
+            holder.upperLeftCorner.text = getDriveProperty(
+                getSettingsLayout(
+                    2
+                ),
+                currentDrive
+            )
             holder.lowerLeftCorner.text = getDriveProperty(
                 getSettingsLayout(
                     3
@@ -65,10 +80,12 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
                 ),
                 currentDrive
             )
-        val category = Utils.getCategoryDrawableId(currentDrive.category)
-        if (category != 0) {    //category == 0 -> not found
-            holder.icon.setImageResource(category)
+            val category = Utils.getCategoryDrawableId(currentDrive.category)
+            if (category != 0) {    //category == 0 -> not found
+                holder.icon.setImageResource(category)
+            }
         }
+
     }
 
     fun setDrives(drives: List<Drive>) {
@@ -179,10 +196,27 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
             2 -> return DateFormat.getTimeInstance().format(drive.duration.time)
             3 -> return DateFormat.getDateTimeInstance().format(drive.start_timestamp.time)
             4 -> return DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time)   //TODO need .time ?
-            5 -> return String.format("%.2f km", drive.mileageStart)//TODO einheit
-            6 -> return String.format("%.2f km", drive.mileageDestination)//TODO einheit
-            7 -> return drive.start.address
-            8 -> return drive.destination.address
+            5 -> return String.format("%d km", drive.mileageStart)//TODO einheit
+            6 -> return String.format("%d km", drive.mileageDestination)//TODO einheit
+            7 -> {
+                var address = ""
+                try {
+                    address = drive.start!!.address
+                } catch (e : NullPointerException) {
+                     address = ""
+                }
+                return address
+            }
+            8 -> {
+                var address = ""
+                try {
+                    address = drive.destination!!.address
+                } catch (e : NullPointerException) {
+                    address = ""
+                }
+                return address
+            }
+            9 -> return String.format("%d km", drive.distance)
         }
         return ""
     }

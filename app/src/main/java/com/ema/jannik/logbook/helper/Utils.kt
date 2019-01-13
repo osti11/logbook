@@ -3,7 +3,6 @@ package com.ema.jannik.logbook.helper
 import android.app.Application
 import android.content.Context
 import android.content.res.Resources
-import android.provider.Settings
 import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.model.database.Drive
@@ -31,6 +30,9 @@ class Utils {
                 }
                 3 -> {
                     return R.string.category_3
+                }
+                4 -> {
+                    return R.string.category_4
                 }
             }
             return 0
@@ -138,8 +140,8 @@ class Utils {
                 4 -> return drive.destination_timestamp.toString()
                 5 -> return drive.mileageStart.toString()
                 6 -> return drive.mileageDestination.toString()
-                7 -> return drive.start.address
-                8 -> return drive.destination.address
+                7 -> return drive.start!!.address
+                8 -> return drive.destination!!.address
             }
             return ""
         }
