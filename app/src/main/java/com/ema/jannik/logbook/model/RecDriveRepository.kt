@@ -42,7 +42,7 @@ class RecDriveRepository(application: Application) {
         return  GetAddressAsyncTask(geocoding).execute(location).get()
     }
 
-    fun getLastDrive(): Drive{  //TODO was wenn kein EIntrag exestiert
+    fun getLastDrive(): Drive{
         return GetLastDriveAsyncTask(driveDao).execute().get()
     }
 

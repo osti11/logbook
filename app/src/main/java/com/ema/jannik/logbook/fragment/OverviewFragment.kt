@@ -65,9 +65,11 @@ class OverviewFragment : Fragment() {
              * @param drive The item that was clicked.
              */
             override fun onItemClick(drive: Drive) {
-                val intent = Intent(context, DetailsDriveActivity::class.java)
-                intent.putExtra(DetailsDriveActivity.EXTRA_ID, drive.id)
-                startActivity(intent)
+                if (drive.start != null && drive.destination != null){
+                    val intent = Intent(context, DetailsDriveActivity::class.java)
+                    intent.putExtra(DetailsDriveActivity.EXTRA_ID, drive.id)
+                    startActivity(intent)
+                }
             }
         })
 

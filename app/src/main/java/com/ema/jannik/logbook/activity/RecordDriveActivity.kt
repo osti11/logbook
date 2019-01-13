@@ -1,5 +1,6 @@
 package com.ema.jannik.logbook.activity
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.nfc.NfcAdapter
@@ -8,6 +9,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.getSystemService
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
@@ -52,10 +55,14 @@ class RecordDriveActivity : AppCompatActivity() {
         if(intent.getBooleanExtra(EXTRA_BLUETOOTH_START, false)){
             startForegroundService()
         }
+
+        setViewWhenRunning()
     }
 
     private fun startForegroundService() {
         textView.visibility = View.VISIBLE
+        button_stopFS.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
+        button_stopFS.setTextColor(ContextCompat.getColor(this, R.color.light))
 
         val serviceIntent = Intent(this, LocationUpdateService::class.java)
         ContextCompat.startForegroundService(this, serviceIntent)
@@ -86,6 +93,22 @@ class RecordDriveActivity : AppCompatActivity() {
                 allSuccess = false
         }
         return allSuccess
+    }
+
+    /**
+     * Überprüft ob der LocationUpdateService ausgeführt wird.
+     */
+    private fun isForegroundServiceRunning(): Boolean{
+        return LocationUpdateService.isRunning
+    }
+
+    /**
+     * Wenn der Service schon aus geführt wird, wird der passende Text angezeigt.
+     */
+    private fun setViewWhenRunning() {
+        if(isForegroundServiceRunning()){
+            onClickStartForegroundService(View(applicationContext))
+        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

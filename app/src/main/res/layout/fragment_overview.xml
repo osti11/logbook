@@ -13,7 +13,7 @@
             android:text="@string/textView_noEntry"
             android:textSize="30sp"
             android:textAlignment="center"
-            android:visibility="gone"
+            
             android:layout_marginTop="30dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -40,9 +40,9 @@
             android:layout_marginEnd="66dp"
             android:text="@string/fab_record"
             android:background="@drawable/rounded_view"
-            android:textColor="#000000"
+            android:textColor="@color/colorAccent"
             android:padding="3dp"
-            android:visibility="gone"/>
+            />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -54,7 +54,7 @@
             android:layout_gravity="end|bottom"
             android:layout_marginBottom="86dp"
             android:layout_marginEnd="20dp"
-            android:visibility="gone"
+            
             android:onClick="onClickFabAdd"/>
 
 
@@ -67,8 +67,8 @@
             android:layout_marginEnd="66dp"
             android:text="@string/fab_add"
             android:background="@drawable/rounded_view"
-            android:textColor="#000000"
-            android:visibility="gone"
+            android:textColor="@color/colorAccent"
+            
             android:padding="5dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -81,6 +81,32 @@
             android:onClick="onClickFabRec"
             android:layout_marginBottom="136dp"
             android:layout_marginEnd="20dp"
-            android:visibility="gone"/>
+            
+    />
+
+    <TextView
+            android:id="@+id/textView_fab_correctMileage_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="186dp"
+            android:background="@drawable/rounded_view"
+            android:textColor="@color/colorAccent"
+            android:padding="5dp"
+            android:layout_marginEnd="66dp"
+            
+            android:text="@string/textView_correctMileage"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:onClick="onClickFabCorrect"
+            android:id="@+id/fab_correctMileage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            app:fabSize="mini"
+            android:layout_marginBottom="186dp"
+            android:layout_marginEnd="20dp"
+            
+            android:src="@drawable/ic_correct"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

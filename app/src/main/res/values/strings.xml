@@ -70,6 +70,7 @@
         <item>milage at destination</item>
         <item>start address</item>
         <item>destination address</item>
+        <item>distance</item>
     </string-array>
     <string name="title_settings">Settings</string>
     <string name="toast_saveSettings">save settings</string>
@@ -145,11 +146,14 @@
     </string>
     <string name="textView_titleDeleteFew">mehere Einträge löschen</string>
     <string name="textView_deleteFewDescription">
-        Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
+        Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle
+        Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
     </string>
     <string name="title_impressum">Imprint</string>
     <string name="textView_titleExport">expotieren</string>
-    <string name="textView_exportDescription">Du kannst dein digitales Fahrtenbuch als Email expotieren, um es dir, zum leichteren Übertragen, auf deinem PC anzuschauen. Dazu musst du rechts oben auf den SHARE-Button drücken. Danach kannst du auswählen wie die Nachricht
+    <string name="textView_exportDescription">Du kannst dein digitales Fahrtenbuch als Email expotieren, um es dir, zum
+        leichteren Übertragen, auf deinem PC anzuschauen. Dazu musst du rechts oben auf den SHARE-Button drücken. Danach
+        kannst du auswählen wie die Nachricht
         formatiert werden soll, als Liste oder Tabelle. Die Tabellenformatierung ist nur zum einfachen Einfügen in einem
         Tabellenkalkulationsprogramm wie Excel gedacht.
     </string>
@@ -168,4 +172,8 @@
         auswählen zu können muss Bluetooth aktiviert sein und dein Handy schonmal mit dem Gerät verbunden sein.
     </string>
     <string name="textView_titleBluetooth" translatable="false">Bluetooth</string>
+    <string name="textView_correctMileage">correct mileage</string>
+    <string name="toast_incorrectMileage">mileage is incorrect</string>
+    <string name="category_4">correct mileage</string>
+    <string name="hint_mileage">new mileage</string>
 </resources>

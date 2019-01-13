@@ -6,7 +6,7 @@ import androidx.room.*
 /**
  * This abstract class represent the Database which contains the tables drive, route and stage.
  */
-@Database(entities = [Drive::class, Route::class], version = 2) //TODO need now db version
+@Database(entities = [Drive::class, Route::class], version = 3) //TODO need now db version
 @TypeConverters(Converts::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun driveDao(): DriveDao

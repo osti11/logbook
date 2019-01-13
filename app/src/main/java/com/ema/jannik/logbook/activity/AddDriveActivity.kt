@@ -26,6 +26,7 @@ import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.model.database.Stage
 import com.ema.jannik.logbook.view.ExplanationDialogAddDrive
 import com.google.android.gms.location.places.Place
+import java.lang.NullPointerException
 import java.lang.NumberFormatException
 import java.text.DateFormat
 import java.util.*
@@ -103,6 +104,8 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         numberPicker_odometer_end.minValue = 0
         numberPicker_odometer_end.maxValue = 400000
 
+        setNumberpickerwithLastEntry()
+
         //--set Button--
         resetImageButtonBackgroundColor()
         imageButton_noCategory.setBackgroundColor(
@@ -111,8 +114,25 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                 R.color.colorPrimaryDark
             )
         )
+    }
 
+    /**
+     *
+     */
+    private fun setNumberpickerwithLastEntry(){
+        val repository: AddDriveRepository = AddDriveRepository(application)
 
+        var drive: Drive?
+        try {
+            drive = repository.getLastDrive()
+        } catch (e: Exception) {
+            drive = null
+        }
+        if (drive != null) {
+            numberPicker_odometerStart.value = drive.mileageStart
+            numberPicker_odometer_end.value  = drive.mileageDestination
+            numberPicker_distance.value      = drive.distance
+        }
     }
 
     /**
@@ -212,7 +232,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         duration.set(Calendar.MINUTE, minute!!)
 
         //save in db
-        val repository = AddDriveRepository(application)
+        val repository: AddDriveRepository = AddDriveRepository(application)
         repository.insert(
             Drive
                 (
@@ -227,9 +247,9 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                     latitude = destinationAddress.latLng.latitude,
                     address = destinationAddress.address.toString()
                 ),
-                mileageDestination = endMilage.toDouble(),
-                mileageStart = startMilage.toDouble(),
-                distance = distance.toDouble(),
+                mileageDestination = endMilage,
+                mileageStart = startMilage,
+                distance = distance,
                 start_timestamp = startTime,
                 destination_timestamp = endTime,
                 category = category,

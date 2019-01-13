@@ -22,11 +22,27 @@ class AddDriveRepository(application: Application) {
         InsertDriveAsyncTask(driveDao).execute(drive)
     }
 
+    /**
+     * @exception NullPointerException Wenn kein EIntrag in der Datenbank vorhanden ist.
+     */
+    fun getLastDrive(): Drive{
+        return GetLastDriveAsyncTask(driveDao).execute().get()
+    }
+
     companion object {
         private class InsertDriveAsyncTask(private val driveDao: DriveDao) : AsyncTask<Drive, Void, Void>(){
             override fun doInBackground(vararg params: Drive): Void? {
                 driveDao.insert(params[0])
                 return null
+            }
+        }
+
+        private class  GetLastDriveAsyncTask(private val driveDao: DriveDao) : AsyncTask<Void, Void, Drive>(){
+            /**
+             * Override this method to perform a computation on a background thread. The
+             */
+            override fun doInBackground(vararg params: Void?): Drive {
+                return driveDao.getLastDrive()
             }
         }
     }

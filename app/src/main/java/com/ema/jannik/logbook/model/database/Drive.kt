@@ -28,12 +28,12 @@ data class Drive(
     @ColumnInfo(name = "dr_duration") var duration: Calendar,       //TODO richtig ge castet?
     @ColumnInfo(name= "dr_start_timestamp") var start_timestamp: Calendar,
     @ColumnInfo(name= "dr_destination_timestamp") var destination_timestamp: Calendar,
-    @ColumnInfo(name = "dr_mileage_start") var mileageStart: Double,
-    @ColumnInfo(name = "dr_mileage_destination") var mileageDestination: Double,
-    @ColumnInfo(name = "dr_distance") var distance: Double,
+    @ColumnInfo(name = "dr_mileage_start") var mileageStart: Int,
+    @ColumnInfo(name = "dr_mileage_destination") var mileageDestination: Int,
+    @ColumnInfo(name = "dr_distance") var distance: Int,
     @ColumnInfo(name = "dr_category") var category: Int,
-    @Embedded(prefix = "dr_start_") var start: Stage,
-    @Embedded(prefix = "dr_destination_") var destination: Stage
+    @Embedded(prefix = "dr_start_") var start: Stage?,  //kann null sein um km stand zu korregieren
+    @Embedded(prefix = "dr_destination_") var destination: Stage?
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "dr_id")

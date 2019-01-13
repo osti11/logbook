@@ -25,6 +25,13 @@ import java.util.*
 
 class LocationUpdateService : Service() {
 
+    companion object {
+        var isRunning: Boolean = false
+    }
+
+    init {
+        isRunning = true
+    }
 
     private val TAG = this::class.java.name
 
@@ -121,6 +128,8 @@ class LocationUpdateService : Service() {
 
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
         saveInDb()
+
+        isRunning = false
     }
 
     /**
@@ -135,12 +144,14 @@ class LocationUpdateService : Service() {
         val timeEnd = Calendar.getInstance()
         val duration = Calendar.getInstance()
         duration.timeInMillis = timeEnd.timeInMillis - timeStart.timeInMillis   //TODO calc time
-        var mileagestart: Double
+        var mileagestart: Int
         try {
             mileagestart = repository.getLastDrive().mileageDestination
         } catch (e: Exception) {    //lastDrive don't exist
-            mileagestart = 0.0
+            mileagestart = 0
         }
+
+        val last = repository.getLastDrive()
 
         val drive = Drive(
             purpose = "",
@@ -181,13 +192,13 @@ class LocationUpdateService : Service() {
     /**
      * calculate the distance betwwen the locations
      */
-    private fun getDistance(locations: MutableList<Location>): Double {
+    private fun getDistance(locations: MutableList<Location>): Int{
         var distance = 0F
         for (l in locations.indices){
             if(l + 1 < locations.size)
                 distance += locations[l].distanceTo(locations[l+1])
         }
-        return distance.toDouble()/1000 //meter to kilometer
+        return distance.toInt()/1000 //meter to kilometer
     }
 
     /**

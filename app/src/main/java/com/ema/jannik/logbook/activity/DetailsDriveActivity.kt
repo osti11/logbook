@@ -116,13 +116,13 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         textView_purpose.text = drive!!.purpose
-        textView_startAddress.text = drive!!.start.address
-        textView_destinationAddress.text = drive!!.destination.address
+        textView_startAddress.text = drive!!.start!!.address
+        textView_destinationAddress.text = drive!!.destination!!.address
         textView_startTime.text = DateFormat.getDateTimeInstance().format(drive!!.start_timestamp.time)
         textView_endTime.text = DateFormat.getDateTimeInstance().format(drive!!.destination_timestamp.time)
-        textView_mileageStart.text = String.format("%.2f km", drive!!.mileageStart)//TODO einheit
-        textView_mileageDestination.text = String.format("%.2f km", drive!!.mileageDestination)//TODO einheit
-        textView_distance.text = String.format("%.2f km", drive!!.distance)//TODO einheit
+        textView_mileageStart.text = String.format("%d km", drive!!.mileageStart)//TODO einheit
+        textView_mileageDestination.text = String.format("%d km", drive!!.mileageDestination)//TODO einheit
+        textView_distance.text = String.format("%d km", drive!!.distance)//TODO einheit
 
         val duration = drive!!.duration
         duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
@@ -160,9 +160,9 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (drive != null) {
             val start = drive!!.start
-            val startLatLng = LatLng(start.latitude, start.longitude)
+            val startLatLng = LatLng(start!!.latitude, start!!.longitude)
             val destination = drive!!.destination
-            val destinationLatLng = LatLng(destination.latitude, destination.longitude)
+            val destinationLatLng = LatLng(destination!!.latitude, destination.longitude)
 
             //add marker for start address
             map.addMarker(

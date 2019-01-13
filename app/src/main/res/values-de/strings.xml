@@ -63,6 +63,7 @@
         <item>Kilometerstand am Ziel</item>
         <item>StartAdresse</item>
         <item>Zieladresse</item>
+        <item>Entfernung</item>
     </string-array>
     <string-array name="spinner_day">
         <item>Montag</item>
@@ -144,4 +145,8 @@
     <string name="textView_dayDescription">Tag</string>
     <string name="textView_bluetoothDescription">Name des verbundenen Gerätes</string>
     <string name="switch_bluetooth">Autostart bei einer Bluetoothverbindung</string>
+    <string name="textView_correctMileage">Kilometerstand korrigieren</string>
+    <string name="toast_incorrectMileage">Kilometerstand stimmt nicht</string>
+    <string name="category_4">" Kilometerstand korregiert"</string>
+    <string name="hint_mileage">neuer Kilometerstand</string>
 </resources>

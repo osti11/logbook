@@ -264,8 +264,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             for (d in drives) {
                 text += "\n" + getString(R.string.category) + "\t" + getString(Utils.getCategory(d.category))
                 text += "\n" + getString(R.string.email_purpose) + "\t" + d.purpose
-                text += "\n" + getString(R.string.email_startAddress) + "\t" + d.start.address
-                text += "\n" + getString(R.string.email_destinationAddress) + "\t" + d.destination.address
+                text += "\n" + getString(R.string.email_startAddress) + "\t" + d.start?.address
+                text += "\n" + getString(R.string.email_destinationAddress) + "\t" + d.destination?.address
                 text += "\n" + getString(R.string.email_mileageStart) + "\t" + d.mileageStart.toString()
                 text += "\n" + getString(R.string.email_mileageDestination) + "\t" + d.mileageDestination.toString()
                 text += "\n" + getString(R.string.email_startTimestamp) + "\t" + DateFormat.getDateTimeInstance().format(
@@ -278,21 +278,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 text += "\n"
             }
         } else if (choice == 1) {   //as table
-            text += "\n" +
-                    getString(R.string.category) + "\t" + "\t" +
-                    getString(R.string.email_purpose) + "\t" + "\t" +
-                    getString(R.string.email_startAddress) + "\t" + "\t" +      //TODO formatting
-                    getString(R.string.email_destinationAddress) + "\t" + "\t" +
-                    getString(R.string.email_mileageStart) + "\t" + "\t" +
-                    getString(R.string.email_mileageDestination) + "\t" + "\t" +
-                    getString(R.string.email_startTimestamp) + "\t" + "\t" +
-                    getString(R.string.email_destinationTimestamp) + "\t" + "\t" +
-                    getString(R.string.email_duration)
+            text += String.format(
+                "\n%s \t%s \t%s \t%s \t%s \t%s \t%s \t%s \t%s",
+                getString(R.string.category),
+                getString(R.string.email_purpose),
+                getString(R.string.email_startAddress),
+                getString(R.string.email_destinationAddress),
+                getString(R.string.email_mileageStart),
+                getString(R.string.email_mileageDestination),
+                getString(R.string.email_startTimestamp),
+                getString(R.string.email_destinationTimestamp),
+                getString(R.string.email_duration)
+            )
+
             for (d in drives) {
                 text += "\n" +
                         d.purpose + "\t" + "\t" +
-                        d.start.address + "\t" + "\t" +
-                        d.destination.address + "\t" + "\t" +
+                        d.start?.address + "\t" + "\t" +
+                        d.destination?.address + "\t" + "\t" +
                         d.mileageStart.toString() + "\t" + "\t" +
                         d.mileageDestination.toString() + "\t" + "\t" +
                         DateFormat.getDateTimeInstance().format(d.start_timestamp.time) + "\t" + "\t" +
@@ -322,6 +325,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onClickFabShow(view: View) {
         changeVisibility(fab_add, textView_fab_add_description)
         changeVisibility(fab_record, textView_fab_record_description)
+        changeVisibility(fab_correctMileage, textView_fab_correctMileage_description)
     }
 
     /**
@@ -330,10 +334,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * @param textView  passed the textView which contains the description of the floating action button.
      */
     private fun changeVisibility(floatingActionButton: FloatingActionButton, textView: TextView) {
-        if (floatingActionButton.visibility == View.VISIBLE) {
+        Log.i(TAG, "visible:\t" + View.VISIBLE)
+        Log.i(TAG, "gone:\t" + View.GONE)
+        Log.i(TAG, "visibility fab:\t" + floatingActionButton.visibility)
+        Log.i(TAG, "visibility tv:\t" + textView.visibility)
+
+        if (textView.visibility == View.VISIBLE) {
             floatingActionButton.hide()
             textView.visibility = View.GONE
-        } else if (floatingActionButton.visibility == View.GONE) {
+        } else if (textView.visibility == View.GONE) {
             floatingActionButton.show()
             textView.visibility = View.VISIBLE
         }
@@ -345,6 +354,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onClickFabAdd(view: View) {
         val intent = Intent(this, AddDriveActivity::class.java)
         startActivity(intent)         //TODO start activity for result
+    }
+
+    /**
+     * TODO comments
+     */
+    fun onClickFabCorrect(view: View) {
+        val intent = Intent(this, CorrectMileageActivity::class.java)
+        startActivity(intent)
     }
 
     /**

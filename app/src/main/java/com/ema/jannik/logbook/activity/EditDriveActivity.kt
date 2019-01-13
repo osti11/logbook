@@ -36,7 +36,7 @@ import java.util.*
  * This activity modify an entry.
  * The layout is the same as from the addDriveActivity.
  */
-class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
     val TAG = this::class.java.name
 
@@ -125,6 +125,8 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         Log.i(TAG, "set View with drive")
         //--set View with drive--
         getDrivefromDetailsDriveActivity()
+
+        setOnClickNumberPicker()
     }
 
     /**
@@ -145,6 +147,26 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         } else {
             return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onClick(p0: View?) {
+        when (p0!!.id) {
+            R.id.numberPicker_odometerStart ->{
+                numberPicker_odometer_end.value = numberPicker_odometerStart.value + numberPicker_distance.value
+            }
+            R.id.numberPicker_odometer_end -> {
+                numberPicker_distance.value = numberPicker_odometerStart.value - numberPicker_odometer_end.value
+            }
+            R.id.numberPicker_distance -> {
+                numberPicker_odometer_end.value = numberPicker_distance.value + numberPicker_odometerStart.value
+            }
+        }
+    }
+
+    private fun setOnClickNumberPicker() {
+        numberPicker_odometerStart.setOnClickListener(this)
+        numberPicker_odometer_end.setOnClickListener(this)
+        numberPicker_distance.setOnClickListener(this)
     }
 
     /**
@@ -176,8 +198,8 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
     private fun setView(drive: Drive) {    //TODO was wen Werte nicht gestzt
         //--set View--
         onClickCategory(Utils.getImageButtonByCategory(drive.category))
-        textView_startAddress.setText(drive.start.address)
-        textView_destinationAddress.setText(drive.destination.address)
+        textView_startAddress.setText(drive.start!!.address)
+        textView_destinationAddress.setText(drive.destination!!.address)
         edit_text_purpose.setText(drive.purpose)
         editText_start_time.setText(DateFormat.getDateTimeInstance().format(drive.start_timestamp.time))
         editText_endTime.setText(DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time))
@@ -276,9 +298,9 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         drive!!.purpose = purpose
         drive!!.start = startAddress!!
         drive!!.destination = destinationAddress!!
-        drive!!.mileageDestination = endMilage.toDouble()
-        drive!!.mileageStart = startMilage.toDouble()
-        drive!!.distance = distance.toDouble()
+        drive!!.mileageDestination = endMilage
+        drive!!.mileageStart = startMilage
+        drive!!.distance = distance
         drive!!.start_timestamp = startTime
         drive!!.destination_timestamp = endTime
         drive!!.category = category
