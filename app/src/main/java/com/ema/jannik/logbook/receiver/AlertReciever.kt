@@ -1,4 +1,4 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.receiver
 
 import android.app.Notification
 import android.app.PendingIntent
@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.activity.MainActivity
 import com.ema.jannik.logbook.helper.App
 
@@ -56,7 +57,7 @@ class AlertReciever : BroadcastReceiver() {
             context,
             App.CHANNEL_UPDATE_ID
         )
-            .setSmallIcon(R.drawable.ic_warning)
+            .setSmallIcon(R.drawable.ic_assignment_turned_black)
             .setContentTitle("Übertragen")   //TODO in string.xml aulaggern
             .setContentText("Bitte Einträge in das Fahrtenbuch übernehmen")
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)

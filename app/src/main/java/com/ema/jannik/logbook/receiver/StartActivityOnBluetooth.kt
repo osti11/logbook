@@ -1,19 +1,14 @@
-package com.ema.jannik.logbook
+package com.ema.jannik.logbook.receiver
 
 import android.bluetooth.BluetoothDevice
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
-import com.ema.jannik.logbook.R.id.textView
-import com.ema.jannik.logbook.activity.MainActivity
+import com.ema.jannik.logbook.LocationUpdateService
 import com.ema.jannik.logbook.activity.RecordDriveActivity
 import com.ema.jannik.logbook.fragment.SettingFragment
-import kotlinx.android.synthetic.main.activity_record_drive.*
 
 
 class StartActivityOnBluetooth : BroadcastReceiver() {
