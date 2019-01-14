@@ -128,9 +128,7 @@
         KIlometerstände der neueren Einträge um die Entfernung des gelöschten EIntrags angepasst werden soll. (Das macht
         SInn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
     </string>
-    <string name="alertDialog_messageLayout">Hier kasst du das Layout der einzelnen Listenelemente anpassen, indem du
-        auswählst was in welcher ERcke angezeigtr wird
-    </string>
+    <string name="alertDialog_messageLayout">Hier kannst du festlegen welche Informationen über die Fahrten in der Übersichtsliste angezeigt werde. Auf der Abbildung siehst du vier Platzhalter darunter kannst du festlegen welcher Platzhalter welche Informationen zugewiesen werden.</string>
     <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine</string>
     <string name="alertDialog_messagePurpose">Hier kannst du festlegen ob du benachrichtigt werden willst wenn kein
         Grund für die Fahrt angegeben wurde.
@@ -147,11 +145,9 @@
     <string name="switch_bluetooth">Autostart bei einer Bluetoothverbindung</string>
     <string name="textView_correctMileage">Kilometerstand korrigieren</string>
     <string name="toast_incorrectMileage">Kilometerstand stimmt nicht</string>
-    <string name="category_4">" Kilometerstand korregiert"</string>
+    <string name="category_4">Kilometerstand korrigiert</string>
     <string name="hint_mileage">neuer Kilometerstand</string>
     <string name="notification_gps_text">Fahrt wird aufgezeichnet.</string>
-    <string name="alertDialog_messageEnableBluetooth">"Bluetooth wurde eingeschaltet. Das ist nötig um die
-        Bluetootheinstellungen zu ändern. Sobald du die EInstellungen verlässt wird Bluetooth wieder deaktiviert.\n \n "
-    </string>
+    <string name="alertDialog_messageEnableBluetooth">Bluetooth wurde eingeschaltet. Das ist nötig um die Bluetootheinstellungen zu ändern. Sobald du die Einstellungen verlässt wird Bluetooth wieder deaktiviert.</string>
     <string name="toast_bluetoothDisabled">Bluetooth deaktiviert</string>
 </resources>

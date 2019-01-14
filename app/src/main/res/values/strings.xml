@@ -51,9 +51,7 @@
     <string name="textView_titleNotification">Notification</string>
     <string name="textView_titleLayout">Layout</string>
     <string name="button_setDefault">reset to default</string>
-    <string name="alertDialog_messageLayout">Hier kasst du das Layout der einzelnen Listenelemente anpassen, indem du
-        auswählst was in welcher ERcke angezeigtr wird
-    </string>
+    <string name="alertDialog_messageLayout">Hier kannst du festlegen welche Informationen über die Fahrten in der Übersichtsliste angezeigt werde. Auf der Abbildung siehst du vier Platzhalter darunter kannst du festlegen welcher Platzhalter welche Informationen zugewiesen werden.</string>
 
     <string-array name="spinner_notificationInterval">
         <item>every day</item>
@@ -178,8 +176,6 @@
     <string name="hint_mileage">new mileage</string>
     <string name="notification_gps_title" translatable="false">GPS</string>
     <string name="notification_gps_text">Ride is recorded.</string>
-    <string name="alertDialog_messageEnableBluetooth">Bluetooth wurde eingeschaltet. Das ist nötig um die
-        Bluetootheinstellungen zu ändern. Sobald du die EInstellungen verlässt wird Bluetooth wieder deaktiviert.
-    </string>
+    <string name="alertDialog_messageEnableBluetooth">Bluetooth has been disabled. This is necessary to change the bluetooth settings. When you leave the settings bluetooth will be disabled.</string>
     <string name="toast_bluetoothDisabled">Bluetooth disabled</string>
 </resources>
