@@ -13,12 +13,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import com.ema.jannik.logbook.AlertReciever
+import com.ema.jannik.logbook.receiver.AlertReciever
 import com.ema.jannik.logbook.R
 import kotlinx.android.synthetic.main.fragment_setting.*
 import java.util.*
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothAdapter
+import com.ema.jannik.logbook.view.ExplanationDialogSettings
 import kotlin.collections.ArrayList
 
 
@@ -79,11 +79,37 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
     private lateinit var spinnerLayout4Value: String
 
     /**
+     * TRUE wenn Bluetooth eingeschaltet wird.
+     */
+    private var bluetoothWasDisabled: Boolean = false
+
+    /**
      * Called to do initial creation of a fragment.  This is called after [.onAttach] and before [.onCreateView].
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true);    //enable optionMenu
+
+        //enable bluetooth for settings
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if (!mBluetoothAdapter.isEnabled) {
+            mBluetoothAdapter.enable()
+            bluetoothWasDisabled = true
+
+            val dialog = ExplanationDialogSettings(R.string.alertDialog_messageEnableBluetooth)
+            dialog.show(activity!!.supportFragmentManager, "info dialog")
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        if(bluetoothWasDisabled) {
+            val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+            mBluetoothAdapter.disable()
+
+            Toast.makeText(context, R.string.toast_bluetoothDisabled, Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
