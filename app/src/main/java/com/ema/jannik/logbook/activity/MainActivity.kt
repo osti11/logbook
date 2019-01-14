@@ -122,7 +122,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             this,
             CHANNEL_UPDATE_ID
         )
-            .setSmallIcon(R.drawable.ic_warning)
+            .setSmallIcon(R.drawable.ic_assignment_turned_black)
             .setContentTitle("Eintrag unvollständig")   //TODO in string.xml aulaggern
             .setContentText("Bitte vervollständige deinen Eintrag")
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         Toast.makeText(
             this,
-            "Alle Einträge vor dem " + DateFormat.getDateInstance().format(calendar.time),
+            "Alle Einträge vor dem " + DateFormat.getDateInstance().format(calendar.time) + "wurden gelöscht",
             Toast.LENGTH_SHORT
         ).show()
         //TODO in string.xml auslagern

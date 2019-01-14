@@ -176,4 +176,10 @@
     <string name="toast_incorrectMileage">mileage is incorrect</string>
     <string name="category_4">correct mileage</string>
     <string name="hint_mileage">new mileage</string>
+    <string name="notification_gps_title" translatable="false">GPS</string>
+    <string name="notification_gps_text">Ride is recorded.</string>
+    <string name="alertDialog_messageEnableBluetooth">Bluetooth wurde eingeschaltet. Das ist nötig um die
+        Bluetootheinstellungen zu ändern. Sobald du die EInstellungen verlässt wird Bluetooth wieder deaktiviert.
+    </string>
+    <string name="toast_bluetoothDisabled">Bluetooth disabled</string>
 </resources>

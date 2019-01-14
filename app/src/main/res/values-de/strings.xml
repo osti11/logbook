@@ -149,4 +149,9 @@
     <string name="toast_incorrectMileage">Kilometerstand stimmt nicht</string>
     <string name="category_4">" Kilometerstand korregiert"</string>
     <string name="hint_mileage">neuer Kilometerstand</string>
+    <string name="notification_gps_text">Fahrt wird aufgezeichnet.</string>
+    <string name="alertDialog_messageEnableBluetooth">"Bluetooth wurde eingeschaltet. Das ist nötig um die
+        Bluetootheinstellungen zu ändern. Sobald du die EInstellungen verlässt wird Bluetooth wieder deaktiviert.\n \n "
+    </string>
+    <string name="toast_bluetoothDisabled">Bluetooth deaktiviert</string>
 </resources>

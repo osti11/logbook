@@ -77,8 +77,8 @@ class LocationUpdateService : Service() {
 
         Log.i(TAG, "notification")
         notification = NotificationCompat.Builder(this, App.CHANNEL_FORGROUNDSERVICE_ID)    //set notification
-            .setContentTitle("GPS")    //TODO in string.xml
-            .setContentText("run location service")
+            .setContentTitle(getString(R.string.notification_gps_title))    //TODO in string.xml
+            .setContentText(getString(R.string.notification_gps_text))
             .setSmallIcon(R.drawable.ic_location)
             .setContentIntent(pendingIntent)
             .build()
