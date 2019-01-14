@@ -89,16 +89,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true);    //enable optionMenu
-
-        //enable bluetooth for settings
-        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if (!mBluetoothAdapter.isEnabled) {
-            mBluetoothAdapter.enable()
-            bluetoothWasDisabled = true
-
-            val dialog = ExplanationDialogSettings(R.string.alertDialog_messageEnableBluetooth)
-            dialog.show(activity!!.supportFragmentManager, "info dialog")
-        }
     }
 
     override fun onPause() {
@@ -129,6 +119,18 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         Log.i(TAG, "onActivityCreated")
         super.onActivityCreated(savedInstanceState)
+
+        //enable bluetooth for settings
+        Log.i(TAG, "Bluetooth adapter")
+        val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        if (!mBluetoothAdapter.isEnabled) {
+            mBluetoothAdapter.enable()
+            Log.i(TAG, "bluetooth enabled")
+            bluetoothWasDisabled = true
+
+            val dialog = ExplanationDialogSettings(R.string.alertDialog_messageEnableBluetooth)
+            dialog.show(activity!!.supportFragmentManager, "info dialog")
+        }
 
         //--set onClick Listener--
         button_setDefault.setOnClickListener(this)
