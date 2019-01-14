@@ -56,13 +56,13 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
             holder.itemView.setBackgroundColor(ContextCompat.getColor(activity.applicationContext ,R.color.light))
             holder.lowerLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.dark))
             holder.upperLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.dark))
-            holder.upperRightCorner.text = getDriveProperty(
+            holder.upperLeftCorner.text = getDriveProperty(
                 getSettingsLayout(
                     1
                 ),
                 currentDrive
             )
-            holder.upperLeftCorner.text = getDriveProperty(
+            holder.upperRightCorner.text = getDriveProperty(
                 getSettingsLayout(
                     2
                 ),
