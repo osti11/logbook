@@ -1,5 +1,6 @@
 package com.ema.jannik.logbook.activity
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +29,6 @@ import com.google.android.gms.maps.model.PolylineOptions
 import kotlinx.android.synthetic.main.activity_details_drive.*
 import java.sql.Time
 import java.text.DateFormat
-import java.time.Duration
 import java.util.*
 
 class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -36,6 +36,9 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
     val TAG = "DetailsDriveActivity"
 
     companion object {
+
+        const val REQUEST_CODE = 111
+
         /**
          * to identify the extra from the intent.
          */
@@ -116,8 +119,8 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         textView_purpose.text = drive!!.purpose
-        textView_startAddress.text = drive!!.start!!.address
-        textView_destinationAddress.text = drive!!.destination!!.address
+        editText_startAddress.text = drive!!.start!!.address
+        editText_destinationAddress.text = drive!!.destination!!.address
         textView_startTime.text = DateFormat.getDateTimeInstance().format(drive!!.start_timestamp.time)
         textView_endTime.text = DateFormat.getDateTimeInstance().format(drive!!.destination_timestamp.time)
         textView_mileageStart.text = String.format("%d km", drive!!.mileageStart)//TODO einheit
@@ -125,8 +128,7 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
         textView_distance.text = String.format("%d km", drive!!.distance)//TODO einheit
 
         val duration = drive!!.duration
-        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
-        textView_duration.text = Time(duration.timeInMillis).toString()//TODO format time
+        textView_duration.text = Time(duration.timeInMillis).toString()
     }
 
     /**
@@ -144,10 +146,18 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
         if (item!!.itemId == R.id.edit_drive) {
             val intent = Intent(this, EditDriveActivity::class.java)
             intent.putExtra(EditDriveActivity.EXTRA_ID, drive!!.id)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE)
             return true
         } else {
             return super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CODE) {
+            if(resultCode == Activity.RESULT_OK) {
+                finish()//wenn eintrag geändert, schließe Detail ansicht mit alten Daten
+            }
         }
     }
 

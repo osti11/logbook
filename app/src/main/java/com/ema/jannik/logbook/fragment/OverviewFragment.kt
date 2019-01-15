@@ -15,12 +15,12 @@ import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.view.DriveAdapter
 import com.ema.jannik.logbook.viewmodel.DriveViewModel
-import kotlinx.android.synthetic.main.fragment_overview.*
 import com.ema.jannik.logbook.activity.DetailsDriveActivity
 import com.ema.jannik.logbook.model.AddDriveRepository
 import com.ema.jannik.logbook.model.DriveRepository
 import com.ema.jannik.logbook.model.database.Stage
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_overview.*
 import java.util.*
 
 class OverviewFragment : Fragment() {

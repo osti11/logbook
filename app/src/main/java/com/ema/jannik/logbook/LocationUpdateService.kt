@@ -47,7 +47,6 @@ class LocationUpdateService : Service() {
     private var locations: MutableList<Location> = mutableListOf()
 
     private lateinit var timeStart: Calendar
-    private lateinit var timeEnd: Calendar
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
@@ -127,7 +126,14 @@ class LocationUpdateService : Service() {
         super.onDestroy()
 
         fusedLocationProviderClient.removeLocationUpdates(locationCallback)
-        saveInDb()
+
+        Log.i(TAG, "save in DB")
+        if (locations.size > 2) {   //mehr als zwei Positionen si8nd nötig für db eintrag.
+            saveInDb()
+        } else {
+            Toast.makeText(this, R.string.toast_locationError, Toast.LENGTH_SHORT).show()
+        }
+
 
         isRunning = false
     }
@@ -144,14 +150,14 @@ class LocationUpdateService : Service() {
         val timeEnd = Calendar.getInstance()
         val duration = Calendar.getInstance()
         duration.timeInMillis = timeEnd.timeInMillis - timeStart.timeInMillis   //TODO calc time
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
+
         var mileagestart: Int
         try {
             mileagestart = repository.getLastDrive().mileageDestination
         } catch (e: Exception) {    //lastDrive don't exist
             mileagestart = 0
         }
-
-        val last = repository.getLastDrive()
 
         val drive = Drive(
             purpose = "",
@@ -174,10 +180,8 @@ class LocationUpdateService : Service() {
             )
         )
 
-        Log.i(TAG, "insertDriveToDB")
         val result = repository.insert(drive)
 
-        Log.i(TAG, "insertRouteToDB")
         locations.forEach { l: Location ->
             repository.insert(
                 Route(
@@ -192,13 +196,13 @@ class LocationUpdateService : Service() {
     /**
      * calculate the distance betwwen the locations
      */
-    private fun getDistance(locations: MutableList<Location>): Int{
+    private fun getDistance(locations: MutableList<Location>): Int {
         var distance = 0F
-        for (l in locations.indices){
-            if(l + 1 < locations.size)
-                distance += locations[l].distanceTo(locations[l+1])
+        for (l in locations.indices) {
+            if (l + 1 < locations.size)
+                distance += locations[l].distanceTo(locations[l + 1])
         }
-        return distance.toInt()/1000 //meter to kilometer
+        return distance.toInt() / 1000 //meter to kilometer
     }
 
     /**
@@ -211,11 +215,6 @@ class LocationUpdateService : Service() {
                 //super.onLocationResult(p0)  //todo das hier nötig
                 for (location: Location in p0!!.locations) {
                     Log.i(TAG, location.latitude.toString() + " / " + location.longitude.toString())
-                    Toast.makeText(
-                        applicationContext,
-                        location.latitude.toString() + " / " + location.longitude.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
                     locations.add(location)
                 }
             }

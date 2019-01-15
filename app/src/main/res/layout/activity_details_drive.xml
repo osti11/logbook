@@ -90,12 +90,12 @@
                     app:layout_constraintTop_toBottomOf="@id/textView_purpose"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_startAddress"/>
+                    app:layout_constraintBottom_toTopOf="@+id/editText_startAddress"/>
 
             <TextView
                     android:layout_width="381dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_startAddress"
+                    android:id="@+id/editText_startAddress"
                     app:layout_constraintTop_toBottomOf="@+id/textView_startAddressDescription"
                     android:textSize="18sp"
                     android:textColor="@color/dark"
@@ -111,15 +111,15 @@
                     android:text="@string/editText_destinationAddress"
                     android:layout_marginStart="8dp"
                     android:textAlignment="textStart"
-                    app:layout_constraintTop_toBottomOf="@id/textView_startAddress"
+                    app:layout_constraintTop_toBottomOf="@id/editText_startAddress"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toTopOf="@+id/textView_destinationAddress"/>
+                    app:layout_constraintBottom_toTopOf="@+id/editText_destinationAddress"/>
 
             <TextView
                     android:layout_width="381dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView_destinationAddress"
+                    android:id="@+id/editText_destinationAddress"
                     app:layout_constraintTop_toBottomOf="@+id/textView_destinationAddressDescription"
                     android:textSize="18sp"
                     android:textColor="@color/dark"
@@ -131,7 +131,7 @@
                     android:text="@string/EditText_startTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView_startTimeDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_destinationAddress"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_destinationAddress"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"/>
             <TextView
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content" android:id="@+id/textView_mileageStartDescription"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_destinationAddress"/>
+                    app:layout_constraintTop_toBottomOf="@+id/editText_destinationAddress"/>
             <TextView
                     android:text="50000"
                     android:layout_width="wrap_content"

@@ -36,12 +36,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
          */
         const val NOTIFICATION_INTERVAL: String = "notificationInterval"
 
-        /**
-         * shared preferences speichert den Zustand von switch_purpose.
-         * Dieser legt fest es eine Benachrichtigung gibt wenn 'Zweck der Fahrt' nicht angegeben wird.
-         */
-        const val PURPOSE: String = "purpose"
-
         const val LAYOUT_ONE: String = "layout1"
 
         const val LAYOUT_TWO: String = "layout2"
@@ -69,7 +63,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      */
     private lateinit var spinnerDayValue: String    //TODO hier witer werte setzen speichern werte benutzen.
     private lateinit var spinnerNotificationValue: String
-    private var switchPurposeValue: Boolean = false
     private var switchDeleteValue: Boolean = false
     private var switchBluetoothValue: Boolean = false
     private lateinit var spinnerBluetoothValue: String
@@ -117,20 +110,23 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      * a previous saved state, this is the state.
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.i(TAG, "onActivityCreated")
-        super.onActivityCreated(savedInstanceState)
-
         //enable bluetooth for settings
         Log.i(TAG, "Bluetooth adapter")
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (!mBluetoothAdapter.isEnabled) {
             mBluetoothAdapter.enable()
+
+            Toast.makeText(context, R.string.toast_bluetoothEnabled, Toast.LENGTH_SHORT).show()
+
             Log.i(TAG, "bluetooth enabled")
             bluetoothWasDisabled = true
 
             val dialog = ExplanationDialogSettings(R.string.alertDialog_messageEnableBluetooth)
             dialog.show(activity!!.supportFragmentManager, "info dialog")
         }
+
+        Log.i(TAG, "onActivityCreated")
+        super.onActivityCreated(savedInstanceState)
 
         //--set onClick Listener--
         button_setDefault.setOnClickListener(this)
@@ -228,7 +224,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         editor.putBoolean(BLUETOOTH_CONNECTION, false)  //TODO connection name
         editor.putString(NOTIFICATION_INTERVAL, notification[1])
         editor.putString(NOTIFICATION_DAY, day[6])
-        editor.putBoolean(PURPOSE, false)
         editor.putBoolean(DELETE_MODIFY, false)
         editor.putString(LAYOUT_ONE, layout[0])
         editor.putString(LAYOUT_TWO, layout[2])
@@ -351,7 +346,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         editor.putBoolean(BLUETOOTH_CONNECTION, switch_bluetooth.isChecked)
         editor.putString(NOTIFICATION_INTERVAL, spinner_notificationInterval.selectedItem.toString())
         editor.putString(NOTIFICATION_DAY, spinner_day.selectedItem.toString())
-        editor.putBoolean(PURPOSE, switch_purpose.isChecked)
         editor.putBoolean(DELETE_MODIFY, switch_delete.isChecked)
         editor.putString(LAYOUT_ONE, spinner_layoutOne.selectedItem.toString())
         editor.putString(LAYOUT_TWO, spinner_layoutTwo.selectedItem.toString())
@@ -400,10 +394,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             LAYOUT_FOUR,    //Key
             ""     //default Value
         )!!
-        switchPurposeValue = sharedPreferences.getBoolean(
-            PURPOSE,
-            false
-        )
         switchDeleteValue = sharedPreferences.getBoolean(
             DELETE_MODIFY,
             false
@@ -458,7 +448,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             )
         )
         switch_bluetooth.isChecked = switchBluetoothValue
-        switch_purpose.isChecked = switchPurposeValue
         switch_delete.isChecked = switchDeleteValue
     }
 
@@ -510,7 +499,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         when (index) {
             0 -> return AlarmManager.INTERVAL_DAY
             1 -> return 7 * 24 * 60 * 60 * 1000 //einmal pro Woche
-            2 -> return AlarmManager.INTERVAL_DAY * 30  //TODO overflow
+            2 -> return 30 * 24 * 60 * 60 * 1000 as Long    //TODO need as long
         }
         return null
     }

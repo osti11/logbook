@@ -19,18 +19,19 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.DialogFragment
-import com.ema.jannik.logbook.helper.App.Companion.CHANNEL_UPDATE_ID
 import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.fragment.*
+import com.ema.jannik.logbook.helper.App.Companion.CHANNEL_UPDATE_ID
 import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.model.DriveRepository
 import com.ema.jannik.logbook.model.EmailRepository
+import com.ema.jannik.logbook.view.DeleteAllDialog
 import com.ema.jannik.logbook.view.EmailDialog
+import com.ema.jannik.logbook.view.ExplanationDialogAddDrive
 import com.ema.jannik.logbook.view.ExplanationDialogSettings
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_overview.*
 import java.text.DateFormat
 import java.util.*
 
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var notificationManagerCompat: NotificationManagerCompat? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -163,7 +165,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             openMailDialog()
             return true
         } else if (item.itemId == R.id.delete) {
-            startDatePickerFragment()
+            val dialog= DeleteAllDialog()  //info dialog
+            dialog.show(supportFragmentManager, "deleteAllInfo")
+
             return true
         } else {
             return super.onOptionsItemSelected(item)
@@ -172,7 +176,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /**
      * result of the DataPickerFragment
-     *
+     * Löscht alle Einträge die vor dem Ausgewählten Datum erstellt wurden.
      */
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         Log.i(TAG, "onDataSet()")
@@ -183,16 +187,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         Toast.makeText(
             this,
-            "Alle Einträge vor dem " + DateFormat.getDateInstance().format(calendar.time) + "wurden gelöscht",
+            "Alle Einträge vor dem " + DateFormat.getDateInstance().format(calendar.time) + " wurden gelöscht",
             Toast.LENGTH_SHORT
         ).show()
         //TODO in string.xml auslagern
-    }
-
-    private fun startDatePickerFragment() {
-        Log.i(TAG, "startDatePicker()")
-        val datePicker: DialogFragment = DatePickerFragment()
-        datePicker.show(supportFragmentManager, "datePickerDelete")
     }
 
     /**
@@ -201,7 +199,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * This return value is the parameter of the function sendMail()
      */
     private fun openMailDialog() {
-        val dialog = EmailDialog()
+        val dialog = EmailDialog()  //date picker dialog
         dialog.show(supportFragmentManager, "emailDialog")
     }
 
@@ -323,9 +321,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     //--OnClick functions--
     fun onClickFabShow(view: View) {
-        changeVisibility(fab_add, textView_fab_add_description)
-        changeVisibility(fab_record, textView_fab_record_description)
-        changeVisibility(fab_correctMileage, textView_fab_correctMileage_description)
+        var textView = findViewById<TextView>(R.id.textView_fab_add_description)
+        var fab = findViewById<FloatingActionButton>(R.id.fab_add)
+        changeVisibility(fab, textView)
+
+        textView = findViewById(R.id.textView_fab_record_description)
+        fab = findViewById(R.id.fab_record)
+        changeVisibility(fab, textView)
+
+        textView = findViewById(R.id.textView_fab_correctMileage_description)
+        fab = findViewById(R.id.fab_correctMileage)
+        changeVisibility(fab, textView)
     }
 
     /**
@@ -334,18 +340,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * @param textView  passed the textView which contains the description of the floating action button.
      */
     private fun changeVisibility(floatingActionButton: FloatingActionButton, textView: TextView) {
-        Log.i(TAG, "visible:\t" + View.VISIBLE)
-        Log.i(TAG, "gone:\t" + View.GONE)
         Log.i(TAG, "visibility fab:\t" + floatingActionButton.visibility)
         Log.i(TAG, "visibility tv:\t" + textView.visibility)
 
         if (textView.visibility == View.VISIBLE) {
             floatingActionButton.hide()
-            textView.visibility = View.GONE
+            textView.visibility= View.GONE
         } else if (textView.visibility == View.GONE) {
             floatingActionButton.show()
             textView.visibility = View.VISIBLE
         }
+
     }
 
     /**
@@ -390,15 +395,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onClickDeleteInfo(view: View) {
         val dialog = ExplanationDialogSettings(R.string.alertDialog_messageDelete)
         dialog.show(supportFragmentManager, "info dialog")  //TODO TAG als const val
-    }
-
-    /**
-     * onClickListener for the setting fragment.
-     * Open dialog with explanation to the purpose settings.
-     */
-    fun onClickPurposeInfo(view: View) {
-        val dialog = ExplanationDialogSettings(R.string.alertDialog_messagePurpose)
-        dialog.show(supportFragmentManager, "info dialog")
     }
 
     /**

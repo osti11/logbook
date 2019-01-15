@@ -3,7 +3,6 @@ package com.ema.jannik.logbook.activity
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.ema.jannik.logbook.R
 import com.ema.jannik.logbook.fragment.DatePickerFragment
-import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.fragment.TimePickerFragmentStart
 import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.model.EditDriveRepository
@@ -25,7 +23,6 @@ import com.ema.jannik.logbook.model.database.Stage
 import com.ema.jannik.logbook.view.ExplanationDialogAddDrive
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
-import com.google.android.gms.location.places.Place
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import kotlinx.android.synthetic.main.activity_add_drive.*
 import java.lang.NumberFormatException
@@ -198,16 +195,14 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
     private fun setView(drive: Drive) {    //TODO was wen Werte nicht gestzt
         //--set View--
         onClickCategory(Utils.getImageButtonByCategory(drive.category))
-        textView_startAddress.setText(drive.start!!.address)
-        textView_destinationAddress.setText(drive.destination!!.address)
+        editText_startAddress.setText(drive.start!!.address)
+        editText_destinationAddress.setText(drive.destination!!.address)
         edit_text_purpose.setText(drive.purpose)
         editText_start_time.setText(DateFormat.getDateTimeInstance().format(drive.start_timestamp.time))
         editText_endTime.setText(DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time))
-        editText_timeHour.setText(drive.duration.get(Calendar.HOUR_OF_DAY).toString()) //TODO hour oder hour_of_day
-        editText_timeMinute.setText(drive.duration.get(Calendar.MINUTE).toString())
-        numberPicker_odometerStart.value = drive.mileageStart.toInt()
-        numberPicker_distance.value = drive.distance.toInt()
-        numberPicker_odometer_end.value = drive.mileageDestination.toInt()
+        numberPicker_odometerStart.value = drive.mileageStart
+        numberPicker_distance.value = drive.distance
+        numberPicker_odometer_end.value = drive.mileageDestination
         //TODO set global variabels TODO weiter //TODO update funktioniert nicht
         //--set global variables, they are used  to save the entry in the db--
         startTime = drive.start_timestamp
@@ -221,29 +216,6 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
      */
     private fun updateDrive() {    //TODO hier weiter
 
-        Log.i(TAG, "Minute.tostring " + editText_timeMinute.text.toString())
-
-        var minute: Int?
-
-        try {
-            minute = Integer.parseInt(editText_timeMinute.text.toString())
-        } catch (e: NumberFormatException) { //string can not be past into an integer
-            minute = null
-        }
-
-        Log.i(TAG, "Minute.Int " + minute)
-
-        Log.i(TAG, "Hour.tostring " + editText_timeHour.text.toString())
-
-        var hour: Int?
-        try {
-            hour = Integer.parseInt(editText_timeHour.text.toString())
-        } catch (e: NumberFormatException) {    //string can not be past into an integer
-            hour = null
-        }
-
-        Log.i(TAG, "Hour.Int " + hour)
-
         val purpose = edit_text_purpose.text.toString()
         Log.i(TAG, "purpose: " + purpose)
 
@@ -253,10 +225,10 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         val destinationAddress = destinationAddress
         Log.i(TAG, "destinationAddress " + destinationAddress)
 
-        val startMilage = numberPicker_distance.value   //TODO start milage?
+        val startMilage = numberPicker_odometerStart.value
         Log.i(TAG, "distance $startMilage")
 
-        val distance = numberPicker_odometerStart.value
+        val distance = numberPicker_distance.value
         Log.i(TAG, distance.toString())
 
         val endMilage = numberPicker_odometer_end.value
@@ -270,10 +242,6 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
 
         var message: String = ""
 
-        if (minute == null || minute > 59 || minute < 0)  //valid duration minute //TODO unsafe use
-            message += getString(R.string.toast_minute) + "\n"
-        if (hour == null || hour < 0 || hour > 100)  //valid duration hour
-            message += getString(R.string.toast_hour) + "\n"
         if (startAddress == null)
             message += getString(R.string.toast_startAddress) + "\n"
         if (destinationAddress == null)
@@ -288,9 +256,9 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
             return
         }
 
-        val duration: Calendar = Calendar.getInstance()
-        duration.set(Calendar.HOUR_OF_DAY, hour!!)
-        duration.set(Calendar.MINUTE, minute!!)
+        val duration = Calendar.getInstance()
+        duration.timeInMillis = endTime.timeInMillis - startTime.timeInMillis   //TODO calc time
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
 
         //save in db
         val repository = EditDriveRepository(application)
@@ -310,8 +278,8 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
 
         Toast.makeText(this, R.string.toast_addSuccessfully, Toast.LENGTH_LONG).show()
 
+        setResult(Activity.RESULT_OK)
         finish()
-        //finishActivity()  //TODO finish DetailsDriveActivity
     }
 
     /**
@@ -438,7 +406,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
 
         resetImageButtonBackgroundColor()
 
-        var message: String = getString(R.string.category)
+        var message: String = getString(R.string.category) + ": "
 
         when (id) {
             R.id.imageButton_noCategory -> {
@@ -597,14 +565,14 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                         longitude = placeResult.latLng.longitude,
                         address = placeResult.address.toString()
                     )
-                    textView_startAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
+                    editText_startAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
                 } else if (startIntentAutoComplete == false) {  //Event wurd durch klick auf ZielAdresse ausgelöst
                     destinationAddress = Stage(
                         latitude = placeResult.latLng.latitude,
                         longitude = placeResult.latLng.longitude,
                         address = placeResult.address.toString()
                     )
-                    textView_destinationAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
+                    editText_destinationAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
                 }
                 startIntentAutoComplete = null
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {

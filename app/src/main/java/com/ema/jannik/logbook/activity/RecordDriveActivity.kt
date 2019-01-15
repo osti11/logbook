@@ -17,6 +17,8 @@ import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 import kotlinx.android.synthetic.main.activity_record_drive.*
 import com.ema.jannik.logbook.LocationUpdateService
 import com.ema.jannik.logbook.R
+import java.text.DateFormat
+import java.util.*
 
 
 class RecordDriveActivity : AppCompatActivity() {
@@ -61,6 +63,7 @@ class RecordDriveActivity : AppCompatActivity() {
 
     private fun startForegroundService() {
         textView.visibility = View.VISIBLE
+
         button_stopFS.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark))
         button_stopFS.setTextColor(ContextCompat.getColor(this, R.color.light))
 

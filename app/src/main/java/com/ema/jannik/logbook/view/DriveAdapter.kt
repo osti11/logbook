@@ -1,10 +1,7 @@
 package com.ema.jannik.logbook.view
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
-import android.content.res.Resources
-import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +15,7 @@ import com.ema.jannik.logbook.fragment.SettingFragment
 import com.ema.jannik.logbook.helper.Utils
 import com.ema.jannik.logbook.model.database.Drive
 import java.lang.NullPointerException
+import java.sql.Time
 import java.text.DateFormat
 
 
@@ -193,7 +191,7 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
 
         when (x) {
             1 -> return drive.purpose
-            2 -> return DateFormat.getTimeInstance().format(drive.duration.time)
+            2 -> return Time(drive.duration.timeInMillis).toString()
             3 -> return DateFormat.getDateTimeInstance().format(drive.start_timestamp.time)
             4 -> return DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time)   //TODO need .time ?
             5 -> return String.format("%d km", drive.mileageStart)//TODO einheit

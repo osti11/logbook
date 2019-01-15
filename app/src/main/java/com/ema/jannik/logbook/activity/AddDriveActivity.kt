@@ -15,7 +15,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.location.places.ui.PlaceAutocomplete
 import android.content.Intent
-import android.location.Address
 import android.util.Log
 import android.widget.*
 import androidx.core.content.ContextCompat
@@ -26,7 +25,6 @@ import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.model.database.Stage
 import com.ema.jannik.logbook.view.ExplanationDialogAddDrive
 import com.google.android.gms.location.places.Place
-import java.lang.NullPointerException
 import java.lang.NumberFormatException
 import java.text.DateFormat
 import java.util.*
@@ -35,7 +33,7 @@ import java.util.*
 /**
  * in this Activity the user can add a past ride to the db.
  */
-open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
     val TAG = this::class.java.name
 
@@ -114,6 +112,28 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                 R.color.colorPrimaryDark
             )
         )
+
+        setOnClickNumberPicker()
+    }
+
+    override fun onClick(p0: View?) {
+        when (p0!!.id) {
+            R.id.numberPicker_odometerStart ->{
+                numberPicker_odometer_end.value = numberPicker_odometerStart.value + numberPicker_distance.value
+            }
+            R.id.numberPicker_odometer_end -> {
+                numberPicker_distance.value = numberPicker_odometerStart.value - numberPicker_odometer_end.value
+            }
+            R.id.numberPicker_distance -> {
+                numberPicker_odometer_end.value = numberPicker_distance.value + numberPicker_odometerStart.value
+            }
+        }
+    }
+
+    private fun setOnClickNumberPicker() {
+        numberPicker_odometerStart.setOnClickListener(this)
+        numberPicker_odometer_end.setOnClickListener(this)
+        numberPicker_distance.setOnClickListener(this)
     }
 
     /**
@@ -158,31 +178,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     /**
      * Speichert die Eingabe in der DB.
      */
-    private fun saveDrive() {    //TODO hier weiter
-
-        Log.i(TAG, "Minute.tostring " + editText_timeMinute.text.toString())
-
-        var minute: Int?
-
-        try {
-            minute = Integer.parseInt(editText_timeMinute.text.toString())  //TODO nur phasen wenn was eingetragen
-        } catch (e: NumberFormatException) { //string can not be past into an integer
-            minute = null
-        }
-
-        Log.i(TAG, "Minute.Int " + minute)
-
-        Log.i(TAG, "Hour.tostring " + editText_timeHour.text.toString())
-
-        var hour: Int?
-        try {
-            hour = Integer.parseInt(editText_timeHour.text.toString())
-        } catch (e: NumberFormatException) {    //string can not be past into an integer
-            hour = null
-        }
-
-        Log.i(TAG, "Hour.Int " + hour)
-
+    private fun saveDrive() {
         val purpose = edit_text_purpose.text.toString()
         Log.i(TAG, "purpose: " + purpose)
 
@@ -209,10 +205,6 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
 
         var message: String = ""
 
-        if (minute == null || minute > 59 || minute < 0)  //valid duration minute //TODO unsafe use
-            message += getString(R.string.toast_minute) + "\n"
-        if (hour == null || hour < 0 || hour > 100)  //valid duration hour
-            message += getString(R.string.toast_hour) + "\n"
         if (startAddress == null)
             message += getString(R.string.toast_startAddress) + "\n"
         if (destinationAddress == null)
@@ -227,9 +219,9 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
             return
         }
 
-        val duration: Calendar = Calendar.getInstance()
-        duration.set(Calendar.HOUR_OF_DAY, hour!!)
-        duration.set(Calendar.MINUTE, minute!!)
+        val duration = Calendar.getInstance()
+        duration.timeInMillis = endTime.timeInMillis - startTime.timeInMillis   //TODO calc time
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
 
         //save in db
         val repository: AddDriveRepository = AddDriveRepository(application)
@@ -479,10 +471,10 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                 val placeResult = PlaceAutocomplete.getPlace(this, data!!)
                 if (startIntentAutoComplete == true) {      //Event wurd durch klick auf StartAdresse ausgelöst
                     startAddress = placeResult
-                    textView_startAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
+                    editText_startAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
                 } else if (startIntentAutoComplete == false) {  //Event wurd durch klick auf ZielAdresse ausgelöst
                     destinationAddress = placeResult
-                    textView_destinationAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
+                    editText_destinationAddress.setText(placeResult!!.address, TextView.BufferType.EDITABLE)
                 }
                 startIntentAutoComplete = null
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {

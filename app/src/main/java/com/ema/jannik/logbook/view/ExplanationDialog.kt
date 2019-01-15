@@ -5,8 +5,11 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatDialogFragment
+import androidx.fragment.app.DialogFragment
 import com.ema.jannik.logbook.R
+import com.ema.jannik.logbook.fragment.DatePickerFragment
 
 /**
  * This class open an Dialog that explain the settings.
@@ -28,6 +31,31 @@ class ExplanationDialogSettings(val string: Int) : AppCompatDialogFragment(), Di
      * close dialog when ok 'OK' clicked.
      */
     override fun onClick(dialog: DialogInterface?, which: Int) {}
+}
+
+@SuppressLint("ValidFragment")
+class DeleteAllDialog() : AppCompatDialogFragment(), DialogInterface.OnClickListener {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val alertDialogBuilder = AlertDialog.Builder(activity)
+        alertDialogBuilder.setTitle(R.string.title_deleteAll)
+            .setMessage(R.string.explanationDeleteAll)
+
+        alertDialogBuilder.setPositiveButton("OK", this)
+
+        return alertDialogBuilder.create()
+    }
+
+    /**
+     * close dialog when ok 'OK' clicked.
+     */
+    override fun onClick(dialog: DialogInterface?, which: Int) {
+        startDatePickerFragment()
+    }
+
+    private fun startDatePickerFragment() {
+        val datePicker: DialogFragment = DatePickerFragment()
+        datePicker.show(activity!!.supportFragmentManager, "datePickerDelete")
+    }
 }
 
 /**
