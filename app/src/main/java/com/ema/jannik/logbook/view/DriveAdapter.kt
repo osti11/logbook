@@ -2,6 +2,7 @@ package com.ema.jannik.logbook.view
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -52,7 +53,7 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
             holder.itemView.setBackgroundColor(ContextCompat.getColor(activity.applicationContext ,R.color.colorPrimaryDark))
         } else {    //normaler EIntrag
             holder.itemView.setBackgroundColor(ContextCompat.getColor(activity.applicationContext ,R.color.light))
-            holder.lowerLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.dark))
+            holder.lowerLeftCorner.setTextColor(Color.GRAY)
             holder.upperLeftCorner.setTextColor(ContextCompat.getColor(activity.applicationContext ,R.color.dark))
             holder.upperLeftCorner.text = getDriveProperty(
                 getSettingsLayout(
