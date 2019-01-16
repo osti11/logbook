@@ -33,7 +33,8 @@ import java.util.*
  * This activity modify an entry.
  * The layout is the same as from the addDriveActivity.
  */
-class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
+class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
+    View.OnClickListener {
 
     val TAG = this::class.java.name
 
@@ -148,11 +149,11 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.numberPicker_odometerStart ->{
+            R.id.numberPicker_odometerStart -> {
                 numberPicker_odometer_end.value = numberPicker_odometerStart.value + numberPicker_distance.value
             }
             R.id.numberPicker_odometer_end -> {
-                numberPicker_distance.value = numberPicker_odometerStart.value - numberPicker_odometer_end.value
+                numberPicker_distance.value = numberPicker_odometer_end.value - numberPicker_odometerStart.value
             }
             R.id.numberPicker_distance -> {
                 numberPicker_odometer_end.value = numberPicker_distance.value + numberPicker_odometerStart.value
@@ -248,7 +249,9 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
             message += getString(R.string.toast_destinationAddress) + "\n"  //TODO namens gebung Toast
         if (endMilage - startMilage != distance)
             message += getString(R.string.toast_mileage) + "\n"
-        if (editText_start_time.text == null || editText_start_time.text == null)
+        if (editText_start_time.text == null || editText_start_time.text == null
+            || startTime.timeInMillis > endTime.timeInMillis
+        )
             message += getString(R.string.toast_time)
         if (message != "") {   //when message has benn modified then show the message
             val dialog = ExplanationDialogAddDrive(message)
@@ -423,7 +426,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_private.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 1
@@ -433,7 +436,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_work.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 2
@@ -444,7 +447,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_way.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 3

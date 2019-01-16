@@ -159,7 +159,20 @@ Fusion Location Provider
 Diese Methode ist im prinziep eine verbesserte und vereinfachte Form des Fusion Location Client und wird von Google empfohlen.
 
 \subsubsection{Entfernung bestimmen}
-Die bestimmten Positionen werden gesammelt bis das Aufzeichnen der Fahrt beendet wird.
+Die bestimmten Positionen werden gesammelt bis das Aufzeichnen der Fahrt beendet wird. 
+Um die zurückgelegte Entfernung zu bestimmen, muss die Entfernung zwischen den einzelnen Punkten bestimmt werden.
+Dafür hat die Klasse 'Location' schon die Funktion 'distanceTo(Location)'.
+Ein Codeausschnitt um die Entfernung zu bestimmten könnte wie folgt aussehen
+
+```
+fun getDistance(locations: List<Location>): Int {
+	for (l in locations.indices) {
+		if (l + 1 < locations.size)
+			distance += locations[l].distanceTo(locations[l + 1])
+	}
+	return distance.toInt() / 1000 //meter to kilometer
+}
+```
 
 \subsubsection{Start- und Zieladresse ermitteln}
 Bevor man die Fahrt in die Datenbank schreiben kann benötigt man außer den GPS-Koordinaten, Ankunftszeit, Abfahrtszeit und 
@@ -168,12 +181,53 @@ entgegennimmt und eine Adresse zurückgibt. Da ich eh schon die Google Maps API 
 Das ist eine Google API die genau das macht, GPS-Kordinaten einer Adresse zuordnen und umgekehrt. 
 
 \subsubsection{Foreground Service}
+Um das Aufzeichnen der Fahrt sollte auch funktionieren wenn die App nicht im Vordergrund läuft.
+Deswegen sollte das Aufzeichnen der Fahrt im Hintergrund laufen.
+Seit Android Oreo gibt es Einschränkungen für "Background Threads" und "Backmground Location Limits". 
+Diese besagen das wenn man die Position mehr als ein paar mal pro Stunde Abfragt, dann ist das nur in einem
+'Foreground Service' möglich. Außerdem wurden 'Foreground Services' auch limitiert, diese haben nach dem start 5 Sekunden
+Zeit eine Notifaction anzuzeigen sonst werden diese vom System gekillt.
 
 \subsubsection{Darstellung der Fahrt auf Karte}
-Alle erfassten Daten sollten im GPSX Format erfasst werden. 
-Diese können benutzt werden um die Route in Google Maps darzustellen.
+In der Detailansicht sollte es eine Karte geben auf der die Start und Zielposition bei hinzugefügten Fahrten angezeigt werden
+und bei aufgezeichneten Fahrten außerdem noch der Weg. Für die Darstellung auf der Karte werde ich die Google Maps SDK verwenden.
+Die Start und Zieladresse werden als Marker dargestellt. Bei einer aufgezeichneten Fahrt wird dann noch eine Verbindungslinie 
+zwischen allen erfassten Position, mithilfe von 'Polylines'. 
+Das hinzufügen eines Markes und Polylienes könnte dann wie folgt ausschauen.
+
+```
+map.addMarker(
+	MarkerOptions()
+		.position(destinationLatLng).title(getString(R.string.destinationAddress) + ": " + destination.address)
+)
+
+if (routes != null) {	# wenn es GPS-Position zwischen Start und Zieladresse gibt
+	val options = PolylineOptions().width(8f)
+		.color(ContextCompat.getColor(applicationContext, R.color.colorPrimaryDark))
+
+	routes.forEach {
+		options.add(it) 
+	}
+	map.addPolyline(options)
+}
+```
+
 
 \subsection{Bluetooth}
+Die App soll das aufzeichnen Automatisch starten wenn eine Bluetoothverbindung aufgebaut wird.
+Dafür benötige ich einen Brodcastreciever der getriggert wird wenn eine Bluetoothverbindung aufgebaut oder beendet wird.
+Das auslößen eines Recievers wenn eine Bluetoothverbindung aufgebaut wird geschieht über "android.bluetooth.device.action.ACL_CONNECTED".
+und das beim beenden einer Bluetoothverbindung über "android.bluetooth.device.action.ACL_DISCONNECTED"  
+
+
+```
+<receiver android:name=".receiver.StartActivityOnBluetooth">
+<intent-filter>
+	<action android:name="android.bluetooth.device.action.ACL_CONNECTED"/>
+	<action android:name="android.bluetooth.device.action.ACL_DISCONNECTED"/>
+</intent-filter>
+</receiver>
+```
 
 \subsection{NFC}
 Meine App ist nach dem MVVM Pattern und dem Single-Activity-Pattern aufgebaut
@@ -181,6 +235,9 @@ Meine App ist nach dem MVVM Pattern und dem Single-Activity-Pattern aufgebaut
 \subsubsection{MVVM}
 Das steht für Model, ViewModel, View. 
 
+\subsection{Einstellungen}
+Der Benutzer soll die Möglichkeit haben einzustellen wann er Benachrichtigt
+gespeichert in den Shared Prefernces
 
 \subsection{View}
 
@@ -192,6 +249,29 @@ Android Jetpack
 
 
 \section{Features}
+
+\subsection{Kernfeatures}
+Diese Features müssen auf jeden Fall umgesetzt werden, damit man die App benutzen kann. 
+\begin{enumerate}
+	\item Alle Fahrten werden in einer Liste angezeigt.
+	\item Es gibt eine Detailansicht für jede Fahrt.
+	\item Bei aufgezeichneten Fahrten muss es in der Detailansicht noch eine Karte mit dem eingezeichneten Weg geben.
+	\item Man muss einzelne Fahrten löschen können
+\end{enumerate}
+
+\subsection{Features}
+\begin{enumerate}
+	\item Einträge editieren
+	\item Einträge als Email expotieren.
+	\item Die Email ist so formatiert das man den Text der Email einfach in Excel einfügen kann.
+	\item Alle Einträge vor einem bestimmten Datum löschen.
+	\item Benachrichtigung als Erinnerung, dass man die Einträge in sein Fahrtenbuch übernimmt.
+	\item Anpassbare Listenübersicht, man kann selbst bestimmen welche Informationen angezeigt werden.
+	\item Die App startet das aufzeichen Automatisch wenn man sich per Bluetooth mit dem Auto verbindet.
+	\item Man kann den Kilometerstand korrektgieren.
+	\item Man kann in den Einstellungen den Tag und den Abstand bestimmen in dem man Benachrichtigt wird.
+	\item Wenn man einen Eintrag löscht werden die Kilometerstände aller neueren Einträge um die Distanz des gelöschten Eintrags verringert.
+\end{enumerate}
 
 \subsection{Anforderungen}
 
@@ -255,6 +335,7 @@ Android Jetpack
 \section{Code Dokumentation}
 
 \section{Fazit}
-%Input(einleitung.tex) ->einleitung.tex einbinden
+
+\section{Aufwand}
 
 \end{document}

@@ -33,7 +33,8 @@ import java.util.*
 /**
  * in this Activity the user can add a past ride to the db.
  */
-open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, View.OnClickListener {
+open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener,
+    DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
     val TAG = this::class.java.name
 
@@ -118,11 +119,11 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
 
     override fun onClick(p0: View?) {
         when (p0!!.id) {
-            R.id.numberPicker_odometerStart ->{
+            R.id.numberPicker_odometerStart -> {
                 numberPicker_odometer_end.value = numberPicker_odometerStart.value + numberPicker_distance.value
             }
             R.id.numberPicker_odometer_end -> {
-                numberPicker_distance.value = numberPicker_odometerStart.value - numberPicker_odometer_end.value
+                numberPicker_distance.value = numberPicker_odometer_end.value - numberPicker_odometerStart.value
             }
             R.id.numberPicker_distance -> {
                 numberPicker_odometer_end.value = numberPicker_distance.value + numberPicker_odometerStart.value
@@ -139,7 +140,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     /**
      *
      */
-    private fun setNumberpickerwithLastEntry(){
+    private fun setNumberpickerwithLastEntry() {
         val repository: AddDriveRepository = AddDriveRepository(application)
 
         var drive: Drive?
@@ -150,8 +151,8 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         }
         if (drive != null) {
             numberPicker_odometerStart.value = drive.mileageStart
-            numberPicker_odometer_end.value  = drive.mileageDestination
-            numberPicker_distance.value      = drive.distance
+            numberPicker_odometer_end.value = drive.mileageDestination
+            numberPicker_distance.value = drive.distance
         }
     }
 
@@ -188,10 +189,10 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         val destinationAddress = destinationAddress
         Log.i(TAG, "destinationAddress " + destinationAddress)
 
-        val startMilage = numberPicker_distance.value   //TODO start milage?
+        val startMilage = numberPicker_odometerStart.value
         Log.i(TAG, "distance " + startMilage)
 
-        val distance = numberPicker_odometerStart.value
+        val distance = numberPicker_distance.value
         Log.i(TAG, distance.toString())
 
         val endMilage = numberPicker_odometer_end.value
@@ -211,7 +212,9 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
             message += getString(R.string.toast_destinationAddress) + "\n"  //TODO namens gebung Toast
         if (endMilage - startMilage != distance)
             message += getString(R.string.toast_mileage) + "\n"
-        if (editText_start_time.text == null || editText_start_time.text == null)
+        if (editText_start_time.text == null || editText_start_time.text == null
+            || startTime.timeInMillis > endTime.timeInMillis
+        )
             message += getString(R.string.toast_time)
         if (message != "") {   //when message has benn modified then show the message
             val dialog = ExplanationDialogAddDrive(message)
@@ -316,14 +319,14 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
 
         resetImageButtonBackgroundColor()
 
-        var message: String = getString(R.string.category)
+        var message: String = getString(R.string.category) + ": "
 
         when (view.id) {
             R.id.imageButton_noCategory -> {
                 imageButton_noCategory.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 0    //TODO welche werte?
@@ -333,7 +336,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                 imageButton_private.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 1
@@ -343,7 +346,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                 imageButton_work.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 2
@@ -354,7 +357,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                 imageButton_way.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 3

@@ -51,7 +51,7 @@ class Utils {
                     return R.drawable.ic_private_grey_24dp
                 }
                 2 -> {
-                    return R.drawable.ic_work_grey_24dp
+                    return R.drawable.ic_work
                 }
                 3 -> {
                     return R.drawable.ic_home_location
