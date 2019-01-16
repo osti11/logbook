@@ -170,7 +170,7 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
 
         if (drive != null) {
             val start = drive!!.start
-            val startLatLng = LatLng(start!!.latitude, start!!.longitude)
+            val startLatLng = LatLng(start!!.latitude, start.longitude)
             val destination = drive!!.destination
             val destinationLatLng = LatLng(destination!!.latitude, destination.longitude)
 
