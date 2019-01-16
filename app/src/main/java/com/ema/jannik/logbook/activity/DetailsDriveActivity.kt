@@ -165,7 +165,6 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
      * Add markers for the start address and the destination.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        Toast.makeText(this, "map is ready", Toast.LENGTH_SHORT).show() //TODO for development
         map = googleMap
 
         if (drive != null) {
