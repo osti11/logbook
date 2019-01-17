@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_setting.*
 import java.util.*
 import android.bluetooth.BluetoothAdapter
 import com.ema.jannik.logbook.view.ExplanationDialogSettings
+import java.lang.NullPointerException
 import kotlin.collections.ArrayList
 
 
@@ -84,6 +85,10 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         setHasOptionsMenu(true);    //enable optionMenu
     }
 
+    /**
+     * Diese Funktion wird ausgelößt wenn das Fragment durch ein anderes ersetzt wird.
+     * Wenn Bluetooth beim öffnen dieses Fragmentes aktiviert wurde, wird Bluetooth beim verlassen wieder deaktiviert.
+     */
     override fun onPause() {
         super.onPause()
 
@@ -342,8 +347,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         val editor = sharedPreferences.edit()
 
         //--save settings--
-        editor.putString(BLUETOOTH_CONNECTION_NAME, spinner_bluetooth.selectedItem.toString())  //FIXME null point exception wenn bluetoth is off
-        editor.putBoolean(BLUETOOTH_CONNECTION, switch_bluetooth.isChecked)
         editor.putString(NOTIFICATION_INTERVAL, spinner_notificationInterval.selectedItem.toString())
         editor.putString(NOTIFICATION_DAY, spinner_day.selectedItem.toString())
         editor.putBoolean(DELETE_MODIFY, switch_delete.isChecked)
@@ -351,6 +354,13 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         editor.putString(LAYOUT_TWO, spinner_layoutTwo.selectedItem.toString())
         editor.putString(LAYOUT_THREE, spinner_layout3.selectedItem.toString())
         editor.putString(LAYOUT_FOUR, spinner_layout4.selectedItem.toString())
+
+        try {   //Can't get a list of connected bluetooth devices from the system. So there is nothing we can safe.
+            editor.putString(BLUETOOTH_CONNECTION_NAME, spinner_bluetooth.selectedItem.toString())
+            editor.putBoolean(BLUETOOTH_CONNECTION, switch_bluetooth.isChecked)
+        } catch (e: NullPointerException) {
+            Toast.makeText(context, R.string.bluetoothSaveError, Toast.LENGTH_SHORT).show()
+        }
 
         editor.apply()
 
@@ -497,9 +507,9 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         }
 
         when (index) {
-            0 -> return AlarmManager.INTERVAL_DAY
-            1 -> return 7 * 24 * 60 * 60 * 1000 //einmal pro Woche
-            2 -> return 30 * 24 * 60 * 60 * 1000 as Long    //TODO need as long
+            0 -> return AlarmManager.INTERVAL_DAY           //einmal pro Tag
+            1 -> return 7 * 24 * 60 * 60 * 1000             //einmal pro Woche
+            2 -> return 30 * 24 * 60 * 60 * 1000 as Long    //einmal pro Monat      //TODO need as long
         }
         return null
     }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fahrtenbuch</string>
     <string name="fab_record">Fahrt aufzeichnen</string>
     <string name="fab_add">Fahrt hinzufügen</string>
-    <string name="editText_startAddress">Start Adresse</string>
-    <string name="editText_destinationAddress">Ziel Adresse</string>
+    <string name="editText_startAddress">Startadresse</string>
+    <string name="editText_destinationAddress">Zieladresse</string>
     <string name="textView_distance">Entfernung</string>
     <string name="textView_mileageStart">Kilomterstand beim Abfahren</string>
     <string name="menu_settings">Einstellungen</string>
@@ -20,7 +19,7 @@
     <string name="button_recStart">Starten</string>
     <string name="button_recEnd">beenden</string>
     <string name="menu_rec">Fahrt aufzeichnen</string>
-    <string name="textView_noEntry">kein Eintrag!</string>
+    <string name="textView_noEntry">kein Eintrag</string>
     <string name="editText_endTime">Ankunft</string>
     <string name="textView_category">Kategorie</string>
     <string name="menu_share">teilen</string>
@@ -87,16 +86,15 @@
     <string name="alertDialog_emailTitle">Einträge in Email expotieren</string>
     <string name="editText_timeHour">Stunde</string>
     <string name="editText_timeMinute">Minute</string>
-    <string name="toast_minute">Minut ist ungültig</string>
     <string name="toast_addSuccessfully">Hinzufügen war erfolgreich</string>
     <string name="alertDialog_titleAddDrive">" "</string>
     <string name="snackbar_button">rückgängig machen</string>
     <string name="snackbar_text">Eintrag gelöscht.</string>
-    <string name="menu_delete">Alles löschen vor dem ...</string>
+    <string name="menu_delete">Alles löschen vor dem &#8230;</string>
     <string name="textView_titleDelete">Löschen</string>
     <string name="switch_delete">Löschen ändert neuere Einträge</string>
     <string name="title_introduction">Einführung</string>
-    <string name="textView_title">Wilkommen</string>
+    <string name="textView_title">Willkommen</string>
     <string name="textView_titleDescription">Diese App hilft dir beim führen deines Fahrtenbuches. Um dir den Einstieg
         zu erleichtern wird dir im folgenden Text die grundfunktionalität der App erklärt.
     </string>
@@ -112,7 +110,7 @@
         links oder rechts streichen um diese zu löschen. Danach hast du noch kurze Zeit die möglichkeit das Löschen
         rückgängig zu machen.
     </string>
-    <string name="textView_titleDeleteFew">mehere Einträge löschen</string>
+    <string name="textView_titleDeleteFew">mehrere Einträge löschen</string>
     <string name="textView_deleteFewDescription">Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
     </string>
     <string name="textView_titleExport">Expotieren</string>
@@ -123,22 +121,22 @@
     <string name="toast_mileage">Kilometerstand ist unkorrekt</string>
     <string name="title_impressum">Impressum</string>
     <string name="textView_TitleRecordDrive">Fahrt aufzeichnen</string>
-    <string name="textView_titleDrive">Fahrt erfassen</string>
-    <string name="alertDialog_messageDelete">Hier kannst du bestimmen ob wenn ein einzelner Eiontrag gelöscht wird die
-        KIlometerstände der neueren Einträge um die Entfernung des gelöschten EIntrags angepasst werden soll. (Das macht
-        SInn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
+    <string name="textView_titleDrive">Einträge erstellen</string>
+    <string name="alertDialog_messageDelete">
+        Wenn du eine einzelne Fahrt löschst, werden die Kilometerstände aller neuren Fahrten um die Distanz der gelöschten Fahrt verringert. (Das macht
+        Sinn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
     </string>
-    <string name="alertDialog_messageLayout">Hier kannst du festlegen welche Informationen über die Fahrten in der Übersichtsliste angezeigt werde. Auf der Abbildung siehst du vier Platzhalter darunter kannst du festlegen welcher Platzhalter welche Informationen zugewiesen werden.</string>
-    <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine</string>
-    <string name="alertDialog_messagePurpose">Hier kannst du festlegen ob du benachrichtigt werden willst wenn kein
-        Grund für die Fahrt angegeben wurde.
-    </string>
+    <string name="alertDialog_messageLayout">Hier kannst du festlegen welche Informationen über die Fahrten in der
+        Übersichtsliste angezeigt werde. Auf der Abbildung siehst du vier Zahlen.
+        In den Feldern darunter kannst du den Zahlen Informationen zuordnen.</string>
+    <string name="alertDialog_messageNotification">Hier kannst du die Abstände zwischen den Benachrichtigungen einstellen,
+        die dich daran erinnern sollen die Fahrten in dein <i>richtiges Fahrtenbuch</i> zu übertragen.</string>
     <string name="textView_navigationDescription">Wenn du von links nach rechts streichst oder auf ☰ drückst öffnet sich
-        die Navigation
+        die Navigation.
     </string>
     <string name="textView_notificationIntervalDescription">Wiederholung</string>
     <string name="textView_titleAddDrive">Fahrt hinzufügen</string>
-    <string name="toast_startAddress">Start Adresse fehlt</string>
+    <string name="toast_startAddress">Startadresse fehlt</string>
     <string name="toast_time">Zeitangabe ist ungültig</string>
     <string name="textView_dayDescription">Tag</string>
     <string name="textView_bluetoothDescription">Name des verbundenen Gerätes</string>
@@ -172,5 +170,32 @@
         Datenschutz
 
         Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor."
+    </string>
+    <string name="bluetoothSaveError">Bluetooth-Einstellungen können nicht gespeichert werden</string>
+    <string name="alertDialog_messageBluetooth">Hier kannst du bestimmen ob die App Fahrten automatisch aufzeichnem soll,
+        wenn sich dein Handy per Bluetooth mit einem bestimmten Gerät verbindet. Im darunterliegenden Feld kannst du den
+        Namen des zu verbindeten Gerätes auswählen.
+    </string>
+    <string name="textView_bluetooth">In den Einstellungen kannst du festlegen ob die App Fahrten automatisch aufzeichnen
+        soll, wenn eine Verbindung zu einem bestimmten Gerät aufgebaut wird und das Aufzeichnen auch selbsständig beendet
+        wenn die Verbindung unterbrochen Wird.
+    </string>
+    <string name="textView_exportDescription">Du kannst dein digitales Fahrtenbuch als Email expotieren, um es dir, zum
+        leichteren Übertragen, auf deinem PC anzuschauen. Dazu musst du rechts oben auf den SHARE-Button drücken. Danach
+        kannst du auswählen wie die Nachricht
+        formatiert werden soll, als Liste oder Tabelle. Die Tabellenformatierung ist nur zum einfachen Einfügen in einem
+        Tabellenkalkulationsprogramm wie Excel gedacht.
+    </string>
+    <string name="manu_drawer_open">Navigationsleiste öffnen</string>
+    <string name="menu_drawer_close">Navigationsleiste schließen</string>
+    <string name="title_Record">aufzeichnen</string>
+    <string name="textView_driveDescription">Um einträge zu erstellen musst du in der Übersicht auf + drücken,
+        danach erscheint eine Auswahl. Du kannst denn Kilometerstand korrigieren, Fahrten aufzeichnen oder erstellen.</string>
+    <string name="textView_addDriveDescription">Beim Hinzufügen kannst du Fahrten, die du vergessen hast aufzuzeichnen,
+        per Hand eintragen. Bei hionzugefügten Fahrten wird in der Detailansicht nur der Start- und Endpunkt makiert,
+        nicht der Weg zwischen den Punkten.</string>
+    <string name="textView_correctTitle">Kilometerstand korrigieren</string>
+    <string name="textView_correctDescription">Wenn du den Kilometerstand korrigiert, wird dieser beim nächsten
+        aufzeichnen einer Fahrt als Startkilometerstand verwendet. Korrigeirte KIlometerstände haben keine Detailansicht.
     </string>
 </resources>

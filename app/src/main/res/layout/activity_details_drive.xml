@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_directions_car_black_24dp"
+                    android:src="@drawable/ic_car"
                     android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
 

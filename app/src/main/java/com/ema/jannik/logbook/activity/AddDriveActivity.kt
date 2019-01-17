@@ -25,7 +25,6 @@ import com.ema.jannik.logbook.model.database.Drive
 import com.ema.jannik.logbook.model.database.Stage
 import com.ema.jannik.logbook.view.ExplanationDialogAddDrive
 import com.google.android.gms.location.places.Place
-import java.lang.NumberFormatException
 import java.text.DateFormat
 import java.util.*
 
@@ -34,7 +33,7 @@ import java.util.*
  * in this Activity the user can add a past ride to the db.
  */
 open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener,
-    DatePickerDialog.OnDateSetListener, View.OnClickListener {
+    DatePickerDialog.OnDateSetListener, NumberPicker.OnValueChangeListener{
 
     val TAG = this::class.java.name
 
@@ -110,15 +109,15 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         imageButton_noCategory.setBackgroundColor(
             ContextCompat.getColor(
                 applicationContext,
-                R.color.colorPrimaryDark
+                R.color.colorPrimary
             )
         )
 
-        setOnClickNumberPicker()
+        setOnChangedNumberPicker()
     }
 
-    override fun onClick(p0: View?) {
-        when (p0!!.id) {
+    override fun onValueChange(picker: NumberPicker?, oldVal: Int, newVal: Int) {
+        when (picker!!.id) {
             R.id.numberPicker_odometerStart -> {
                 numberPicker_odometer_end.value = numberPicker_odometerStart.value + numberPicker_distance.value
             }
@@ -131,10 +130,10 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         }
     }
 
-    private fun setOnClickNumberPicker() {
-        numberPicker_odometerStart.setOnClickListener(this)
-        numberPicker_odometer_end.setOnClickListener(this)
-        numberPicker_distance.setOnClickListener(this)
+    private fun setOnChangedNumberPicker() {
+        numberPicker_odometerStart.setOnValueChangedListener(this)
+        numberPicker_odometer_end.setOnValueChangedListener(this)
+        numberPicker_distance.setOnValueChangedListener(this)
     }
 
     /**

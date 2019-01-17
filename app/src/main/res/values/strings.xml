@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Logbook</string>
+    <string name="app_name" translatable="false">Logbook</string>
     <string name="fab_record">record ride</string>
     <string name="fab_add">add ride</string>
     <string name="editText_startAddress">start address</string>
@@ -16,12 +16,12 @@
     <string name="editText_purpose">purpose of the journey</string>
     <string name="textView_duration">duration of the journey</string>
     <string name="menu_save">save</string>
-    <string name="menu_addDrive">add journey</string>
+    <string name="menu_addDrive">add ride</string>
     <string name="EditText_startTime">departure</string>
     <string name="button_recStart">start</string>
     <string name="button_recEnd">finish</string>
     <string name="menu_rec">ride record</string>
-    <string name="textView_noEntry">no entry!</string>
+    <string name="textView_noEntry">no entry</string>
     <string name="editText_endTime">arrival</string>
     <string name="textView_category">category</string>
     <string name="menu_share">share</string>
@@ -41,17 +41,17 @@
     <string name="toast_notFound">entry not found</string>
     <string name="textView_notificationIntervalDescription">repeat</string>
     <string name="alertDialog_titleSettings">explanation</string>
-    <string name="alertDialog_messageNotification">Hier kannst du einstellen in welchen Abständen du eine
-        Benachrichtigung bekommen möchtest um die Fahrten in dein <i>richtiges</i> Fahrtenbuch einzutragen.
+    <string name="alertDialog_messageNotification">Here you can set in which intervals you would
+        like to receive a notification to enter the rides in your <i>real</i> logbook.
     </string>
     <string name="switch_purpose">purpose ofthe journey required</string>
-    <string name="alertDialog_messagePurpose">Hier kannst du festlegen ob du benachrichtigt werden willst wenn kein
-        Grund für die Fahrt angegeben wurde.
-    </string>
     <string name="textView_titleNotification">Notification</string>
     <string name="textView_titleLayout">Layout</string>
     <string name="button_setDefault">reset to default</string>
-    <string name="alertDialog_messageLayout">Hier kannst du festlegen welche Informationen über die Fahrten in der Übersichtsliste angezeigt werde. Auf der Abbildung siehst du vier Platzhalter darunter kannst du festlegen welcher Platzhalter welche Informationen zugewiesen werden.</string>
+    <string name="alertDialog_messageLayout">Here you can specify what information about the rides are displayed in the
+        overview list. In the picture you can see four numbers.
+        In the fields below you can assign information to the numbers.
+    </string>
 
     <string-array name="spinner_notificationInterval">
         <item>every day</item>
@@ -87,7 +87,6 @@
     </string-array>
     <string name="editText_timeHour">hour</string>
     <string name="editText_timeMinute">minute</string>
-    <string name="toast_minute">minute is not valid</string>
     <string name="toast_hour">hour is not valid</string>
     <string name="toast_startAddress">start address is missing</string>
     <string name="toast_destinationAddress">destination address is missing</string>
@@ -101,9 +100,9 @@
     <string name="distance_unit" translatable="false">" km"</string>
     <string name="textView_titleDelete">Delete</string>
     <string name="switch_delete">delete changes newer entries</string>
-    <string name="alertDialog_messageDelete">Hier kannst du bestimmen ob wenn ein einzelner Eiontrag gelöscht wird die
-        KIlometerstände der neueren Einträge um die Entfernung des gelöschten EIntrags angepasst werden soll. (Das macht
-        SInn wenn die meisten deiner Fahrten automatisch aufgezeichnet werden)
+    <string name="alertDialog_messageDelete">Deleting a single trip reduces the mileage of
+        all new trips by the distance of the deleted trip. (That makes
+        sense if most of your trips are recorded automatically)
     </string>
     <string-array name="spinner_day">
         <item>Monday</item>
@@ -115,60 +114,46 @@
         <item>Sunday</item>
     </string-array>
     <string name="title_introduction">Introduction</string>
-    <string name="textView_title">Wilkommen</string>
-    <string name="textView_titleDescription">Diese App hilft dir beim führen deines Fahrtenbuches. Um dir den Einstieg
-        zu erleichtern wird dir im folgenden Text die grundfunktionalität der App erklärt.
+    <string name="textView_title">Welcome</string>
+    <string name="textView_titleDescription">This app helps you to keep your logbook.
+        To help you get started, the basic functionality of the app is explained in the following text.
     </string>
     <string name="textView_titleNavigation">Navigation</string>
-    <string name="textView_navigationDescription">Wenn du von links nach rechts streichst oder auf ☰ drückst öffnet sich
-        die Navigation
+    <string name="textView_navigationDescription">Stroke from left to right or press ☰ to open the navigation.</string>
+    <string name="textView_titleDrive">Create Entries</string>
+    <string name="textView_driveDescription">In order to create entries, you must press + in the overview,
+        then a selection appears. You can correct mileage, record or create rides.</string>
+    <string name="textView_TitleRecordDrive">Record ride</string>
+    <string name="textView_recordDriveDescription">When recording, you press a start button. Now your GPS position will
+        be recorded until you press the Stop button. The app does not have to be in the foreground.
     </string>
-    <string name="textView_titleDrive">Fahrt erfassen</string>
-    <string name="textView_driveDescription">Um eine Fahrt aufzuzeichnen drückst du in der rechten unteren Ecke auf das
-        + Symbol. Danach kannst du eine Fahrt aufzeichnen oder hinzufügen.
+    <string name="textView_titleAddDrive">Add Ride</string>
+    <string name="textView_addDriveDescription">When adding, you can make trips, enter by hand.
+        Added rides mark the start and end points, not the way between points.</string>
+    <string name="textView_deleteDescription">You can delete individual entries or all entries before a certain time.</string>
+    <string name="textView_titleDeleteSingle">delete individual entries</string>
+    <string name="textView_deleteSingleDescription">In the overview, you can in the list of individual entries to
+        the left or right to delete them. Then you have a short time the possibility to cancel the deletion.
     </string>
-    <string name="textView_TitleRecordDrive">record ride</string>
-    <string name="textView_recordDriveDescription">Beim aufzeichnen drückst du einen start Knopf. Nun wird deine
-        GPS-Position erfasst bis du auf den Stop Knopf drückst.
-    </string>
-    <string name="textView_titleAddDrive">Fahrt hinzufügen</string>
-    <string name="textView_addDriveDescription">Beim Hinzufügen kannst du eine Fahrt nachträglich per Hand hinzufügen.
-    </string>
-    <string name="textView_deleteDescription">Du kannst einzelnene Einträge löschen oder alle Einträge vor einem
-        bestimmten Zeitpunkt.
-    </string>
-    <string name="textView_titleDeleteSingle">einzelne Einträge löschen</string>
-    <string name="textView_deleteSingleDescription">Bei der Übersicht kannst du in der Liste einzelne Einträge nach
-        links oder rechts streichen um diese zu löschen. Danach hast du noch kurze Zeit die möglichkeit das Löschen
-        rückgängig zu machen.
-    </string>
-    <string name="textView_titleDeleteFew">mehere Einträge löschen</string>
-    <string name="textView_deleteFewDescription">
-        Wenn du rechts oben auf den Papierkorb drückst öffnet sich ein Dialog indem du ein Datum auswählen kannst. Alle
-        Einträge die vor diesem Datum erstellt wurden erden dann <i>uwiderruflich</i> gelöscht.
+    <string name="textView_titleDeleteFew">delete several entries</string>
+    <string name="textView_deleteFewDescription">If you press on the trash box on the top right corner,
+        a dialog opens in which you can select a date. All entries created before this date will then be deleted irrevocably.
     </string>
     <string name="title_impressum">Imprint</string>
     <string name="textView_titleExport">expotieren</string>
-    <string name="textView_exportDescription">Du kannst dein digitales Fahrtenbuch als Email expotieren, um es dir, zum
-        leichteren Übertragen, auf deinem PC anzuschauen. Dazu musst du rechts oben auf den SHARE-Button drücken. Danach
-        kannst du auswählen wie die Nachricht
-        formatiert werden soll, als Liste oder Tabelle. Die Tabellenformatierung ist nur zum einfachen Einfügen in einem
-        Tabellenkalkulationsprogramm wie Excel gedacht.
+    <string name="textView_exportDescription">You can email your digital logbook to email it to you
+        Easier transfer to look at your PC. To do that, you have to press the SHARE button in the top right corner. After that
+        you can choose as the message formatted as a list or table. The table formatting is just for easy insertion in one
+        Spreadsheet program like Excel thought.
     </string>
     <string name="textView_rec">Position is recorded</string>
     <string name="toast_recDriveStop">Data is processed.</string>
     <string name="textView_dayDescription">day</string>
     <string name="textView_bluetoothDescription">name of the connected device</string>
     <string name="switch_bluetooth">autostart by bluetooth connection</string>
-    <string name="alertDialog_messageBluetooth">Hier kannst du bestimmen ob die App bei eine Bluetoothverbindung
-        automatisch die Aufzeichnung einer Fahrt beginnen soll und diese auch beenden soll wenn die Verbindung beendet
-        wird. Solltest du dich für ja entscheiden kannst du im nächsten Schritt den Namen dieser Verbindung auswählen.
-    </string>
-    <string name="textView_bluetooth">In den EInstellungen kannst du festlegen ob die App automatisch beginnen soll eine
-        Fahrt aufzuzeichnen wenn eine BluetoothVerbindung zu einem bestimmten Gerät aufgabeut wird und diese auch wieder
-        beenden soll wie die Bluetoothverbindung abbricht. Um den Namen des Bluetoothgerätes in den EInstellungen
-        auswählen zu können muss Bluetooth aktiviert sein und dein Handy schonmal mit dem Gerät verbunden sein.
-    </string>
+    <string name="alertDialog_messageBluetooth">Here you can determine if the app automatically records trips,
+        when your phone connects to a specific device via Bluetooth. In the field below you can the
+        Select the name of the device.</string>
     <string name="textView_titleBluetooth" translatable="false">Bluetooth</string>
     <string name="textView_correctMileage">correct mileage</string>
     <string name="toast_incorrectMileage">mileage is incorrect</string>
@@ -183,20 +168,19 @@
     <string name="explanationDeleteAll">In the next dialog you can select a date. All entries created before this date will be deleted irrevocably.</string>
     <string name="title_deleteAll">Delete</string>
     <string name="textView_impressum">
-        "Angaben gemäß § 5 TMG
+        According to § 5 TMG
 
         Jannik Ostermayer
 
-        E-Mail: jannik.ostermayer@gmx.de
-
-        Haftungsausschluss:
-
-        Urheberrecht
-
-        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
-
-        Datenschutz
-
-        Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich. Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor."
+    </string>
+    <string name="bluetoothSaveError">Bluetooth settings can not be saved</string>
+    <string name="textView_bluetooth">In the settings, you can specify whether the app will record trips automatically ,
+        when a connection to a particular device is established and the recording also terminated automatically
+        if the connection is interrupted.
+    </string>
+    <string name="title_Record">record</string>
+    <string name="textView_correctTitle">Correct Mileage</string>
+    <string name="textView_correctDescription">If you correct the mileage, it will be used as the starting mileage the
+        next time you record a ride. Corrected mileage readings do not have a detailed view.
     </string>
 </resources>

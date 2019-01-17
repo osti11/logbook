@@ -45,10 +45,10 @@ class Utils {
         fun getCategoryDrawableId(category: Int): Int {    //TODO drawable
             when (category) {
                 0 -> {
-                    return R.drawable.ic_directions_car_black_24dp
+                    return R.drawable.ic_car
                 }
                 1 -> {
-                    return R.drawable.ic_private_grey_24dp
+                    return R.drawable.ic_private
                 }
                 2 -> {
                     return R.drawable.ic_work

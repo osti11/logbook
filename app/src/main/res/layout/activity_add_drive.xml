@@ -180,7 +180,7 @@
                         android:layout_width="0px"
                         android:layout_weight="0.25"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_home_black_24dp"
+                        android:src="@drawable/ic_home"
                         android:id="@+id/imageButton_private"
                         android:onClick="onClickCategory"
                 />
@@ -208,7 +208,7 @@
                         android:layout_margin="0dp"
                         android:layout_width="0px"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/ic_directions_car_black_24dp"
+                        app:srcCompat="@drawable/ic_car"
                         android:layout_weight="0.25"
                         android:id="@+id/imageButton_noCategory"
                         android:onClick="onClickCategory"/>

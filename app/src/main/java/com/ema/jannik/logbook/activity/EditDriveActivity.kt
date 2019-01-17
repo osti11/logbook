@@ -34,7 +34,7 @@ import java.util.*
  * The layout is the same as from the addDriveActivity.
  */
 class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener,
-    View.OnClickListener {
+    NumberPicker.OnValueChangeListener {
 
     val TAG = this::class.java.name
 
@@ -116,7 +116,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         imageButton_noCategory.setBackgroundColor(
             ContextCompat.getColor(
                 applicationContext,
-                R.color.colorPrimaryDark
+                R.color.colorPrimary
             )
         )
 
@@ -124,7 +124,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         //--set View with drive--
         getDrivefromDetailsDriveActivity()
 
-        setOnClickNumberPicker()
+        setOnChangedNumberPicker()
     }
 
     /**
@@ -147,8 +147,8 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         }
     }
 
-    override fun onClick(p0: View?) {
-        when (p0!!.id) {
+    override fun onValueChange(picker: NumberPicker?, oldVal: Int, newVal: Int) {
+        when (picker!!.id) {
             R.id.numberPicker_odometerStart -> {
                 numberPicker_odometer_end.value = numberPicker_odometerStart.value + numberPicker_distance.value
             }
@@ -161,10 +161,10 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         }
     }
 
-    private fun setOnClickNumberPicker() {
-        numberPicker_odometerStart.setOnClickListener(this)
-        numberPicker_odometer_end.setOnClickListener(this)
-        numberPicker_distance.setOnClickListener(this)
+    private fun setOnChangedNumberPicker() {
+        numberPicker_odometerStart.setOnValueChangedListener(this)
+        numberPicker_odometer_end.setOnValueChangedListener(this)
+        numberPicker_distance.setOnValueChangedListener(this)
     }
 
     /**
@@ -358,7 +358,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_noCategory.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 0    //TODO welche werte?
@@ -368,7 +368,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_private.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 1
@@ -378,7 +378,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_work.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 2
@@ -389,7 +389,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_way.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 3
@@ -416,7 +416,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                 imageButton_noCategory.setBackgroundColor(
                     ContextCompat.getColor(
                         applicationContext,
-                        R.color.colorPrimaryDark
+                        R.color.colorPrimary
                     )
                 )
                 category = 0    //TODO welche werte?
@@ -493,8 +493,8 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
     fun onClickEndTime(view: View) {  //TODO mehre Listener
         Log.i(TAG, "onClickEndTime")
         startFragmentTimePicker = false
-        startDatePickerFragment()
-    }
+    startDatePickerFragment()
+}
 
     /**
      * set the boolean startFragmentTimePicker to false and call the function startTimePickerFragment()

@@ -42,7 +42,7 @@ class RecordDriveActivity : AppCompatActivity() {
 
         //--set ActionBar--
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_back)
-        title = "aufzeichnen"   //TODO in STring.xml
+        title = getString(R.string.title_Record)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!checkPermission(permissions)) {
