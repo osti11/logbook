@@ -105,6 +105,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.i(TAG, "onCreateView()")
+
         return inflater.inflate(R.layout.fragment_setting, container, false)
     }
 
@@ -115,6 +116,9 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      * a previous saved state, this is the state.
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onActivityCreated")
+        super.onActivityCreated(savedInstanceState)
+
         //enable bluetooth for settings
         Log.i(TAG, "Bluetooth adapter")
         val mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
@@ -129,9 +133,6 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
             val dialog = ExplanationDialogSettings(R.string.alertDialog_messageEnableBluetooth)
             dialog.show(activity!!.supportFragmentManager, "info dialog")
         }
-
-        Log.i(TAG, "onActivityCreated")
-        super.onActivityCreated(savedInstanceState)
 
         //--set onClick Listener--
         button_setDefault.setOnClickListener(this)
@@ -265,6 +266,9 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         for (bt in pairedDevices)
             s.add(bt.name)
 
+        if(s.size == 0) {
+            return getListOfAllBluetoothDevices()   //wenn noch nicht verfügbar nochmal abfragen
+        }
         return s
     }
 
