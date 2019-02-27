@@ -22,8 +22,8 @@ import androidx.room.PrimaryKey
     tableName = "route", foreignKeys = arrayOf(
         ForeignKey(
             entity = Drive::class,
-            parentColumns = arrayOf("dr_id"),      //TODO must I use db or class name
-            childColumns = arrayOf("ro_drId"),  //TODO must I use db or class name
+            parentColumns = arrayOf("dr_id"),
+            childColumns = arrayOf("ro_drId"),
             onDelete = ForeignKey.CASCADE
         )
     )

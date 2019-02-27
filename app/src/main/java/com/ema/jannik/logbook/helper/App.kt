@@ -33,14 +33,14 @@ class App : Application() {
             val channelUpdate =  NotificationChannel(
                 CHANNEL_UPDATE_ID,
                 getString(R.string.channel_description),    //just to identifie
-                NotificationManager.IMPORTANCE_HIGH     //How important, wie laut, wies aussieht    //TODO nachen welche wichtigkeit verwenden
+                NotificationManager.IMPORTANCE_HIGH     //How important, wie laut, wies aussieht
             )
             channelUpdate.description = getString(R.string.channel_description)
 
             //FourgroundService Notification
             val channelForground = NotificationChannel(
                 CHANNEL_FORGROUNDSERVICE_ID,
-                "Get position",  //TODO in string.xml,
+                "Get position",
                 NotificationManager.IMPORTANCE_DEFAULT
             )
 

@@ -161,7 +161,7 @@
     <string name="hint_mileage">new mileage</string>
     <string name="notification_gps_title" translatable="false">GPS</string>
     <string name="notification_gps_text">Ride is recorded.</string>
-    <string name="alertDialog_messageEnableBluetooth">Bluetooth has been disabled. This is necessary to change the bluetooth settings. When you leave the settings bluetooth will be disabled.</string>
+    <string name="alertDialog_messageEnableBluetooth">Bluetooth has been enabled. This is necessary to change the bluetooth settings. When you leave the settings bluetooth will be disabled.</string>
     <string name="toast_bluetoothDisabled">Bluetooth disabled</string>
     <string name="toast_locationError">Not enough location information to save the ride.</string>
     <string name="toast_bluetoothEnabled">Bluetooth enabled</string>

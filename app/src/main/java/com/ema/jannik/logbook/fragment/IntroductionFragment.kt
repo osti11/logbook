@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import com.ema.jannik.logbook.R
 
 /**
- * This fragment
+ * This fragment contains a description of the functionality of the app
  */
 class IntroductionFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

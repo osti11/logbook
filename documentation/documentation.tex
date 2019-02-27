@@ -42,7 +42,7 @@
 	{\large \today\par}
 
 \end{titlepage}
-
+\pagebreak
 \tableofcontents    %Inhaltsverzeichnis
 \pagebreak          %Seitenumbruch
 
@@ -110,30 +110,30 @@ Dafür werde ich die Google Maps SDK verwenden.
 
 \subsection{Datenbank}
 
- \begin{table}
-	\caption{Spalten des Fahrtenbuches}
-    \centering
-	\begin{tabular}{c c c c c c c c c c c c c}
-		\hline
-		Datum & Fahrzeit von - bis & Zweck der Fahrt  & Besuchte Person, Firma, Behörde &
-		km-Stand Fahrtbeginn & Gefahrene km & Start & Ziel & km-Satnd Fahrtende & Ktaftstoff &
-		Ltr. je 100km & Sonstiger Betrag & Name des Fahrers\\ [0.5ex]
-		1 & Home & HS & lernen \\ [1ex]
-		\hline
-	\end{tabular}
-	\label{table:nonlin}
- \end{table}
-
- \begin{table}
-	\caption{Aufbau Datenbank}
-    \centering
-	\begin{tabular}{c c c c c c c c c c c c c}
-		\hline
-        id & start & destination & purpose & mileage_start & mileage_destination & odometer \\ [1ex]
-		\hline
-	\end{tabular}
-	\label{table:nonlin}
- \end{table}
+%\begin{table}	//TODO table
+%	\caption{Spalten des Fahrtenbuches}
+%   \centering
+%	\begin{tabular}{c c c c c c c c c c c c c}
+%		\hline
+%		Datum & Fahrzeit von - bis & Zweck der Fahrt  & Besuchte Person, Firma, Behörde &
+%		km-Stand Fahrtbeginn & Gefahrene km & Start & Ziel & km-Satnd Fahrtende & Ktaftstoff &
+%		Ltr. je 100km & Sonstiger Betrag & Name des Fahrers\\ [0.5ex]
+%		1 & Home & HS & lernen \\ [1ex]
+%		\hline
+%	\end{tabular}
+%	\label{table:nonlin}
+%\end{table}
+%
+%\begin{table}
+%	\caption{Aufbau Datenbank}
+%   \centering
+%	\begin{tabular}{c c c c c c c c c c c c c}
+%		\hline
+%       id & start & destination & purpose & mileage_start & mileage_destination & odometer \\ [1ex]
+%		\hline
+%	\end{tabular}
+%	\label{table:nonlin}
+%\end{table}
 
 \subsection{Aufzeichnen Der Fahrt}
 Um die Fahrt aufzuzeichnen
@@ -141,21 +141,21 @@ Um die Fahrt aufzuzeichnen
 \subsubsection{Position bestimmen}
 Um die Position unter Android zu ermitteln gibt es drei Wege:
 \begin{enumerate}
-	\item  LocationManager & LocationListener
+	\item  LocationManager und LocationListener
 	\item fusion location client
 	\item fusion location provider
 \end{enumerate}
 
-LocationManager & LocationListener
+\paragraph{LocationManager und LocationListener}
 Bei dieser Möglichkeit werden die Boardmittel von ANdroid verwendet um die Position bestimmen.
 Diese Methode hat den größten Akkuverbrauch und wird von Google nicht empfohlen.
 
-Fusion Location client
+\paragraph{Fusion Location client}
 Bei dieser Methode wird der Google Location Service verwendet der sowieso im Hintergrund läuft. Bei dieser Methode 
 startet man ein update Request bei dem man die Rahmenbedingungen wie Priorität min und max Zeit zwischen den Updates einstellen kann.
 Diese Methode ist Akkuschonender.
 
-Fusion Location Provider
+\paragraph{Fusion Location Provider}
 Diese Methode ist im prinziep eine verbesserte und vereinfachte Form des Fusion Location Client und wird von Google empfohlen.
 
 \subsubsection{Entfernung bestimmen}
@@ -164,7 +164,7 @@ Um die zurückgelegte Entfernung zu bestimmen, muss die Entfernung zwischen den 
 Dafür hat die Klasse 'Location' schon die Funktion 'distanceTo(Location)'.
 Ein Codeausschnitt um die Entfernung zu bestimmten könnte wie folgt aussehen
 
-```
+\begin{verbatim}
 fun getDistance(locations: List<Location>): Int {
 	for (l in locations.indices) {
 		if (l + 1 < locations.size)
@@ -172,7 +172,7 @@ fun getDistance(locations: List<Location>): Int {
 	}
 	return distance.toInt() / 1000 //meter to kilometer
 }
-```
+\end{verbatim}
 
 \subsubsection{Start- und Zieladresse ermitteln}
 Bevor man die Fahrt in die Datenbank schreiben kann benötigt man außer den GPS-Koordinaten, Ankunftszeit, Abfahrtszeit und 
@@ -195,22 +195,22 @@ Die Start und Zieladresse werden als Marker dargestellt. Bei einer aufgezeichnet
 zwischen allen erfassten Position, mithilfe von 'Polylines'. 
 Das hinzufügen eines Markes und Polylienes könnte dann wie folgt ausschauen.
 
-```
-map.addMarker(
-	MarkerOptions()
-		.position(destinationLatLng).title(getString(R.string.destinationAddress) + ": " + destination.address)
-)
+\begin{verbatim}
+	map.addMarker(
+		MarkerOptions()
+			.position(destinationLatLng).title(getString(R.string.destinationAddress) + ": " + destination.address)
+	)
 
-if (routes != null) {	# wenn es GPS-Position zwischen Start und Zieladresse gibt
-	val options = PolylineOptions().width(8f)
-		.color(ContextCompat.getColor(applicationContext, R.color.colorPrimaryDark))
+	if (routes != null) {	# wenn es GPS-Position zwischen Start und Zieladresse gibt
+		val options = PolylineOptions().width(8f)
+			.color(ContextCompat.getColor(applicationContext, R.color.colorPrimaryDark))
 
-	routes.forEach {
-		options.add(it) 
+		routes.forEach {
+			options.add(it) 
+		}
+		map.addPolyline(options)
 	}
-	map.addPolyline(options)
-}
-```
+\end{verbatim}
 
 
 \subsection{Bluetooth}
@@ -219,15 +219,14 @@ Dafür benötige ich einen Brodcastreciever der getriggert wird wenn eine Blueto
 Das auslößen eines Recievers wenn eine Bluetoothverbindung aufgebaut wird geschieht über "android.bluetooth.device.action.ACL_CONNECTED".
 und das beim beenden einer Bluetoothverbindung über "android.bluetooth.device.action.ACL_DISCONNECTED"  
 
-
-```
-<receiver android:name=".receiver.StartActivityOnBluetooth">
-<intent-filter>
-	<action android:name="android.bluetooth.device.action.ACL_CONNECTED"/>
-	<action android:name="android.bluetooth.device.action.ACL_DISCONNECTED"/>
-</intent-filter>
-</receiver>
-```
+\begin{verbatim}
+	<receiver android:name=".receiver.StartActivityOnBluetooth">
+	<intent-filter>
+		<action android:name="android.bluetooth.device.action.ACL_CONNECTED"/>
+		<action android:name="android.bluetooth.device.action.ACL_DISCONNECTED"/>
+	</intent-filter>
+	</receiver>
+\end{verbatim}
 
 \subsection{NFC}
 Meine App ist nach dem MVVM Pattern und dem Single-Activity-Pattern aufgebaut
@@ -333,6 +332,151 @@ Diese Features müssen auf jeden Fall umgesetzt werden, damit man die App benutz
 \section{UML-Diagramme}
 
 \section{Code Dokumentation}
+In diesem Abschnitt werde ich mich durch die einzelnen Ansichten meiner App durcharbeiten. Dabei erkläre ich das Layout,
+die dazu gehörigen Codeausschnitte und zeige die Probleme auf, auf die ich gestoßen bin.
+
+\subsection{Aufbau}
+Auf \ref{img:img/structure.jpg} sehen sie die Verzeichnisstruktur des Projektes. Wie die Namen schon sagen befinden sich im Ordner \enquote{activity} 
+alle Activity's und im Ordner \enquote{fragment} alle Fragmente. Unter \enquote{helper} findet man alle Klassen die Funktionen bereitstellen die global 
+genutzt werden. Im Ordner \enquote{model} befinden sich alle Klassen die eine Geschäftslogik enthalten. Direkt unter  \enquote{model} befinden sich alle Repositories.
+Diese bilden eine zusätzliche Abstraktionsebene, da sie nur die Funktionen der Geschäftslogik implementieren die für eine Activity notwendig sind. Im Unterordner
+\enquote{database} befinden sich alle Klassen die zur implementierung der Room Database benötigt werden. Im Unterordner \enquote{location} befindet sich die Logik um
+GPS-Kordinaten in eine Adresse umzuwandeln. Im Package \enquote{reciever} befinden sich die Brodcastreciever die für die Benachrichtigung und das automatisfche aufzeichnen 
+der App bei einer Bluetoothverbindung verantwortlich sind. //TODO weiter machen
+
+%Grafik
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=12cm]{img/structure.jpg}
+        \caption{\label{img:img/structure.jpg}Aufbau des Projektes}
+    \end{center}
+\end{figure}
+
+\subsection{SplashScreenActivity}
+Diese Activity wird gestartet wenn auf das Icon geklickt wird.
+Diese zeigt das Applogo für zwei Sekunden und startet im Anschluss die MainActivity.
+Zum erzeugen einfacheren erzeugen des Splashscreens wird das Framework \enquote{EasySplashScreen} verwendet,
+dieses generiert dan das Layout, weshalb es auch kein Layout-File gibt.
+
+\paragraph{Code}
+\begin{verbatim}
+	class SplashScreenActivity : AppCompatActivity() {
+
+	    override fun onCreate(savedInstanceState: Bundle?) {
+	        super.onCreate(savedInstanceState)
+
+	        val config = EasySplashScreen(this@SplashScreenActivity)
+	                .withFullScreen() # blendet Toolbar aus
+	                .withTargetActivity(MainActivity::class.java) # Activity die nach dem beenden gestartet wird
+	                .withSplashTimeOut(2000) # Zeit in ms nach der die Activity sich beendet
+	                .withBackgroundColor(Color.WHITE) # Weiß wird als Hintergrundfarbe gestzt
+	                .withLogo(R.drawable.ic_launcher_round) # zeigt Applogo in der Mitte des Bildschirms an
+	            	.withFooterText ("developed by Jannik Ostermayer") # Dieser Text wird unten angezeigt
+
+	        val splashScreen: View = config.create() # erzeugt Layout 
+
+	        setContentView(splashScreen) # lädt das Layout in die Activity
+	    }
+	}
+\end{verbatim}
+
+\subsection{MainActivity}
+Diese Activity wird von der SplashScreenActivity gestartet.
+Diese Activty besteht eigentlich nur aus einem NavigationView und einem \enquote{FrameLayout} welches die Fragmente
+Einstellungen, Übersicht, Impressum und Einführung lädt die im NavigationView ausgewählt werden. 
+
+\paragraph{Layout}
+\begin{verbatim}
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:id="@+id/drawer_layout"
+        android:fitsSystemWindows="true">
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:id="@+id/toolbar"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:elevation="4dp"/>
+
+        <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+    <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/drawer_header"
+            app:menu="@menu/drawer_menu"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+\end{verbatim}
+
+
+\begin{verbatim}
+	override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        //--Navigation--
+        setSupportActionBar(toolbar)    //set toolbar as actionbar
+        nav_view.setNavigationItemSelectedListener(this)
+        val actionBarDrawerToggle = ActionBarDrawerToggle(
+            this, drawer_layout, toolbar,
+            R.string.manu_drawer_open, R.string.menu_drawer_close
+        )
+        drawer_layout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.syncState()
+
+        //--Notification--
+        notificationManagerCompat = NotificationManagerCompat.from(this)    //can not create channels
+
+        //--load Fragments--
+        if (savedInstanceState == null) {    //Don't load the fragment when the device is rotated
+            if (isFirstStart()) {
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container,  //open Fragment
+                    IntroductionFragment()
+                ).commit()
+            } else {
+                supportFragmentManager.beginTransaction().replace(
+                    R.id.fragment_container,  //open Fragment
+                    OverviewFragment()
+                ).commit()
+            }
+            nav_view.setCheckedItem(R.id.nav_overview)
+        }
+
+        setFirstStartToFalse()
+    }
+\end{verbatim}
+
+\subsubsection{OverviewFragment}
+test
+
+\paragraph{Layout}
+
+\subsection{}
 
 \section{Fazit}
 

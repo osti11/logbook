@@ -22,7 +22,9 @@ import com.ema.jannik.logbook.view.ExplanationDialogSettings
 import java.lang.NullPointerException
 import kotlin.collections.ArrayList
 
-
+/**
+ * This fragment represent the settings of the app.
+ */
 class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnClickListener {
     val TAG = this::class.java.name
 
@@ -60,9 +62,9 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
     }
 
     /**
-     * Diese Variabel wird von den shared preferneces gestzt //TODO kommentare
+     * Diese Variabel wird von den shared preferneces gestzt
      */
-    private lateinit var spinnerDayValue: String    //TODO hier witer werte setzen speichern werte benutzen.
+    private lateinit var spinnerDayValue: String
     private lateinit var spinnerNotificationValue: String
     private var switchDeleteValue: Boolean = false
     private var switchBluetoothValue: Boolean = false
@@ -185,7 +187,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         inflater!!.inflate(
             R.menu.setting_menu,
             menu
-        )    //tell system to use add note menu     //TODO share button entfernen
+        )    //tell system to use add note menu
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -195,7 +197,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.save_setting) {
             saveSettings()
-            setAlarm(getDay()!!)    //TODO
+            setAlarm(getDay()!!)
             return true
         } else {
             return super.onOptionsItemSelected(item)
@@ -227,7 +229,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         val day = resources.getStringArray(R.array.spinner_day)
 
         //--save settings--
-        editor.putBoolean(BLUETOOTH_CONNECTION, false)  //TODO connection name
+        editor.putBoolean(BLUETOOTH_CONNECTION, false)
         editor.putString(NOTIFICATION_INTERVAL, notification[1])
         editor.putString(NOTIFICATION_DAY, day[6])
         editor.putBoolean(DELETE_MODIFY, false)
@@ -394,7 +396,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         )!!
         spinnerLayout1Value = sharedPreferences.getString(
             LAYOUT_ONE,    //Key
-            ""     //default Value //TODO oder Zahl speichern
+            ""     //default Value
         )!!
         spinnerLayout2Value = sharedPreferences.getString(
             LAYOUT_TWO,    //Key
@@ -482,7 +484,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
      * set the alarm to remember the user to copy the entries into 'a real logbook'.
      * @param c
      */
-    private fun setAlarm(c: Calendar) {    //TODO modify for Day
+    private fun setAlarm(c: Calendar) {
         val alarmManager: AlarmManager = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlertReciever::class.java)
         val pendingIntent = PendingIntent.getBroadcast(context, PENDING_INTENT_REQUEST_CODE_COPY, intent, 0)
@@ -513,7 +515,7 @@ class SettingFragment : Fragment(), AdapterView.OnItemSelectedListener, View.OnC
         when (index) {
             0 -> return AlarmManager.INTERVAL_DAY           //einmal pro Tag
             1 -> return 7 * 24 * 60 * 60 * 1000             //einmal pro Woche
-            2 -> return 30 * 24 * 60 * 60 * 1000 as Long    //einmal pro Monat      //TODO need as long
+            2 -> return 30 * 24 * 60 * 60 * 1000 as Long    //einmal pro Monat
         }
         return null
     }

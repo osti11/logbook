@@ -9,18 +9,18 @@ import com.ema.jannik.logbook.model.database.Drive
 /**
  * This VieModel provides the data for the View of the AddDriveActivity
  */
-class AddDriveViewModel(application: Application): AndroidViewModel(application) {  //TODO in Viewmodel oder repositotory
+class AddDriveViewModel(application: Application): AndroidViewModel(application) {
     private val repository: DriveRepository
 
     init {
         repository = DriveRepository(application)
     }
 
-    fun insert(drive: Drive) {      //TODO needs?
-        //repository.insert(drive)
+    fun insert(drive: Drive) {
+        repository.insert(drive)
     }
 
-    fun delete(drive: Drive) {      //TODO edit = delete + insert ?
+    fun delete(drive: Drive) {
         repository.delete(drive)
     }
 }

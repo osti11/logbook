@@ -100,7 +100,6 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
 
         Log.i(TAG, "set NumberPicker")
         //--set Numberpicker--
-        //TODO set this whit db help
         numberPicker_odometerStart.maxValue = 400000
         numberPicker_odometerStart.minValue = 0
 
@@ -147,6 +146,10 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         }
     }
 
+    /**
+     * onValueChangeListener for NumberPicker.
+     * Update the other numberPickers when thge value of one numberPicker change.
+     */
     override fun onValueChange(picker: NumberPicker?, oldVal: Int, newVal: Int) {
         when (picker!!.id) {
             R.id.numberPicker_odometerStart -> {
@@ -161,6 +164,9 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         }
     }
 
+    /**
+     * Set OnValueChangedListener for the NumberPickers.
+     */
     private fun setOnChangedNumberPicker() {
         numberPicker_odometerStart.setOnValueChangedListener(this)
         numberPicker_odometer_end.setOnValueChangedListener(this)
@@ -191,9 +197,9 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
 
     /**
      * Setzt die Werte in die View ein.
-     * @param drive //TODO Kommentare
+     * @param drive
      */
-    private fun setView(drive: Drive) {    //TODO was wen Werte nicht gestzt
+    private fun setView(drive: Drive) {
         //--set View--
         onClickCategory(Utils.getImageButtonByCategory(drive.category))
         editText_startAddress.setText(drive.start!!.address)
@@ -204,7 +210,6 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         numberPicker_odometerStart.value = drive.mileageStart
         numberPicker_distance.value = drive.distance
         numberPicker_odometer_end.value = drive.mileageDestination
-        //TODO set global variabels TODO weiter //TODO update funktioniert nicht
         //--set global variables, they are used  to save the entry in the db--
         startTime = drive.start_timestamp
         endTime = drive.destination_timestamp
@@ -215,7 +220,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
     /**
      * save the input in the database
      */
-    private fun updateDrive() {    //TODO hier weiter
+    private fun updateDrive() {
 
         val purpose = edit_text_purpose.text.toString()
         Log.i(TAG, "purpose: " + purpose)
@@ -246,7 +251,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         if (startAddress == null)
             message += getString(R.string.toast_startAddress) + "\n"
         if (destinationAddress == null)
-            message += getString(R.string.toast_destinationAddress) + "\n"  //TODO namens gebung Toast
+            message += getString(R.string.toast_destinationAddress) + "\n"
         if (endMilage - startMilage != distance)
             message += getString(R.string.toast_mileage) + "\n"
         if (editText_start_time.text == null || editText_start_time.text == null
@@ -260,8 +265,8 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
         }
 
         val duration = Calendar.getInstance()
-        duration.timeInMillis = endTime.timeInMillis - startTime.timeInMillis   //TODO calc time
-        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
+        duration.timeInMillis = endTime.timeInMillis - startTime.timeInMillis
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)
 
         //save in db
         val repository = EditDriveRepository(application)
@@ -361,7 +366,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                         R.color.colorPrimary
                     )
                 )
-                category = 0    //TODO welche werte?
+                category = 0
                 message += getString(R.string.category_0)
             }
             R.id.imageButton_private -> {
@@ -404,7 +409,6 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
      * @param id the Id of the imageButton which you get from the function
      * Utils.getCategoryDrawableId() when you pass the category.
      */
-
     fun onClickCategory(id: Int) {
 
         resetImageButtonBackgroundColor()
@@ -419,7 +423,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
                         R.color.colorPrimary
                     )
                 )
-                category = 0    //TODO welche werte?
+                category = 0
                 message += getString(R.string.category_0)
             }
             R.id.imageButton_private -> {
@@ -490,7 +494,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
     /**
      * set the boolean startFragmentTimePicker to true and call the function startTimePickerFragment()
      */
-    fun onClickEndTime(view: View) {  //TODO mehre Listener
+    fun onClickEndTime(view: View) {
         Log.i(TAG, "onClickEndTime")
         startFragmentTimePicker = false
     startDatePickerFragment()
@@ -499,7 +503,7 @@ class EditDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListene
     /**
      * set the boolean startFragmentTimePicker to false and call the function startTimePickerFragment()
      */
-    fun onClickStartTime(view: View) {  //TODO mehre Listener
+    fun onClickStartTime(view: View) {
         Log.i(TAG, "onClick start Time()")
         startFragmentTimePicker = true
         startDatePickerFragment()

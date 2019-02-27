@@ -10,7 +10,7 @@ import java.util.*
  */
 class Converts {
     @TypeConverter
-    fun fromTimestamp(value: Long?): Calendar? {    //TODO stimmt das
+    fun fromTimestamp(value: Long?): Calendar? {
         val cal = Calendar.getInstance()
         cal.timeInMillis = value!!
         return cal
@@ -20,27 +20,4 @@ class Converts {
     fun CalendarToTimestamp(calendar: Calendar?): Long? {
         return calendar?.timeInMillis
     }
-
-    /*
-    companion object {
-        /**
-         * convert Timestamp into Date, to save it in the database
-         */
-        @JvmStatic
-        @TypeConverter
-
-        fun fromTimestamp(value: Long?): Date? {
-            return if (value == null) null else Date(value)
-        }
-
-        /**
-         * convert Date back into timestamp
-         */
-        @JvmStatic
-        @TypeConverter
-        fun dateToTimestamp(date: Date?): Long? {
-            return date?.time
-        }
-    }
-    */
 }

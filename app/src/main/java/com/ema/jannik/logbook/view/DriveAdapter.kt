@@ -90,8 +90,6 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
     fun setDrives(drives: List<Drive>) {
         this.drives = drives
         notifyDataSetChanged()
-
-        //TODO where set no entry
     }
 
     /**
@@ -180,7 +178,7 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
      * @param drive instanced drive object
      * @return value of the suitable property. When nothing found return ""
      */
-    fun getDriveProperty(property: String, drive: Drive): String {  //TODO retrurn null?
+    fun getDriveProperty(property: String, drive: Drive): String {
         var x = 1
         val array = activity.getResources().getStringArray(R.array.spinner_layout)
         //iterate spinner_layout array
@@ -194,9 +192,9 @@ class DriveAdapter(val activity: Activity) : RecyclerView.Adapter<DriveAdapter.D
             1 -> return drive.purpose
             2 -> return Time(drive.duration.timeInMillis).toString()
             3 -> return DateFormat.getDateTimeInstance().format(drive.start_timestamp.time)
-            4 -> return DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time)   //TODO need .time ?
-            5 -> return String.format("%d km", drive.mileageStart)//TODO einheit
-            6 -> return String.format("%d km", drive.mileageDestination)//TODO einheit
+            4 -> return DateFormat.getDateTimeInstance().format(drive.destination_timestamp.time)
+            5 -> return String.format("%d km", drive.mileageStart)
+            6 -> return String.format("%d km", drive.mileageDestination)
             7 -> {
                 var address = ""
                 try {

@@ -15,7 +15,7 @@ class Utils {
         /**
          * This function recieve the category as Int and return an description
          * @param category category as int
-         * @return integer from the string.xml with the description //TODO überarbeiten
+         * @return integer from the string.xml with the description
          */
         fun getCategory(category: Int): Int {
             when (category) {
@@ -42,7 +42,7 @@ class Utils {
          * @param category the category
          * @return return id of the drawable or 0 when not found
          */
-        fun getCategoryDrawableId(category: Int): Int {    //TODO drawable
+        fun getCategoryDrawableId(category: Int): Int {
             when (category) {
                 0 -> {
                     return R.drawable.ic_car
@@ -123,7 +123,7 @@ class Utils {
          * @param drive instanced drive object
          * @return value of the suitable property. When nothing found return ""
          */
-        fun getDriveProperty(property: String, drive: Drive): String {  //TODO retrurn null?
+        fun getDriveProperty(property: String, drive: Drive): String {
             var x = 1
             val array = Resources.getSystem().getStringArray(R.array.spinner_layout)
             //iterate spinner_layout array

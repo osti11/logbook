@@ -97,11 +97,9 @@ class LocationUpdateService : Service() {
         Log.i(TAG, "getFusedLocationProviderClient")
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-
-        //TODO get time
         timeStart = Calendar.getInstance()
 
-        if (ActivityCompat.checkSelfPermission( //TODO check SDK Level by appcombat?
+        if (ActivityCompat.checkSelfPermission(
                 applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
@@ -149,8 +147,8 @@ class LocationUpdateService : Service() {
         val distance = getDistance(locations)
         val timeEnd = Calendar.getInstance()
         val duration = Calendar.getInstance()
-        duration.timeInMillis = timeEnd.timeInMillis - timeStart.timeInMillis   //TODO calc time
-        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
+        duration.timeInMillis = timeEnd.timeInMillis - timeStart.timeInMillis
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)
 
         var mileagestart: Int
         try {

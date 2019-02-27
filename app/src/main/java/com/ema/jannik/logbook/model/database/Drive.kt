@@ -24,8 +24,8 @@ import java.util.*
  */
 @Entity(tableName = "drive")
 data class Drive(
-    @ColumnInfo(name = "dr_purpose") var purpose: String,   //TODO wenn leer
-    @ColumnInfo(name = "dr_duration") var duration: Calendar,       //TODO richtig ge castet?
+    @ColumnInfo(name = "dr_purpose") var purpose: String,
+    @ColumnInfo(name = "dr_duration") var duration: Calendar,
     @ColumnInfo(name= "dr_start_timestamp") var start_timestamp: Calendar,
     @ColumnInfo(name= "dr_destination_timestamp") var destination_timestamp: Calendar,
     @ColumnInfo(name = "dr_mileage_start") var mileageStart: Int,

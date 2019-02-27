@@ -35,6 +35,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.DateFormat
 import java.util.*
 
+/**
+ * This activity contains an burger menu an load the right fragment when chosen.
+ */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     EmailDialog.EmailDialogListener, DatePickerDialog.OnDateSetListener {
 
@@ -76,13 +79,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     R.id.fragment_container,  //open Fragment
                     IntroductionFragment()
                 ).commit()
+                nav_view.setCheckedItem(R.id.nav_introduction)
             } else {
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container,  //open Fragment
                     OverviewFragment()
                 ).commit()
+                nav_view.setCheckedItem(R.id.nav_overview)
             }
-            nav_view.setCheckedItem(R.id.nav_overview)
+
         }
 
         setFirstStartToFalse()
@@ -95,7 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * @return when shared preferences not set return false
      */
     private fun isFirstStart(): Boolean {
-        val pref = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)   //TODO überall das selbe?
+        val pref = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
         return pref.getBoolean(SHARED_PREFERENCES_FIRST_START, true)
     }
 
@@ -103,43 +108,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * set shared preferences SHARED_PREFERENCES_FIRST_START to false
      */
     private fun setFirstStartToFalse() {
-        val pref = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)   //TODO überall das selbe?
+        val pref = getSharedPreferences(SHARED_PREFERENCES, Context.MODE_PRIVATE)
         val editor = pref.edit()
         editor.putBoolean(SHARED_PREFERENCES_FIRST_START, false)
         editor.apply()
     }
 
     /**
-     * Send notification on channel
+     * Don't close the activity on back press when the navigation drawer is open.
      */
-    fun sendOnChannel(/*view: View*/) {     //Set the setting her for api lower then Oreo
-        //wenn man auf die notifiaction klickt
-        val activityIntent = Intent(this, MainActivity::class.java)
-        val contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0)
-
-        //request code -> Cancel oder update
-        //flag was passiert bei recreate
-
-        val notification: Notification = NotificationCompat.Builder(
-            this,
-            CHANNEL_UPDATE_ID
-        )
-            .setSmallIcon(R.drawable.ic_assignment_turned_black)
-            .setContentTitle("Eintrag unvollständig")   //TODO in string.xml aulaggern
-            .setContentText("Bitte vervollständige deinen Eintrag")
-            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setDefaults(Notification.DEFAULT_ALL)
-            .setContentIntent(contentIntent)
-            .build()
-
-        notificationManagerCompat!!.notify(1, notification)
-        //more notifaction same time -> diffrent id
-        //update or cancel them pass same id
-    }
-
-
-    override fun onBackPressed() {  //Pack press when navigationDrawer is open don't leav the activity
+    override fun onBackPressed() {
         Log.i(TAG, "onBackPressed()")
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -190,7 +168,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             "Alle Einträge vor dem " + DateFormat.getDateInstance().format(calendar.time) + " wurden gelöscht",
             Toast.LENGTH_SHORT
         ).show()
-        //TODO in string.xml auslagern
     }
 
     /**
@@ -228,7 +205,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container, SettingFragment()
                 ).commit()
-            }  //sendOnChannel() TODO send push notification
+            }
             R.id.nav_impessum -> {
                 title = getString(R.string.title_impressum)
                 supportFragmentManager.beginTransaction().replace(
@@ -240,6 +217,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    /**
+     * This function handle the result of the EmailDialog by calling the sendMail() function.
+     */
     override fun onOkClickedEmailDialog(choice: Int) {
         sendMail(choice)
     }
@@ -248,7 +228,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * This function create an intent to start the email client, to send a list of all table entries
      * @param choice when choice = 1 -> as list, choice = 2 as table
      */
-    private fun sendMail(choice: Int) { //TODO Format Time -> DriveAdapter
+    private fun sendMail(choice: Int) {
         val calander = Calendar.getInstance()
         val subject: String =
             getString(R.string.app_name) + getString(R.string.email_subject) + DateFormat.getDateInstance().format(
@@ -298,7 +278,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         d.mileageDestination.toString() + "\t" + "\t" +
                         DateFormat.getDateTimeInstance().format(d.start_timestamp.time) + "\t" + "\t" +
                         DateFormat.getDateTimeInstance().format(d.destination_timestamp.time) + "\t" + "\t" +
-                        DateFormat.getTimeInstance().format(d.duration.time)    //TODO anderster formattieren, hat anhang vormittag
+                        DateFormat.getTimeInstance().format(d.duration.time)
 
             }
         }
@@ -320,6 +300,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     //--OnClick functions--
+
+    /**
+     * Manage the viability of the smaller floatingActionButtons when the flotingActionButton in the overview is clicked.
+     */
     fun onClickFabShow(view: View) {
         var textView = findViewById<TextView>(R.id.textView_fab_add_description)
         var fab = findViewById<FloatingActionButton>(R.id.fab_add)
@@ -358,11 +342,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     fun onClickFabAdd(view: View) {
         val intent = Intent(this, AddDriveActivity::class.java)
-        startActivity(intent)         //TODO start activity for result
+        startActivity(intent)
     }
 
     /**
-     * TODO comments
+     * this function is called when the floating action button 'fab_correctMileage' is clicked and start the CorrectMileageActivity.
      */
     fun onClickFabCorrect(view: View) {
         val intent = Intent(this, CorrectMileageActivity::class.java)
@@ -374,7 +358,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     fun onClickFabRec(view: View) {
         val intent = Intent(this, RecordDriveActivity::class.java)
-        startActivity(intent)         //TODO start activity for result
+        startActivity(intent)
     }
 
     /**
@@ -394,7 +378,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     fun onClickDeleteInfo(view: View) {
         val dialog = ExplanationDialogSettings(R.string.alertDialog_messageDelete)
-        dialog.show(supportFragmentManager, "info dialog")  //TODO TAG als const val
+        dialog.show(supportFragmentManager, "info dialog")
     }
 
     /**

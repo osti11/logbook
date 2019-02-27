@@ -31,6 +31,9 @@ import java.sql.Time
 import java.text.DateFormat
 import java.util.*
 
+/**
+ * This Activity is used for a detail view of a ride.
+ */
 class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
 
     val TAG = "DetailsDriveActivity"
@@ -123,9 +126,9 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
         editText_destinationAddress.text = drive!!.destination!!.address
         textView_startTime.text = DateFormat.getDateTimeInstance().format(drive!!.start_timestamp.time)
         textView_endTime.text = DateFormat.getDateTimeInstance().format(drive!!.destination_timestamp.time)
-        textView_mileageStart.text = String.format("%d km", drive!!.mileageStart)//TODO einheit
-        textView_mileageDestination.text = String.format("%d km", drive!!.mileageDestination)//TODO einheit
-        textView_distance.text = String.format("%d km", drive!!.distance)//TODO einheit
+        textView_mileageStart.text = String.format("%d km", drive!!.mileageStart)
+        textView_mileageDestination.text = String.format("%d km", drive!!.mileageDestination)
+        textView_distance.text = String.format("%d km", drive!!.distance)
 
         val duration = drive!!.duration
         textView_duration.text = Time(duration.timeInMillis).toString()
@@ -222,7 +225,7 @@ class DetailsDriveActivity : AppCompatActivity(), OnMapReadyCallback {
             dialog.show()
         } else {
             Toast.makeText(this, "you can make no requests", Toast.LENGTH_SHORT)
-                .show() //TODO Toast die map funktioniert nicht richtig, in string.xml
+                .show()
         }
         return false
     }

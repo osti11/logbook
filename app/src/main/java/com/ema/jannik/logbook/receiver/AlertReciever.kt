@@ -49,7 +49,7 @@ class AlertReciever : BroadcastReceiver() {
      * @param context The Context in which the receiver is running.
      * @param intent The Intent being received.
      */
-    override fun onReceive(context: Context?, intent: Intent?) {    //TODO look tutorial
+    override fun onReceive(context: Context?, intent: Intent?) {
         val activityIntent = Intent(context, MainActivity::class.java)
         val contentIntent = PendingIntent.getActivity(context!!, 0, activityIntent, 0)
 

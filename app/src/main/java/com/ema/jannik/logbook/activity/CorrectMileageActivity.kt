@@ -13,7 +13,7 @@ import java.lang.Exception
 import java.util.*
 
 /**
- *
+ * This Activity is used to correct the mileage for the next drive.
  */
 class CorrectMileageActivity : AppCompatActivity() {
 
@@ -26,7 +26,8 @@ class CorrectMileageActivity : AppCompatActivity() {
     }
 
     /**
-     *
+     * OnClickListener for the save-button.
+     * Is the mileage smaller one you get a toast with an advice.
      */
     fun onClickSave(view: View) {
         var mileage: Int
@@ -45,7 +46,7 @@ class CorrectMileageActivity : AppCompatActivity() {
     }
 
     /**
-     *
+     * Save the corrected mileage in the db.
      */
     private fun save(mileage: Int){
         val repository = AddDriveRepository(application)

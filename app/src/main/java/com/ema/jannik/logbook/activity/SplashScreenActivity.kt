@@ -24,9 +24,8 @@ class SplashScreenActivity : AppCompatActivity() {
                 .withTargetActivity(MainActivity::class.java)
                 .withSplashTimeOut(2000)
                 .withBackgroundColor(Color.WHITE)
-                //.withBeforeLogoText(getString(R.string.app_name))
                 .withLogo(R.drawable.ic_launcher_round)
-            .withFooterText ("developed by Jannik Ostermayer") //TODO string.xml
+            .withFooterText ("developed by Jannik Ostermayer")
 
         val splashScreen: View = config.create()    //create View
 

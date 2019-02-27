@@ -65,7 +65,7 @@ class RecDriveRepository(application: Application) {
          */
         private class GetAddressAsyncTask(private val geocoding: Geocoding) :AsyncTask<Location, Void, String>(){
             override fun doInBackground(vararg params: Location?): String{
-                return geocoding.getAddressFromLocation(params[0]!!)   //ToDo error als return
+                return geocoding.getAddressFromLocation(params[0]!!)
             }
         }
 

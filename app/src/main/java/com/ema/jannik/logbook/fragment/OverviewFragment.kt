@@ -23,6 +23,9 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_overview.*
 import java.util.*
 
+/**
+ * This fragment contains a list of all rides.
+ */
 class OverviewFragment : Fragment() {
 
     val TAG = this::class.java.toString()
@@ -49,7 +52,7 @@ class OverviewFragment : Fragment() {
         val observer = Observer<List<Drive>> { drives: List<Drive> ->
             run {
                 driveAdapter.setDrives(drives)
-                if (driveAdapter.itemCount == 0) {  //set textView when now entry          //TODO hier richtig?
+                if (driveAdapter.itemCount == 0) {  //set textView when now entry
                     textView_noEntry.visibility = View.VISIBLE
                 } else {
                     textView_noEntry.visibility = View.GONE
@@ -122,14 +125,14 @@ class OverviewFragment : Fragment() {
     /**
      * Passt den Kilometerstand der neueren Einträge an die Entfernung des gelöschten Eintrags an
      * @param drive Eintrag der aud der Db gelöscht wurde.
-     * @param todo TRUE = Löschen rückgängig machen, FALSE = KIlometerstand an gelöschenten Eintrag anpassen
+     * @param todos TRUE = Löschen rückgängig machen, FALSE = KIlometerstand an gelöschenten Eintrag anpassen
      */
-    private fun updateNewerDrives(drive: Drive, todo: Boolean) {
+    private fun updateNewerDrives(drive: Drive, todos: Boolean) {
         val repository = DriveRepository(activity!!.application)
         //Holt sich alle Einträge deren StartZeitpunkt > gelöschenterEintrag.destination_timestamp
         val drives = repository.getAllAfter(drive.destination_timestamp)
 
-        if(todo){
+        if(todos){
             //addiert Entfernung des gelöschten Eintrags vom Kilometerstand ab und aktuallisiert DB
             drives.forEach {
                 it.mileageStart += drive.distance

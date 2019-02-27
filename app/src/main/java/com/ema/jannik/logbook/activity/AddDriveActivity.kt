@@ -92,7 +92,6 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         title = getString(R.string.menu_addDrive)  //Text for action bar
 
         //--set Numberpicker--
-        //TODO set this whit db help
         numberPicker_odometerStart.maxValue = 400000
         numberPicker_odometerStart.minValue = 0
 
@@ -116,6 +115,10 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         setOnChangedNumberPicker()
     }
 
+    /**
+     * onValueChangeListener for NumberPicker.
+     * Update the other numberPickers when thge value of one numberPicker change.
+     */
     override fun onValueChange(picker: NumberPicker?, oldVal: Int, newVal: Int) {
         when (picker!!.id) {
             R.id.numberPicker_odometerStart -> {
@@ -130,6 +133,9 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         }
     }
 
+    /**
+     * Set OnValueChangedListener for the NumberPickers.
+     */
     private fun setOnChangedNumberPicker() {
         numberPicker_odometerStart.setOnValueChangedListener(this)
         numberPicker_odometer_end.setOnValueChangedListener(this)
@@ -137,7 +143,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     *
+     * set the value of the Numberpickers with the values from the last entry in the db.
      */
     private fun setNumberpickerwithLastEntry() {
         val repository: AddDriveRepository = AddDriveRepository(application)
@@ -156,7 +162,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * Setzt add_drive_menu.xml als Menülayout.
+     * set add_drive_menu.xml as menu layout.
      */
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_drive_menu, menu)
@@ -164,7 +170,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * Ruft die Funktion saveDrive() auf wenn 'SPEICHERN' in der rechten oberen Ecke geklickt wird.
+     * Call the function 'saveDrive()' when the save icon in the toolbar is clicked.
      */
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.save_drive) {
@@ -176,7 +182,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * Speichert die Eingabe in der DB.
+     * Save the input in the db.
      */
     private fun saveDrive() {
         val purpose = edit_text_purpose.text.toString()
@@ -208,7 +214,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         if (startAddress == null)
             message += getString(R.string.toast_startAddress) + "\n"
         if (destinationAddress == null)
-            message += getString(R.string.toast_destinationAddress) + "\n"  //TODO namens gebung Toast
+            message += getString(R.string.toast_destinationAddress) + "\n"
         if (endMilage - startMilage != distance)
             message += getString(R.string.toast_mileage) + "\n"
         if (editText_start_time.text == null || editText_start_time.text == null
@@ -222,8 +228,8 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         }
 
         val duration = Calendar.getInstance()
-        duration.timeInMillis = endTime.timeInMillis - startTime.timeInMillis   //TODO calc time
-        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)      //TODO andere Weg
+        duration.timeInMillis = endTime.timeInMillis - startTime.timeInMillis
+        duration.set(Calendar.HOUR_OF_DAY, duration.get(Calendar.HOUR_OF_DAY) - 1)
 
         //save in db
         val repository: AddDriveRepository = AddDriveRepository(application)
@@ -257,9 +263,9 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     }
 
     /**
-     * Setzt das Ergebnis des TimePickerFragment.
-     * startFragmentTimePicker == false -> Ergebnis wird in 'endTime' gespeichert.
-     * startFragmentTimePicker == true -> Ergebnis wird in 'startTime' gespeichert.
+     * Set the result from the TimePickerFragment.
+     * startFragmentTimePicker == false -> set the result to 'endTime'.
+     * startFragmentTimePicker == true -> set the result to 'startTime'.
      */
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         Log.i(TAG, "onTimeSet()")
@@ -279,15 +285,6 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
         }
         startFragmentTimePicker = null
     }
-
-    /**
-     * @param view the picker associated with the dialog
-     * @param year the selected year
-     * @param month the selected month (0-11 for compatibility with
-     * [Calendar.MONTH])
-     * @param dayOfMonth th selected day of the month (1-31, depending on
-     * month)
-     */
 
     /**
      *
@@ -328,7 +325,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
                         R.color.colorPrimary
                     )
                 )
-                category = 0    //TODO welche werte?
+                category = 0
                 message += getString(R.string.category_0)
             }
             R.id.imageButton_private -> {
@@ -399,7 +396,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     /**
      * set the boolean startFragmentTimePicker to true and call the function startTimePickerFragment()
      */
-    fun onClickEndTime(view: View) {  //TODO mehre Listener
+    fun onClickEndTime(view: View) {
         Log.i(TAG, "onClickEndTime")
         startFragmentTimePicker = false
         startDatePickerFragment()
@@ -408,7 +405,7 @@ open class AddDriveActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetLis
     /**
      * set the boolean startFragmentTimePicker to false and call the function startTimePickerFragment()
      */
-    fun onClickStartTime(view: View) {  //TODO mehre Listener
+    fun onClickStartTime(view: View) {
         Log.i(TAG, "onClick start Time()")
         startFragmentTimePicker = true
         startDatePickerFragment()

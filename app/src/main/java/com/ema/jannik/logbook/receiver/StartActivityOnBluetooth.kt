@@ -10,7 +10,11 @@ import com.ema.jannik.logbook.LocationUpdateService
 import com.ema.jannik.logbook.activity.RecordDriveActivity
 import com.ema.jannik.logbook.fragment.SettingFragment
 
-
+/**
+ * This BroadcastReceiver is triggered when a bluetooth connection is established or finished.
+ * When the name of the established connection is the same as  stored in the settings the record of a ride start.
+ * The same is true for the quit.
+ */
 class StartActivityOnBluetooth : BroadcastReceiver() {
 
     val TAG = this.javaClass.name
@@ -21,9 +25,6 @@ class StartActivityOnBluetooth : BroadcastReceiver() {
      * @param intent The Intent being received.
      */
     override fun onReceive(context: Context?, intent: Intent?) {
-
-        //TODO for development
-        Toast.makeText(context, "receiver is called", Toast.LENGTH_SHORT).show()
 
         val action = intent!!.action
         val i = Intent(context, RecordDriveActivity::class.java)
@@ -57,7 +58,7 @@ class StartActivityOnBluetooth : BroadcastReceiver() {
     }
 
     /**
-     *
+     * Get the connection name from the settings which is stored in the shared preferences.
      */
     private fun getBluetoothSettings(context: Context?): String? {
         //get values from shared preferences

@@ -11,5 +11,5 @@ This function recieve the category as Int and return an description
 `category` - category as int
 
 **Return**
-integer from the string.xml with the description //TODO überarbeiten
+integer from the string.xml with the description
 

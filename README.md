@@ -15,5 +15,3 @@ Klicke für die Dokumentation [hier](app/documentation/app/index.md).
 ## License
 
 Dieses Projekt steht unter der [MIT Lizenz](LICENSE).
-
-This project is under [MIT license](LICENSE).

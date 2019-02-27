@@ -20,7 +20,9 @@ import com.ema.jannik.logbook.R
 import java.text.DateFormat
 import java.util.*
 
-
+/**
+ * This Activity is used to record a ride vy calling the LocationUpdateService.
+ */
 class RecordDriveActivity : AppCompatActivity() {
 
     companion object {
@@ -61,6 +63,9 @@ class RecordDriveActivity : AppCompatActivity() {
         setViewWhenRunning()
     }
 
+    /**
+     * This function start the LocationUpdateService und change the view.
+     */
     private fun startForegroundService() {
         textView.visibility = View.VISIBLE
 
@@ -89,6 +94,9 @@ class RecordDriveActivity : AppCompatActivity() {
         finish()
     }
 
+    /**
+     * Check if the user grants all permissions.
+     */
     private fun checkPermission(permissionArray: Array<String>): Boolean {
         var allSuccess = true
         for (i in permissionArray.indices) {
@@ -99,14 +107,14 @@ class RecordDriveActivity : AppCompatActivity() {
     }
 
     /**
-     * Überprüft ob der LocationUpdateService ausgeführt wird.
+     * Check if the LocationUpdateService is running.
      */
     private fun isForegroundServiceRunning(): Boolean{
         return LocationUpdateService.isRunning
     }
 
     /**
-     * Wenn der Service schon aus geführt wird, wird der passende Text angezeigt.
+     * Modify the view if the LocationUpdateService is running.
      */
     private fun setViewWhenRunning() {
         if(isForegroundServiceRunning()){
@@ -114,6 +122,9 @@ class RecordDriveActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Request all necessaries permissions and inform the user that he cant use this functionality when he reject the permissions.
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_LOCATION_REQUEST) {
